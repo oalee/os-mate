@@ -1,17 +1,35 @@
 
 \section{Research Questions}
 
-The objective of this internship at the start was to address the following research questions.
+% The objective of this internship at the start was to address the following research questions.
 
-\subsection{Can a standard format be designed for data loaders and preprocessing pipelines?}
-{
-The development of a universal standard format for data loaders and preprocessing pipelines in deep learning is challenging due to the framework-specific nature of the task. Preprocessing pipeline design is highly dependent on the specific problem and its data, making it difficult to create a general solution. However, Separation of concerns (SoC) and modularity principles can enhance code reusability by creating the data loading as an independent python module, and separating preprocessing pipeline from data loading. This project focused on making data loading and code components, such as data loaders and the preprocessing pipelines, sharable within a python machine learning framework.
-}
+% \subsection{
+% What should be the recommended conventions for software engineering in AI and machine learning to promote reproducibility, reusability, shareability, maintainability, and code quality?
+% }
+\subsection{
+    What are the most effective software engineering practices for promoting reproducibility and open science in AI and ML research?}
+    Effective software engineering practices for promoting reproducibility and open science in AI and ML research include modularity, separation of concerns, documentation, version control, and testing. Modularity enables the reuse of code and components, while separation of concerns separates code into distinct modules based on their functionality, making it easier to maintain and modify. Documentation helps other researchers understand how to use and reproduce the code, while version control enables tracking of changes to the code over time. Testing helps ensure that the code works as intended and can be used by others. These practices can help promote open science by enabling the sharing of code and promoting transparency in research.
+    
+\subsection{
+    How can we establish a set of conventions for software engineering in AI and ML that are widely accepted and easy to adopt?}
+    Establishing widely accepted and easy to adopt software engineering conventions for AI and ML is a complex task that requires input and collaboration from multiple stakeholders, including researchers, practitioners, and software engineers. One approach is to focus on the principles of modularity, separation of concerns, and documentation, which can help to promote flexibility, reusability, and maintainability of code. The use of independent modules that only depend on python dependencies and the code inside the module uses relative imports is a simple and effective way to promote modularity. This convention can be supplemented with best practices for documentation, including standardized naming conventions and clear documentation of code functionality, assumptions, and limitations.
+    
+    \subsection{
+    What are the challenges and benefits of adopting a software engineering convention for AI and ML research, and how can we ensure that the benefits outweigh the costs?
+    }
+    Adopting a software engineering convention for AI and ML research can lead to significant benefits, including improved code quality, better maintainability, and enhanced reproducibility. However, there can be a learning curve associated with adopting a new convention, particularly for researchers who may not have extensive software engineering backgrounds. The challenge is to develop a convention that is easy to learn and widely accepted. Modularity can be an effective approach, as it allows for the gradual refactoring of existing code into independent, reusable modules, which can lead to an improved developer experience over time. To ensure that the benefits of adopting a convention outweigh the costs, it is essential to provide clear documentation, training materials, and support resources to facilitate the learning process. Additionally, it is important to foster a culture of collaboration and sharing within the research community, which can help to promote the widespread adoption of best practices and ensure that the benefits of improved software engineering practices are shared across the field.
 
-\subsection{Can this be put in a high-quality, easily accessible database for local access?} {
-The creation of a high-quality, easily accessible database storing preprocessed datasets and related components, such as data loaders and preprocessing pipelines, is complex and involves challenges in terms of data processing, storage, and retrieval, which were beyond the scope of the project. Limitations such as credibility, scalability, compatibility with different deep learning frameworks, privacy, and storage pose additional challenges. This project focused on designing a standard for sharing code-related components, instead of making data available, for feasibility of the task.
-}
+% \subsection{How can modular software engineering conventions promote the reusability and scalability of AI and ML systems?}
 
-\subsection{Can the database be made easily expandable?} {
-Expanding the database of deep learning code components, such as data loaders, relies on adopting software engineering principles of separation of concerns (SoC) and modularity. Adhering to these principles makes code components shareable across projects within the same framework, which can get added to a database and scale in time.
-}
+% \subsection{Can a standard format be designed for data loaders and preprocessing pipelines?}
+% {
+% The development of a universal standard format for data loaders and preprocessing pipelines in deep learning is challenging due to the framework-specific nature of the task. Preprocessing pipeline design is highly dependent on the specific problem and its data, making it difficult to create a general solution. However, Separation of concerns (SoC) and modularity principles can enhance code reusability by creating the data loading as an independent python module, and separating preprocessing pipeline from data loading. This project focused on making data loading and code components, such as data loaders and the preprocessing pipelines, sharable within a python machine learning framework.
+% }
+
+% \subsection{Can this be put in a high-quality, easily accessible database for local access?} {
+% The creation of a high-quality, easily accessible database storing preprocessed datasets and related components, such as data loaders and preprocessing pipelines, is complex and involves challenges in terms of data processing, storage, and retrieval, which were beyond the scope of the project. Limitations such as credibility, scalability, compatibility with different deep learning frameworks, privacy, and storage pose additional challenges. This project focused on designing a standard for sharing code-related components, instead of making data available, for feasibility of the task.
+% }
+
+% \subsection{Can the database be made easily expandable?} {
+% Expanding the database of deep learning code components, such as data loaders, relies on adopting software engineering principles of separation of concerns (SoC) and modularity. Adhering to these principles makes code components shareable across projects within the same framework, which can get added to a database and scale in time.
+% }
