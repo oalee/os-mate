@@ -1,0 +1,17 @@
+
+\section{Research Questions}
+
+The objective of this internship at the start was to address the following research questions.
+
+\subsection{Can a standard format be designed for data loaders and preprocessing pipelines?}
+{
+The development of a universal standard format for data loaders and preprocessing pipelines in deep learning is challenging due to the framework-specific nature of the task. Preprocessing pipeline design is highly dependent on the specific problem and its data, making it difficult to create a general solution. However, Separation of concerns (SoC) and modularity principles can enhance code reusability by creating the data loading as an independent python module, and separating preprocessing pipeline from data loading. This project focused on making data loading and code components, such as data loaders and the preprocessing pipelines, sharable within a python machine learning framework.
+}
+
+\subsection{Can this be put in a high-quality, easily accessible database for local access?} {
+The creation of a high-quality, easily accessible database storing preprocessed datasets and related components, such as data loaders and preprocessing pipelines, is complex and involves challenges in terms of data processing, storage, and retrieval, which were beyond the scope of the project. Limitations such as credibility, scalability, compatibility with different deep learning frameworks, privacy, and storage pose additional challenges. This project focused on designing a standard for sharing code-related components, instead of making data available, for feasibility of the task.
+}
+
+\subsection{Can the database be made easily expandable?} {
+Expanding the database of deep learning code components, such as data loaders, relies on adopting software engineering principles of separation of concerns (SoC) and modularity. Adhering to these principles makes code components shareable across projects within the same framework, which can get added to a database and scale in time.
+}

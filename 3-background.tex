@@ -1,0 +1,55 @@
+
+\section{Background Information}
+
+
+\subsection{Crisis of Reproducibility in AI}
+The crisis of reproducibility in AI refers to the difficulty in reproducing the results of AI research (\cite{gundersen2018reproducible}). The lack of transparency in data collection and research has greatly contributed to the crisis of reproducibility in AI (\cite{gundersen2018reproducible,hutson2018artificial,leakage-recrisis}). Many AI models are developed close sourced using proprietary data and methods, making it difficult for others to replicate the research and understand the inner workings of the models (\cite{gundersen2018reproducible,accountabilityInAi}). Additionally, the lack of transparency in the data collection process can lead to issues such as biased or unreliable data, which can further undermine the credibility and reproducibility of the research, and it can decrease the trust in the field as the results of the research are not independently verifiable  (\cite{accountabilityInAi,leakage-recrisis,scully-debt-ml}). The pressure to publish results and the lack of incentives to share data and code can discourage researchers from making their work easily reproducible. (\cite{psychology-reproducibility-crisis, friesike2015open,kwon2021incentive, ali2017motivating,o2017evaluation})
+
+
+\subsection{Open Science}
+
+Open science is a research methodology that prioritizes transparency, collaboration, and reproducibility (\cite{nielsen2011reinventing}). The promotion of open science in the field of AI has garnered considerable attention in recent years (\cite{accountabilityInAi,gundersen2018reproducible,leakage-recrisis,scully-debt-ml,stodden-towardreprodicibleresearch,coro2020open,braun2018open,hicks2021open,burgelman2019open}). In the field of AI, open science practices can help to address concerns about biased or unreliable data, as well as provide a way for researchers to collaborate and build reproducible research and enhance accountability in AI (\cite{accountabilityInAi,stodden-towardreprodicibleresearch}).  Open science encourages researchers to share their knowledge, data, code, and detailed documentation of their methods (\cite{hutson2018artificial,accountabilityInAi}). 
+Researchers can also use open-source frameworks and standard evaluation metrics (\cite{gundersen2018reproducible}) to facilitate reproducibility. Furthermore, the scientific community can encourage reproducibility by valuing it in the peer-review process (\cite{scully-debt-ml}), and by giving credit to researchers who share their data and code (\cite{scully-debt-ml,credit-datasharing,stodden-towardreprodicibleresearch}).
+
+
+
+
+\subsection{The Significance of Data for AI}
+
+Data is a crucial factor in the success of deep learning models (\cite{lecun2015deep}). The quality, pre-processing, and augmentations applied to the data can significantly impact the model's ability to extract knowledge and make accurate predictions (\cite{shorten2019survey}). Therefore, it is essential for researchers to consistently use the same data split, pre-processing and augmentations when comparing models to ensure fair comparisons (\cite{caton2020fairness,mehrabi2021survey, leakage-recrisis}). Furthermore, if the data collection process is not transparent and well-documented, it can lead to issues such as biased or unreliable data, which can harm the credibility and reproducibility of the research (\cite{accountabilityInAi}). 
+ This is highlighted in the seminal publication "Towards Accountability for Machine Learning Datasets: Practices from Software Engineering and Infrastructure," which emphasizes the importance of incorporating open science principles into the development life cycle of AI datasets and the documentation process for researcher collaboration (\cite{accountabilityInAi}).
+
+
+
+% Additionally, bugs in the data-related code or leakage between the test and train sets can also invalidate the results of a study (\cite{leakage-recrisis}).
+
+
+
+
+% \subsection{Open Science}
+
+\subsection{The Significance of Open Science for AI}
+
+ 
+Open science represents a crucial component in the pursuit of responsible and trustworthy AI (\cite{floridi2019establishing,coro2020open,braun2018open,hicks2021open}). By prioritizing transparency and reproducibility, researchers in the field can advance its development in a safer and trustworthy manner (\cite{coro2020open,floridi2018ai4people,kocak2022transparency,stodden-towardreprodicibleresearch}).
+Open science practices serve to mitigate the risks associated with closed-source AI and big data bias, which have raised significant concerns among stakeholders (\cite{batarseh2020data, o2017weapons}). Adoption of open science and open source AI can increase the fairness and impartiality of AI models (\cite{stodden-towardreprodicibleresearch,accountabilityInAi,gundersen2018reproducible}) and enhance the credibility and trustworthiness of their outputs among stakeholders and decision-makers (\cite{goodman2017european,hsiao2018vtaiwan,praprotnikevaluation}). % 
+% Beyond that, close-sourced AI and bias in big data can have detrimental effects and increases inequality, and threaten democracy (\cite{o2017weapons}).  
+\subsection{Software Engineering}
+% Software engineering is the process of designing, developing, and maintaining software systems efficiently and reliably (\cite{pressman2010software}).
+Software engineering is a well-established discipline that encompasses the process of designing, developing, testing, and maintaining software systems with a focus on quality, reliability, and efficiency \cite{pressman2010software}. While the specific activities and methodologies involved in software engineering can vary depending on the type of software, the principles of good software engineering practices are generally applicable across all types of software, including those in the field of artificial intelligence. The software engineering practices employed in the development of AI systems include, but are not limited to, testing, debugging, documentation, version control, and code review. Additionally, given the complex and evolving nature of AI systems, specific attention must be given to software requirements and their evolution over time. However, unlike traditional software engineering, the requirements of AI systems may not always be well-defined, and software engineering practices may need to be adapted to the rapidly changing needs of these systems.
+
+\subsubsection{Separation of Concerns}
+ The separation of concerns (SoC) is a software engineering principle that suggests that different aspects of a system should be separated into distinct components, allowing for increased clarity, maintainability, and scalability of code (\cite{pressman2010software, de2002importance}). In the context of AI, this principle can be applied by separating the different stages of a machine learning pipeline into distinct, reusable components (\cite{mo2016decoupling,mo2016decoupling,pressman2010software, de2002importance}). By adhering to SoC, researchers can improve the clarity of their code and reduce the risk of introducing bugs and errors (\cite{mo2016decoupling,mo2016decoupling,pressman2010software, de2002importance}).
+
+\subsubsection{Modularity in Python}
+Modularity, or the practice of creating reusable components, is a fundamental aspect of software engineering (\cite{pressman2010software}). In Python, modular design can be achieved through the use of functions, modules, and libraries (\cite{sanner1999python}). By breaking down complex systems into smaller, reusable components, researchers can improve the understandability and extendability of their code. Additionally, modular code is more easily testable and maintainable, leading to increased reproducibility and reliability of results (\cite{amershi2019software,pressman2010software}).
+A python module contains definitions, functions, classes, and variables (\cite{raschka2015python}). By convention, modules are stored in separate directories, and a directory containing one or more modules is called a package. The presence of \verb|__init__.py| file in a package directory indicates that it is a package, and all files in the directory are considered modules of that package. In other words, the \verb|__init__.py| file makes the directory it's in a Python package, and any code in that file is executed when the package is imported.
+
+
+
+\subsection{Deep Learning Frameworks in Python}
+
+The utilization of deep learning models in Python has seen the rise of several prominent frameworks, including Jax, Keras/TensorFlow, PyTorch, PyTorch Lightning, and Jax/Flax (\cite{mihajlovic2020use,raschka2020machine, nguyen2019machine, shatnawi2018comparative}). These frameworks provide a comprehensive set of tools and functionalities for the implementation and training of deep learning models (\cite{elshawi2021dlbench}). 
+However, choosing the right framework can be challenging as each framework has its own advantages and limitations (\cite{nguyen2019machine, elshawi2021dlbench,shatnawi2018comparative}).
+
+One approach to addressing this challenge is the development of unified deep learning frameworks such as Ivy (\cite{ivy}). Ivy supports multiple frameworks, enabling researchers to utilize the strengths of each framework without sacrificing compatibility and ease of use (\cite{ivy}). However, using such a unified framework also introduces overhead in learning, and computation, as well as limitations in terms of customizability. For instance, users are required to utilize Ivy tensors instead of PyTorch or Keras tensors, limiting access to low-level functionality (\cite{IvyDocs, ivy}).
