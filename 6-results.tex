@@ -1,6 +1,8 @@
 
 \section{Results}
 
+\subsection{Deep Learning Project Structure}
+
 The implementation of software engineering principles of as separation of concerns (SoC) and modularity in deep learning projects results in a well-structured illustrated below. 
 \dirtree{%
 .1 /.
@@ -19,9 +21,9 @@ The implementation of software engineering principles of as separation of concer
 The modular architecture of a deep learning project, characterized by the structured folder system, separates the key components into four distinct modules: models, experiments, trainers, and data. This enhances code legibility and comprehensibility, enabling other researchers to quickly access the desired code components. This approach leads to the formation of three standalone modules for models, trainers, and data, each possessing the ability to operate independently. Meanwhile, the fourth module, experiments, functions to harmonize the three modules and provide a unified and comprehensive experiment. The modular structure of independence further enables the sharing of models, trainers, and data loaders across various projects and experiments, thereby enhancing the code's reusability and scalability. 
 
 \subsection{Case Study}
- To demonstrate the effectiveness of the convention, we present a case study of a deep learning project built using Yerbamate, and compare it to an existing project that did not adhere to the convention. Our results show that the project built with Yerbamate had better code quality, was more modular, and was easier to maintain and reproduce.
+ To demonstrate the effectiveness of the convention, we present a case study of a deep learning project built using Yerbamate, and compare it to an existing project that did not adhere to the convention. Our results presented at Appendix \ref{transfer-study} illustrates that the project built with Yerbamate had better code quality, was more modular, and was easier to maintain and reproduce.
  
-\subsubsection{Example Project Structure}
+\subsection{Example Project Structure}
 
 The following illustration presents a sample folder structure for a deep learning vision project\footnote{ \url{https://github.com/oalee/deep-vision}}. It's important to note that each folder represents a modular code component with a specific concern, which is demonstrated by the presence of \verb|__init__.py| within the folder.
 
@@ -75,6 +77,8 @@ For a comprehensive understanding of the Yerbamaté, see the documentation\footn
 One of the primary challenges in the development of Yerbamaté was ensuring flexibility and customization.
 To offer increased flexibility, Yerbamaté does not impose any restrictions on additional module names, allowing researchers to utilize their preferred module names for custom tasks. For instance, in the case of analyzing neural network weights and activations, researchers can use the "analyze" module and share code under that name.  Additionally, Yerbamaté is designed to be framework-agnostic, meaning it can work out of the box with any machine learning framework or library.  Moreover, Yerbamaté offers compatibility with Python and Python can be used for running experiments. 
 
+
+
 \subsubsection{Yerbamaté Command Line}
 The Yerbamaté command line provides useful utility functions and support for modular projects, which can facilitate the development of machine learning models.
 Here is a list of the key Yerbamaté command line options:
@@ -103,26 +107,6 @@ The Yerbamaté Environment API is a tool designed to manage environment variable
 
 
 
-
-
-\subsection{Experiment Configuration}
-
-In the field of artificial intelligence and machine learning, defining hyperparameters and experiments plays a crucial role in the development and optimization of models \cite{wu2019hyperparameter}. The choice of format for defining experiments and hyperparameters can greatly impact the efficiency and flexibility of the experimentation process. After evaluating various formats such as JSON and TOML, it has been determined that Python is the most suitable format for defining experiments in AI and ML. Python provides a high level of expressiveness and versatility, allowing for easy modifications and adaptations of the experiment definition. In addition, Python offers a straightforward syntax for defining hyperparameters and allows for the integration of existing code and libraries. This greatly reduces the overhead associated with switching between different languages or systems, leading to a more streamlined and efficient experimentation process. Furthermore, the ability to use Python's powerful libraries and modules enhances the experimentation process by providing access to a vast range of tools and resources. This further enables the exploration of a wider range of hyperparameters and models, leading to a more comprehensive understanding of the problem at hand.
-
-\subsubsection{No-Loop Python Experiment Configuration Convention}
-
-The experiment configuration in this study adopts a restricted version of the Python language that only disallows the use of loops as a convention. The experiment configuration design choice is intended to maintain a hyperparameter-focused experiment format while promoting separation of concerns. The resulting approach provides several benefits, including increased flexibility and customization, as the configuration format can be adapted to various AI tasks, custom use cases, frameworks, and libraries. Additionally, by incorporating well-documented Python code, the readability of the configuration file is improved, making it more accessible to researchers and practitioners alike. Furthermore, this format is executable directly with Python, which makes it Turing complete. This property is particularly useful because it means that the format can include arbitrary computation and is capable of expressing any algorithm, enhancing its flexibility and power.
-
-
-
-\subsection{Seperation of Concerns for AI}
-
-In the field of software engineering, including artificial intelligence and machine learning, decoupling concerns, also known as separation of concerns, is a crucial design principle that helps to improve the maintainability, scalability, and reusability of code (\cite{mo2016decoupling,qian2006decoupling, pressman2010software}. The goal of decoupling concerns is to break down complex systems into smaller, modular components that can be independently developed, tested, and maintained (\cite{pressman2010software, mo2016decoupling, qian2006decoupling}). For example, in a typical deep learning experiment, the trainer component is responsible for training the model. The trainer component can be designed to receive either a string representing the dataset name or the actual dataset objects. The latter approach provides greater flexibility and customization, as the trainer component can operate on any dataset objects, regardless of the underlying dataset.
-
-
-Another example of separation of concerns in AI is the data loading, training and augmentation process. In this context, hardcoding the dataset and augmentation within the training code leads to limitations in terms of flexibility and experimentation. A more effective approach is to pass the data objects directly to the trainer, rather than relying on a string representation of the dataset name. This approach offers greater flexibility in the data loading process, enabling more customization and control, as well as ease of experimentation with different datasets.
-
-The separation of concerns also applies to the design of the model components. For example, a deep learning model can be implemented as a monolithic block of code or as a series of modular components, such as the encoder, decoder, and attention mechanism. The latter approach allows for greater flexibility and customization of the model, as each component can be modified or replaced without affecting the other components. Decoupling concerns is a crucial design principle in the field of artificial intelligence and machine learning. 
 
 
 \subsubsection{Example Custom Data Preprocessing}

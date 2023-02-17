@@ -46,6 +46,16 @@ Modularity, or the practice of creating reusable components, is a fundamental as
 A python module contains definitions, functions, classes, and variables (\cite{raschka2015python}). By convention, modules are stored in separate directories, and a directory containing one or more modules is called a package. The presence of \verb|__init__.py| file in a package directory indicates that it is a package, and all files in the directory are considered modules of that package. In other words, the \verb|__init__.py| file makes the directory it's in a Python package, and any code in that file is executed when the package is imported.
 
 
+\subsection{Seperation of Concerns for AI}
+
+In the field of software engineering, including artificial intelligence and machine learning, decoupling concerns, also known as separation of concerns, is a crucial design principle that helps to improve the maintainability, scalability, and reusability of code (\cite{mo2016decoupling,qian2006decoupling, pressman2010software}. The goal of decoupling concerns is to break down complex systems into smaller, modular components that can be independently developed, tested, and maintained (\cite{pressman2010software, mo2016decoupling, qian2006decoupling}). For example, in a typical deep learning experiment, the trainer component is responsible for training the model. The trainer component can be designed to receive either a string representing the dataset name or the actual dataset objects. The latter approach provides greater flexibility and customization, as the trainer component can operate on any dataset objects, regardless of the underlying dataset.
+
+
+Another example of separation of concerns in AI is the data loading, training and augmentation process. In this context, hardcoding the dataset and augmentation within the training code leads to limitations in terms of flexibility and experimentation. A more effective approach is to pass the data objects directly to the trainer, rather than relying on a string representation of the dataset name. This approach offers greater flexibility in the data loading process, enabling more customization and control, as well as ease of experimentation with different datasets.
+
+The separation of concerns also applies to the design of the model components. For example, a deep learning model can be implemented as a monolithic block of code or as a series of modular components, such as the encoder, decoder, and attention mechanism. The latter approach allows for greater flexibility and customization of the model, as each component can be modified or replaced without affecting the other components. Decoupling concerns is a crucial design principle in the field of artificial intelligence and machine learning. 
+
+
 
 \subsection{Deep Learning Frameworks in Python}
 
@@ -53,3 +63,8 @@ The utilization of deep learning models in Python has seen the rise of several p
 However, choosing the right framework can be challenging as each framework has its own advantages and limitations (\cite{nguyen2019machine, elshawi2021dlbench,shatnawi2018comparative}).
 
 One approach to addressing this challenge is the development of unified deep learning frameworks such as Ivy (\cite{ivy}). Ivy supports multiple frameworks, enabling researchers to utilize the strengths of each framework without sacrificing compatibility and ease of use (\cite{ivy}). However, using such a unified framework also introduces overhead in learning, and computation, as well as limitations in terms of customizability. For instance, users are required to utilize Ivy tensors instead of PyTorch or Keras tensors, limiting access to low-level functionality (\cite{IvyDocs, ivy}).
+
+
+\subsection{Experiment Configuration}
+
+In the field of artificial intelligence and machine learning, defining hyperparameters and experiments plays a crucial role in the development and optimization of models \cite{wu2019hyperparameter}. The choice of format for defining experiments and hyperparameters can greatly impact the efficiency and flexibility of the experimentation process. After evaluating various formats such as JSON and TOML, it has been determined that Python is the most suitable format for defining experiments in AI and ML. Python provides a high level of expressiveness and versatility, allowing for easy modifications and adaptations of the experiment definition. In addition, Python offers a straightforward syntax for defining hyperparameters and allows for the integration of existing code and libraries. This greatly reduces the overhead associated with switching between different languages or systems, leading to a more streamlined and efficient experimentation process. Furthermore, the ability to use Python's powerful libraries and modules enhances the experimentation process by providing access to a vast range of tools and resources. This further enables the exploration of a wider range of hyperparameters and models, leading to a more comprehensive understanding of the problem at hand.
