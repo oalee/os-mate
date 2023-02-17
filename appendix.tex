@@ -1,0 +1,298 @@
+
+
+\onecolumn
+
+\section{Yerbamaté Command Examples}
+
+\begin{itemize}
+    \item \textbf{Installing GAN experiment from a modular project}: 
+    
+    \texttt{mate install oalee/lightweight-gan/lgan/experiments/lgan -yo pip}
+    \item \textbf{Training the GAN experiment}: 
+    
+    \texttt{mate train lgan cars}
+    
+    \item \textbf{Installing transfer learning experiment}
+
+    \texttt{mate install oalee/big\_transfer/experiments/bit}
+    
+    \item \textbf{Installing code from non modular project code}
+
+    \texttt{mate install https://github.com/rwightman/pytorch-image-models/tree/main/timm/}
+
+    \item \textbf{Installing pytorch ViT implementation source code}
+    
+    \texttt{mate install https://github.com/lucidrains/vit-pytorch/tree/main/vit\_pytorch/}
+
+\end{itemize}
+
+
+\section{Experiment Configuration Example}
+
+\subsection{Example GAN Experiment}
+
+The following example illustrates the experiment definition of a Lightweight Generative Adversarial Networks (\cite{lgan,goodfellow2020generative}) implemented with Pytorch Lightning. The use of Python enables the customization of model hyperparameters, loggers, model savers, learning rate schedulers, and optimization algorithms through argument specqification in functions or classes. The source code for the complete project is accessible on Github\footnote{\url{https://github.com/oalee/lightweight-gan}} and all its modules can be installed and the experiment can be trained using Yerbamaté command line on Colab or local machines. The experiment integrates and imports independent trainers, models, and data modules, and defines the experiment's hyperparameters.
+
+\begin{minted} 
+% [
+% frame=lines,
+% framesep=2mm,
+% baselinestretch=1.2,
+% % bgcolor=LightGray,
+% fontsize=\footnotesize,
+% linenos
+% ]
+{python}
+from ...data.cars import CarsLightningDataModule, AugWrapper
+from ...trainers.lgan import LightningGanModule
+from ...models.lgan import Generator, Discriminator
+from torch import nn
+import yerbamate, torch, pytorch_lightning as pl, pytorch_lightning.callbacks as pl_callbacks, os
+# Managing environment variables
+env = yerbamate.Environment()
+
+data_module = CarsLightningDataModule(
+    image_size=128,
+    aug_prob=0.5,
+    in_channels=3,
+    data_dir=env["data_dir"],
+    batch_size=8,
+)
+
+generator = Generator(
+    image_size=128,
+    latent_dim=128,
+    fmap_max=256,
+    fmap_inverse_coef=12,
+    transparent=False,
+    greyscale=False,
+    attn_res_layers=[],
+    freq_chan_attn=False,
+    norm_class=nn.BatchNorm2d,
+)
+
+discriminator = Discriminator(
+    image_size=128,
+    fmap_max=256,
+    fmap_inverse_coef=12,
+    transparent=False,
+    greyscale=False,
+    disc_output_size=5,
+    attn_res_layers=[],  # Try [16, 32, 64, 128, 256] if your hardware allows
+)
+
+g_optimizer = torch.optim.Adam(generator.parameters(), lr=0.0002, betas=(0.5, 0.999))
+d_optimizer = torch.optim.Adam(
+    discriminator.parameters(), lr=0.0002, betas=(0.5, 0.999)
+)
+
+model = LightningGanModule(
+    save_dir=env["results"],
+    sample_interval=100,
+    generator=generator,
+    discriminator=AugWrapper(discriminator),
+    optimizer=[
+        {
+            "optimizer": g_optimizer,
+            "lr_scheduler": {
+                "scheduler": torch.optim.lr_scheduler.StepLR(
+                    g_optimizer, step_size=100, gamma=0.5
+                ),
+                "monitor": "fid",
+            },
+        },
+        {
+            "optimizer": d_optimizer,
+            "lr_scheduler": {
+                "scheduler": torch.optim.lr_scheduler.ReduceLROnPlateau(
+                    d_optimizer, mode="min", factor=0.5, patience=5, verbose=True
+                ),
+                "monitor": "fid",
+            },
+        },
+    ],
+    aug_types=["translation", "cutout", "color", "offset"],
+    aug_prob=0.5,
+)
+
+logger = pl.loggers.TensorBoardLogger(env["results"], name=env.name)
+callbacks = [
+    pl_callbacks.ModelCheckpoint(
+        monitor="fid",
+        dirpath=env["results"],
+        save_top_k=1,
+        mode="min",
+        save_last=True,
+    ),
+    pl_callbacks.LearningRateMonitor(logging_interval="step"),
+]
+trainer = pl.Trainer(
+    logger=logger,
+    accelerator="gpu",
+    precision=16,
+    gradient_clip_val=0.5,
+    callbacks=callbacks,
+    max_epochs=100,
+)
+
+if env.train:
+    trainer.fit(model, data_module)
+if env.test:
+    trainer.test(model, data_module)
+if env.restart:
+    trainer.fit(model, data_module, ckpt_path=os.path.join(env["results"], "last.ckpt"))
+
+\end{minted}
+
+
+
+\section{Transfer Learning Case Study}
+
+In this section, we showcase the application of modularity and separation of concerns on the official implementation of "Big Transfer (BiT): General Visual Representation Learning"\cite{transferlearning}. The source code from the official repository \footnote{\url{https://github.com/google-research/big_transfer}} has been refactored \footnote{\url{https://github.com/oalee/big_transfer}} into a modular, decoupled structure.  The original folder structure of the repository is as follows:
+
+\dirtree{%
+.1 /.
+.2 \texttt{bit\_common.py}.
+.2 \texttt{bit\_hyperrule.py}.
+.2 \texttt{bit\_pytorch}.
+.3 \texttt{fewshot.py}.
+.3 \texttt{\_\_init\_\_.py}.
+.3 \texttt{lbtoolbox.py}.
+.3 \texttt{models.py}.
+.3 \texttt{requirements.txt}.
+.3 \texttt{train.py}.
+.2 \texttt{\_\_init\_\_.py}.
+}
+\vspace{0.4em}
+In this examination, we delve into the components of the official Big Transfer repository to better understand the purpose of each one. The components are as follows:
+
+\begin{itemize}
+    \item \texttt{bit\_common.py} serves as the central point for defining an argument parser and setting up a logger for experiments. Currently, the project only supports a limited set of hyperparameter selections, which include the initial learning rate, batch size, batch split, and five datasets, namely CIFAR10, CIFAR100, Oxford\_iiit\_pet, Oxford\_flowers102, and ImageNet2012. The name of this file, however, does not accurately reflect its purpose.
+    \item \texttt{bit\_hyperrule.py} is responsible for defining the learning rate scheduler and a utility function for computing the resolution of the model based on the dataset. The name of this file, once again, does not accurately reflect its purpose and separates the concern of data-related functions from the learning rate scheduling.
+    \item \texttt{few\_shot.py} is specifically designed to find few-shot learning samples for the model, and its name accurately reflects its purpose.
+    \item \texttt{lbtoolbox.py} handles interruptions in training and provides a chronometer interface for profiling. This component is independent and does not couple with any other part of the system.
+    \item \texttt{models.py} defines the models and is also an independent component that does not couple with any other part.
+    \item \texttt{train.py} is utilized for training the model. This component includes the implementation for batch splitting and can only be executed with the pre-defined hyperparameter selection.
+\end{itemize}
+
+
+The following code illustrates the execution of the training procedure in the original repository. The training process is initiated by the \texttt{main} function located at the end of the \texttt{train.py} file. 
+\begin{minted}{python}
+if __name__ == "__main__":
+  parser = bit_common.argparser(models.KNOWN_MODELS.keys())
+  parser.add_argument("--datadir", required=True,
+                      help="Path to the ImageNet data folder, preprocessed for torchvision.")
+  parser.add_argument("--workers", type=int, default=8,
+                      help="Number of background threads used to load data.")
+  parser.add_argument("--no-save", dest="save", action="store_false")
+  main(parser.parse_args())
+\end{minted}
+
+This implementation exhibits limited adaptability as the function is dependent solely on the arguments provided through the command-line interface. The following tree structure and experiment definition showcases modularity and separation of concerns applied on this task .
+
+\vspace{0.5em}
+\dirtree{%
+.1 /\texttt{big\_transfer}.
+.2 data.
+.3 bit.
+.4 \texttt{fewshot.py}.
+.4 \texttt{\_\_init\_\_.py}.
+.4 \texttt{minibatch\_fewshot.py}.
+.4 \texttt{requirements.txt}.
+.4 \texttt{transforms.py}.
+.3 \texttt{\_\_init\_\_.py}.
+.2 experiments.
+.3 bit.
+.4 \texttt{dependencies.json}.
+.4 \texttt{few\_shot.py}.
+.4 \texttt{\_\_init\_\_.py}.
+.4 \texttt{learn.py}.
+.4 \texttt{requirements.txt}.
+.3 \texttt{\_\_init\_\_.py}.
+.2 \texttt{\_\_init\_\_.py}.
+.2 models.
+.3 \textt{bit\_torch}.
+.4 downloader.
+.5 \texttt{downloader.py}.
+.5 \texttt{\_\_init\_\_.py}.
+.5 \texttt{requirements.txt}.
+.5 \texttt{utils.py}.
+.4 \texttt{\_\_init\_\_.py}.
+.4 \texttt{models.py}.
+.4 \texttt{requirements.txt}.
+.3 \texttt{\_\_init\_\_.py}.
+.2 trainers.
+.3 \textt{bit\_torch}.
+.4 \texttt{\_\_init\_\_.py}.
+.4 \texttt{utils.py}.
+.4 \texttt{logger.py}.
+.4 \texttt{lr\_schduler.py}.
+.4 \texttt{requirements.txt}.
+.4 \texttt{trainer.py}.
+.3 \texttt{\_\_init\_\_.py}.
+}
+
+\begin{minted}{python}
+from ...trainers.bit_torch.trainer import test, train
+from ...models.bit_torch.models import load_trained_model, get_model_list
+from ...data.bit import get_transforms, mini_batch_fewshot
+import torchvision as tv, yerbamate, os, tensorboard
+from torch.utils.tensorboard import SummaryWriter
+
+
+# BigTransfer Medium ResNet50 Width 1
+model_name = "BiT-M-R50x1"
+# Choose a model form get_model_list that can fit in to your memoery
+# Try "BiT-S-R50x1" if this doesn't works for you
+
+env = yerbamate.Environment()
+
+train_transform, val_transform = get_transforms(img_size=[32, 32])
+data_set = tv.datasets.CIFAR10(
+    env["datadir"], train=True, download=True, transform=train_transform
+)
+val_set = tv.datasets.CIFAR10(env["datadir"], train=False, transform=val_transform)
+
+train_set, val_set, train_loader, val_loader = mini_batch_fewshot(
+    train_set=data_set,
+    valid_set=val_set,
+    examples_per_class=None,  # Fewshot disabled
+    batch=128,
+    batch_split=2,
+    workers=os.cpu_count(),  # Auto-val to cpu count
+)
+
+imagenet_weight_path = os.path.join(env["weights_path"], f"{model_name}.npz")
+model = load_trained_model(
+    weight_path=imagenet_weight_path, model_name=model_name, num_classes=10
+)
+logger = SummaryWriter(log_dir=env["results"], comment=env.name)
+
+if env.train:
+    train(
+        model=model,
+        train_loader=train_loader,
+        valid_loader=val_loader,
+        train_set_size=len(train_set),
+        save=True,
+        save_path=os.path.join(env["results"], f"trained_{model_name}.pt"),
+        batch_split=2,
+        base_lr=0.001,
+        eval_every=100,
+        log_path=os.path.join(env["results"], "log.txt"),
+        tensorboardlogger=logger,
+    )
+
+if env.test:
+    test(
+        model=model,
+        val_loader=val_loader,
+        save_path=os.path.join(env["results"], f"trained_{model_name}.pt"),
+        log_path=os.path.join(env["results"], "log.txt"),
+        tensorboardlogger=logger,
+    )
+
+\end{minted}
+
+
+The new structure in the refactored repository is designed to address the limitations of the original implementation. By separating concerns and adopting modularization, the refactored repository provides a more flexible and scalable solution for training models. The different components in the new structure, such as the trainer, model, and data loading modules, are designed to be independent and reusable, making it easier to manage and maintain the codebase. Moreover, the experimentation module provides a unified interface for combining and executing the various components, making it easier to experiment with different configurations and hyperparameters. Overall, the new structure in the refactored repository represents a significant improvement over the original implementation, offering a better and more organized approach to training machine learning models.

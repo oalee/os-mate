@@ -1,0 +1,504 @@
+\documentclass{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage[sorting = none]{biblatex}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage[table]{xcolor}
+\usepackage{array}
+\usepackage{hyperref}           % page numbers and '\ref's become clickable
+\usepackage{todonotes}
+\usepackage{float}          % for forcing images to stay where they should
+\usepackage{multirow}       % for using multirow in tables
+\usepackage{tikz}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+\usepackage{longtable}
+\usepackage[edges]{forest}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{MnSymbol}
+\usepackage{tipa}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+\usepackage{dirtree}
+
+
+\mdfdefinestyle{Frame}{
+    linecolor=black,
+    outerlinewidth=0.3pt,
+    roundcorner=2pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    leftmargin =1cm,
+    rightmargin =1cm,
+    backgroundcolor=white}
+    \mdfdefinestyle{Frame_NoMargin}{%
+    linecolor=black,
+    outerlinewidth=0.3pt,
+    roundcorner=2pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    backgroundcolor=white}
+    \mdfdefinestyle{InnerFrame_NoMargin}{%
+    linecolor=black,
+    outerlinewidth=0.1pt,
+    roundcorner=0.5pt,
+    % innertopmargin=\baselineskip,
+    % innerbottommargin=\baselineskip,
+    leftmargin =-0.1cm,
+    innerleftmargin = 0.05cm,
+    rightmargin =0cm,
+    backgroundcolor=white}  
+    \mdfdefinestyle{InnerFrameBig_NoMargin}{%
+    linecolor=black,
+    outerlinewidth=0.1pt,
+    roundcorner=0.5pt,
+    % innertopmargin=\baselineskip,
+    % innerbottommargin=\baselineskip,
+    leftmargin =-0.22cm,
+    innerleftmargin = 0.05cm,
+    rightmargin =-0.22cm,
+    backgroundcolor=white}
+      \mdfdefinestyle{Frame_NoInnerMargin}{%
+    linecolor=black,
+    outerlinewidth=0.3pt,
+    roundcorner=2pt,
+    innerleftmargin = 0.02cm,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    backgroundcolor=white}
+      \mdfdefinestyle{Frame_Blank}{%
+    linecolor=white,
+    outerlinewidth=0.0pt,
+    roundcorner=0pt,
+    innerleftmargin = 0.3cm,
+        innertopmargin=0cm,
+    innerbottommargin=0.2cm,
+    backgroundcolor=white}    
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% Some commands       %
+%%%%%%%%%%%%%%%%%%%%%%%
+% Notes
+\newcommand{\note}[1]{\todo[inline]{#1}}
+\newcommand{\urgent}[1]{\todo[inline, color=red]{#1}}
+\newcommand{\revision}[1]{\todo[inline, color=green]{#1}}
+\newcommand{\fix}[1]{\todo[inline, color=yellow]{#1}}
+% Tables
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcommand{\adaptcell}[1]{\parbox{0.95\columnwidth}{\vspace{0.5em}#1\vspace{0.5em}}}
+% Math
+\newcommand{\rarrow}{$\rightarrow\ $}
+\newcommand{\larrow}{$\leftarrow\ $}
+\newcommand{\lif}{\rightarrow}
+\newcommand{\liff}{\leftrightarrow}
+\newcommand{\la}{\forall}
+\renewcommand{\le}{\exists}
+\newcommand{\lxor}{\dot\vee}
+\renewcommand{\ll}{\llbracket}
+\renewcommand{\phi}{\varphi}
+\newcommand{\rr}{\rrbracket}
+\newcommand{\lk}{\square}
+\newcommand{\lp}{\lozenge}
+\newcommand{\argmin}[1]{\underset{#1}{\mathrm{argmin}}}
+\newcommand{\argmax}[1]{\underset{#1}{\mathrm{argmax}}}
+\newcommand{\Sum}[1]{\underset{#1}{\sum}}
+
+% Others
+\newcommand{\newcolumn}{\vfill\pagebreak}
+\renewcommand{\b}[1]{\textbf{#1}}
+\renewcommand{\it}[1]{\textit{#1}}
+\renewcommand{\u}[1]{\underline{#1}}
+
+%%%%%%%%%%% STUFF TO PRINT SEMANTIC TABLEAUX %%%%%%%%%%
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows,calc, trees, automata}
+
+\usepackage{minted}
+% \usepackage[T1]{fontenc}
+
+\usepackage[zerostyle=b,scaled=.75]{newtxtt}
+\usemintedstyle{colorful}
+
+\setminted[python]{breaklines, framesep=2mm, fontsize=\footnotesize, numbersep=5pt}
+
+% \usepackage{xcolor}
+% \definecolor{Text}{HTML}{000000}
+% \AtBeginEnvironment{minted}{\color{Text}}
+
+
+\tikzset{
+	modal/.style={>=stealth',shorten >=1pt,shorten <=1pt,auto,node distance=1.5cm,semithick},world/.style={circle,draw,minimum size=0.5cm,fill=gray!15},point/.style={circle,draw,inner sep=0.5mm,fill=black},reflexive above/.style={->,loop,looseness=7,in=120,out=60},reflexive below/.style={->,loop,looseness=7,in=240,out=300},reflexive left/.style={->,loop,looseness=7,in=150,out=210},reflexive right/.style={->,loop,looseness=7,in=30,out=330},none/.style={}
+}
+
+\forestset{%
+	declare toks={T}{},
+	declare toks={F}{},
+	my label/.style={%
+		tikz+={%
+			\path[late options={%
+				name=\forestoption{name},label={#1}}
+			];
+		}
+	},
+	tableaux/.style={%
+		forked edges,
+		for tree={
+			math content,
+			parent anchor=children,
+			child anchor=parent,
+		},
+		where level=0{%
+			for children={no edge},
+			phantom,
+		}{%
+			before typesetting nodes={%
+				content/.wrap value={\circ},
+			},
+			delay={%
+				my label/.wrap pgfmath arg={{[inner sep=0pt, xshift=-3.5pt, yshift=3.5pt, anchor=north west, font=\scriptsize]-45:$##1$}}{content()},
+				insert before/.wrap pgfmath arg={%
+					[{##1}, no edge, math content, before drawing tree={x'+=7.5pt}]
+				}{T()},
+				insert after/.wrap pgfmath arg={%
+					[{##1}, no edge, math content, before drawing tree={x'-=7.5pt}]
+				}{F()},
+			},
+			if={n_children("!u")==1}{%
+				before packing={calign with current edge},
+			}{}
+		},
+	}
+}
+
+\forestset{
+  smullyan tableaux/.style={
+    for tree={
+      math content
+    },
+    where n children=1{
+      !1.before computing xy={l=\baselineskip},
+      !1.no edge
+    }{},
+    closed/.style={
+      label=below:$\times$
+    },
+  },
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\addbibresource{ref.bib}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+
+
+
+
+
+\title{ \Huge \textbf{Yerbamaté: An Open Science Python Framework for Artificial Intelligence Experimentation} \\[0.5cm]}
+
+\author{
+\begin{tabular}{ll}
+Ali Rahimi
+\end{tabular} \bigskip \\
+
+\textit{Maastricht University} \\
+\textit{Department of Advanced Computing Sciences}\\
+\textit{Maastricht, The Netherlands}\\
+
+}
+\date{January 2023}
+\addbibresource{ref.bib}
+
+
+\begin{document}
+
+\maketitle
+
+
+
+%\tableofcontents
+% \note{TODO: social impact}
+
+
+\begin{abstract}
+    This research internship aimed to address the reproducibility crisis in artificial intelligence (AI) research by investigating software engineering best practices, open science and accessible AI. To achieve this goal, Yerbamaté framework was developed around the software engineering principles of modularity and separation of concerns. Yerbamaté is an open science modular Python framework designed to streamline and simplify the development and management of machine learning projects. The framework encourages quality coding, collaboration, and the sharing of models, trainers, data loaders, and knowledge, while also promoting reproducibility, customization, and flexibility. The modular design and separation of concerns simplify the development and maintenance of machine learning models, leading to an improved developer experience. The straightforward installation, sharing, and training process makes it accessible to researchers and practitioners with varying technical expertise, enhancing collaboration and knowledge sharing. The findings suggest that the adoption of modular design principles and open science tools can contribute significantly to addressing the reproducibility crisis in AI, leading to more accessible, transparent, and trustworthy AI.
+\end{abstract}
+
+\section{Introduction}
+
+  In recent years, deep learning has emerged as a powerful tool for solving complex problems in various fields, such as image and speech recognition, natural language processing, and computer vision (\cite{lecun2015deep}). 
+Deep learning projects, whilst still considered software engineering, differ from traditional software engineering in that they revolve around the creation of models that can extract knowledge from data and make predictions or decisions, as opposed to relying on a pre-defined set of instructions (\cite{lecun2015deep,amershi2019software,wan2019does,se4dl}). These disparities make some phases such as the testing phase of deep learning projects distinct from traditional software (\cite{wan2019does}). Still, principles and design patterns commonly used in software engineering can still aid in developing and maintaining deep learning software (\cite{amershi2019software,wan2019does,se4dl}). 
+
+% The widespread adoption of the Python programming language in AI programming has been noted in recent studies (\cite{mihajlovic2020use,raschka2020machine}). As such, this project focuses on the examination of software engineering practices in the context of Python and its machine learning frameworks. Many interdisciplinary researchers may lack the software engineering expertise necessary to manage their code bases to ensure correctness, understandability, extendability, and reusability (\cite{amershi2019software,scully-debt-ml,leakage-recrisis,accountabilityInAi}).
+% To address these challenges, we investigated the application of software engineering principles of separation of concerns (SoC) and modular design in Python to AI projects. The goal of this study was to improve the reproducibility and reusability of python AI components through the adoption of best software engineering practices. Software engineering is the process of designing, developing, and maintaining software systems efficiently and reliably (\cite{pressman2010software}).
+% In this internship, I explored software engineering practices that could help researchers share and collaborate AI code.
+
+\section{Background Information}
+
+
+\subsection{Crisis of Reproducibility in AI}
+The crisis of reproducibility in AI refers to the difficulty in reproducing the results of AI research (\cite{gundersen2018reproducible}). The lack of transparency in data collection and research has greatly contributed to the crisis of reproducibility in AI (\cite{gundersen2018reproducible,hutson2018artificial,leakage-recrisis}). Many AI models are developed close sourced using proprietary data and methods, making it difficult for others to replicate the research and understand the inner workings of the models (\cite{gundersen2018reproducible,accountabilityInAi}). Additionally, the lack of transparency in the data collection process can lead to issues such as biased or unreliable data, which can further undermine the credibility and reproducibility of the research, and it can decrease the trust in the field as the results of the research are not independently verifiable  (\cite{accountabilityInAi,leakage-recrisis,scully-debt-ml}). The pressure to publish results and the lack of incentives to share data and code can discourage researchers from making their work easily reproducible. (\cite{psychology-reproducibility-crisis, friesike2015open,kwon2021incentive, ali2017motivating,o2017evaluation})
+
+
+\subsection{Open Science}
+
+Open science is a research methodology that prioritizes transparency, collaboration, and reproducibility (\cite{nielsen2011reinventing}). The promotion of open science in the field of AI has garnered considerable attention in recent years (\cite{accountabilityInAi, gundersen2018reproducible, leakage-recrisis, scully-debt-ml, stodden-towardreprodicibleresearch, coro2020open, braun2018open, hicks2021open, burgelman2019open}). In the field of AI, open science practices can help to address concerns about biased or unreliable data, as well as provide a way for researchers to collaborate and build reproducible research and enhance accountability in AI (\cite{accountabilityInAi, stodden-towardreprodicibleresearch}).  Open science encourages researchers to share their knowledge, data, code, and detailed documentation of their methods (\cite{hutson2018artificial,accountabilityInAi}). 
+Researchers can also use open-source frameworks and standard evaluation metrics (\cite{gundersen2018reproducible}) to facilitate reproducibility. Furthermore, the scientific community can encourage reproducibility by valuing it in the peer-review process (\cite{scully-debt-ml}), and by giving credit to researchers who share their data and code (\cite{scully-debt-ml,credit-datasharing,stodden-towardreprodicibleresearch}).
+
+
+
+
+\subsection{The Significance of Data for AI}
+
+Data is a crucial factor in the success of deep learning models (\cite{lecun2015deep}). The quality, pre-processing, and augmentations applied to the data can significantly impact the model's ability to extract knowledge and make accurate predictions (\cite{shorten2019survey}). Therefore, it is essential for researchers to consistently use the same data split, pre-processing and augmentations when comparing models to ensure fair comparisons (\cite{caton2020fairness,mehrabi2021survey, leakage-recrisis}). Furthermore, if the data collection process is not transparent and well-documented, it can lead to issues such as biased or unreliable data, which can harm the credibility and reproducibility of the research (\cite{accountabilityInAi}). 
+ This is highlighted in the seminal publication "Towards Accountability for Machine Learning Datasets: Practices from Software Engineering and Infrastructure," which emphasizes the importance of incorporating open science principles into the development life cycle of AI datasets and the documentation process for researcher collaboration (\cite{accountabilityInAi}).
+
+
+
+% Additionally, bugs in the data-related code or leakage between the test and train sets can also invalidate the results of a study (\cite{leakage-recrisis}).
+
+
+
+
+% \subsection{Open Science}
+
+\subsection{The Significance of Open Science for AI}
+
+ 
+Open science represents a crucial component in the pursuit of responsible and trustworthy AI (\cite{floridi2019establishing,coro2020open,braun2018open,hicks2021open}). By prioritizing transparency and reproducibility, researchers in the field can advance its development in a safer and trustworthy manner (\cite{coro2020open,floridi2018ai4people,kocak2022transparency,stodden-towardreprodicibleresearch}).
+Open science practices serve to mitigate the risks associated with closed-source AI and big data bias, which have raised significant concerns among stakeholders (\cite{batarseh2020data, o2017weapons}). Adoption of open science and open source AI can increase the fairness and impartiality of AI models (\cite{stodden-towardreprodicibleresearch,accountabilityInAi,gundersen2018reproducible}) and enhance the credibility and trustworthiness of their outputs among stakeholders and decision-makers (\cite{goodman2017european,hsiao2018vtaiwan,praprotnikevaluation}). % 
+% Beyond that, close-sourced AI and bias in big data can have detrimental effects and increases inequality, and threaten democracy (\cite{o2017weapons}).  
+\subsection{Software Engineering}
+% Software engineering is the process of designing, developing, and maintaining software systems efficiently and reliably (\cite{pressman2010software}).
+Software engineering is a well-established discipline that encompasses the process of designing, developing, testing, and maintaining software systems with a focus on quality, reliability, and efficiency \cite{pressman2010software}. While the specific activities and methodologies involved in software engineering can vary depending on the type of software, the principles of good software engineering practices are generally applicable across all types of software, including those in the field of artificial intelligence. The software engineering practices employed in the development of AI systems include, but are not limited to, testing, debugging, documentation, version control, and code review. Additionally, given the complex and evolving nature of AI systems, specific attention must be given to software requirements and their evolution over time. However, unlike traditional software engineering, the requirements of AI systems may not always be well-defined, and software engineering practices may need to be adapted to the rapidly changing needs of these systems.
+
+\subsubsection{Separation of Concerns}
+ The separation of concerns (SoC) is a software engineering principle that suggests that different aspects of a system should be separated into distinct components, allowing for increased clarity, maintainability, and scalability of code (\cite{pressman2010software, de2002importance}). In the context of AI, this principle can be applied by separating the different stages of a machine learning pipeline into distinct, reusable components (\cite{mo2016decoupling,mo2016decoupling,pressman2010software, de2002importance}). By adhering to SoC, researchers can improve the clarity of their code and reduce the risk of introducing bugs and errors (\cite{mo2016decoupling,mo2016decoupling,pressman2010software, de2002importance}).
+
+\subsubsection{Modularity in Python}
+Modularity, or the practice of creating reusable components, is a fundamental aspect of software engineering (\cite{pressman2010software}). In Python, modular design can be achieved through the use of functions, modules, and libraries (\cite{sanner1999python}). By breaking down complex systems into smaller, reusable components, researchers can improve the understandability and extendability of their code. Additionally, modular code is more easily testable and maintainable, leading to increased reproducibility and reliability of results (\cite{amershi2019software,pressman2010software}).
+A python module contains definitions, functions, classes, and variables (\cite{raschka2015python}). By convention, modules are stored in separate directories, and a directory containing one or more modules is called a package. The presence of \verb|__init__.py| file in a package directory indicates that it is a package, and all files in the directory are considered modules of that package. In other words, the \verb|__init__.py| file makes the directory it's in a Python package, and any code in that file is executed when the package is imported.
+
+
+
+\subsection{Deep Learning Frameworks in Python}
+
+The utilization of deep learning models in Python has seen the rise of several prominent frameworks, including Jax, Keras/TensorFlow, PyTorch, PyTorch Lightning, and Jax/Flax (\cite{mihajlovic2020use,raschka2020machine, nguyen2019machine, shatnawi2018comparative}). These frameworks provide a comprehensive set of tools and functionalities for the implementation and training of deep learning models (\cite{elshawi2021dlbench}). 
+However, choosing the right framework can be challenging as each framework has its own advantages and limitations (\cite{nguyen2019machine, elshawi2021dlbench,shatnawi2018comparative}).
+
+One approach to addressing this challenge is the development of unified deep learning frameworks such as Ivy (\cite{ivy}). Ivy supports multiple frameworks, enabling researchers to utilize the strengths of each framework without sacrificing compatibility and ease of use (\cite{ivy}). However, using such a unified framework also introduces overhead in learning, and computation, as well as limitations in terms of customizability. For instance, users are required to utilize Ivy tensors instead of PyTorch or Keras tensors, limiting access to low-level functionality (\cite{IvyDocs, ivy}).
+
+
+\section{Methodology}
+
+The widespread adoption of the Python programming language in AI programming has been noted in recent studies (\cite{mihajlovic2020use,raschka2020machine}). As such, this project focuses on the examination of software engineering practices in the context of Python and its machine learning frameworks. Many interdisciplinary researchers may lack the software engineering expertise necessary to manage their code bases to ensure correctness, understandability, extendability, and reusability (\cite{amershi2019software,scully-debt-ml,leakage-recrisis,accountabilityInAi}). To address these challenges, we investigated the application of software engineering principles of separation of concerns (SoC) and modular design in Python to AI projects. The goal of this study was to improve the reproducibility and reusability of python AI components through the adoption of best software engineering practices.
+
+% \subsection{Software Engineering for Python AI Projects}
+%  In the context of AI, the implementation of modularity and SoC principles results in the separation of models, data-related components, and trainers. 
+% This approach facilitates the creation of a modular design, where the code is organized into distinct, reusable components (\cite{sanner1999python,pressman2010software}). This decoupling has the potential to greatly enhance the reusability of code greatly, enabling easier experimentation with models and datasets.
+
+
+\subsection{A Different Approach to Deep Learning Framework}
+
+An alternative approach to the compatibility and re-usability issue in deep learning frameworks is to enforce principles of separation of concerns (SoC) and modularity in Python. 
+The implementation of modularity and SoC principles results in the separation of models, data-related components, and trainers. 
+This approach facilitates the creation of a modular design, where the code is organized into distinct, reusable components (\cite{sanner1999python,pressman2010software}). This separation enhances the reusability of the code, making it easier to experiment with different models and datasets within the same framework. This approach has the advantage of limiting the learning overhead to the principles of software engineering, rather than requiring a transition to a unified deep learning framework.
+
+
+
+A limitation of this approach is that it requires manual translation of AI components, such as data loaders and models, into different frameworks when necessary. While this approach may require additional effort, it allows for greater flexibility and customizability in implementing deep learning models. Additionally, it promotes a deeper understanding of the underlying software engineering principles and their application in the field of AI.
+
+
+
+\section{Research Questions}
+
+The objective of this internship at the start was to address the following research questions.
+
+\subsection{Can a standard format be designed for data loaders and preprocessing pipelines?}
+{
+The development of a universal standard format for data loaders and preprocessing pipelines in deep learning is challenging due to the framework-specific nature of the task. Preprocessing pipeline design is highly dependent on the specific problem and its data, making it difficult to create a general solution. However, Separation of concerns (SoC) and modularity principles can enhance code reusability by creating the data loading as an independent python module, and separating preprocessing pipeline from data loading. This project focused on making data loading and code components, such as data loaders and the preprocessing pipelines, sharable within a python machine learning framework.
+}
+
+\subsection{Can this be put in a high-quality, easily accessible database for local access?} {
+The creation of a high-quality, easily accessible database storing preprocessed datasets and related components, such as data loaders and preprocessing pipelines, is complex and involves challenges in terms of data processing, storage, and retrieval, which were beyond the scope of the project. Limitations such as credibility, scalability, compatibility with different deep learning frameworks, privacy, and storage pose additional challenges. This project focused on designing a standard for sharing code-related components, instead of making data available, for feasibility of the task.
+}
+
+\subsection{Can the database be made easily expandable?} {
+Expanding the database of deep learning code components, such as data loaders, relies on adopting software engineering principles of separation of concerns (SoC) and modularity. Adhering to these principles makes code components shareable across projects within the same framework, which can get added to a database and scale in time.
+}
+
+\section{Results}
+
+
+
+The implementation of software engineering principles of as separation of concerns (SoC) and modularity in deep learning projects results in a well-structured illustrated below. 
+\dirtree{%
+.1 /.
+.2 models.
+.3 \texttt{\_\_init\_\_.py}.
+.2 experiments.
+.3 \texttt{\_\_init\_\_.py}.
+.2 trainers.
+.3 \texttt{\_\_init\_\_.py}.
+.2 data.
+.3 \texttt{\_\_init\_\_.py}.
+}
+\vspace{0.7em}
+
+
+The modular architecture of a deep learning project, characterized by the structured folder system, separates the key components into four distinct modules: models, experiments, trainers, and data. This enhances code legibility and comprehensibility, enabling other researchers to quickly access the desired code components. This approach leads to the formation of three standalone modules for models, trainers, and data, each possessing the ability to operate independently. Meanwhile, the fourth module, experiments, functions to harmonize the three modules and provide a unified and comprehensive experiment. The modular structure of independence further enables the sharing of models, trainers, and data loaders across various projects and experiments, thereby enhancing the code's reusability and scalability. 
+
+
+\subsubsection{Example Project Structure}
+
+The following illustration presents a sample folder structure for a deep learning vision project\footnote{ \url{https://github.com/oalee/deep-vision}}. It's important to note that each folder represents a modular code component with a specific concern, which is demonstrated by the presence of \verb|__init__.py| within the folder.
+
+\dirtree{%
+.1 /.
+.2 data.
+.3 cifar10.
+.4 \texttt{data\_loader.py}.
+.4 \texttt{\_\_init\_\_.py}.
+.3 cifar100.
+.4 \texttt{data\_loader.py}.
+.4 \texttt{\_\_init\_\_.py}.
+.3 \texttt{\_\_init\_\_.py}.
+.2 models.
+.3 resnet.
+.4 \texttt{fine\_tune.py}.
+.4 \texttt{resnet.py}.
+.4 \texttt{\_\_init\_\_.py}.
+.3 efficientnet.
+.4 \texttt{efficientnet.py}.
+.4 \texttt{\_\_init\_\_.py}.
+.3 \texttt{\_\_init\_\_.py}.
+.2 trainers.
+.3 classification.
+.4 \texttt{pl\_classification\_module.py}.
+.4 \texttt{\_\_init\_\_.py}.
+.3 \texttt{\_\_init\_\_.py}.
+.2 experiments.
+.3 \texttt{resnet\_cifar10.py}.
+.3 \texttt{resnet\_cifar100.py}.
+.3 \texttt{fine\_tune\_resnet\_cifar.py}.
+.3 \texttt{keras\_efficient\_net\_cifar.py}.
+.3 \texttt{\_\_init\_\_.py}.
+.2 \texttt{\_\_init\_\_.py}.
+}
+\vspace{2em}
+Each top-level module can be divided into multiple sub-modules, allowing for the separation of individual components within each module. For instance, the models module can comprise sub-modules such as ResNet (\cite{resnet}), ViT (\cite{dosovitskiy2020vit}), CvT (\cite{wu2021cvt}), and others, implemented as independent components. Likewise, the data module can encompass sub-modules such as data loaders, preprocessing pipelines, and post-processing routines. This modular design promotes increased organization and manageability of the codebase, contributing to the efficiency and effectiveness of the deep learning project.
+
+
+\subsection{Yerbamaté: An Open Science Python Framework}
+Yerbamaté\footnote{\url{https://github.com/oalee/yerbamate}} is a result of the study on reproducibility and the importance of modularity in AI and machine learning projects. Yerbamaté is an open source open science framework designed to streamline and simplify the development and management of artificial intelligence and machine learning projects. Built around the principles of modularity and separation of concerns, Yerbamaté provides a convenient and efficient means of adding source code and dependencies to projects.
+
+Modularity allows for a clean and organized codebase, making it easier to maintain, scale, and reuse the code in the future. In addition, Yerbamaté provides an easy-to-use interface for sharing the source code of models, trainers, data loaders, and experiments between modular projects, enabling greater flexibility and collaboration. Furthermore, adopting the Yerbamaté framework ensures that all projects adhering to its principles are readily compatible with Colab\footnote{\url{https://colab.research.google.com/github/oalee/yerbamate/blob/main/deep_learning.ipynb}}, a cloud-based platform widely used for machine learning experimentation and development.
+
+Yerbamaté also provides support for full customizability and reproducibility of results through the inclusion of dependencies in your project. The tool supports pip and conda for dependency management, making it easy to manage and install the necessary dependencies for your project.
+% Additionally, Yerbamaté is fully compatible with python, and can be used with popular libraries such as PyTorch/Lightning, TensorFlow/Keras, JAX/Flax, Huggingface/transformers. Another feature of Yerbamaté is its convenient environment management through the Yerbamaté Environment API. This API allows for the creation and management of virtual environments, ensuring that each experiment is run in an isolated environment with the necessary dependencies. 
+For a comprehensive understanding of the Yerbamaté, see the documentation\footnote{\url{https://oalee.github.io/yerbamate/}}.
+
+
+\subsubsection{Flexibility and Customization}
+One of the primary challenges in the development of Yerbamaté was ensuring flexibility and customization.
+To offer increased flexibility, Yerbamaté does not impose any restrictions on additional module names, allowing researchers to utilize their preferred module names for custom tasks. For instance, in the case of analyzing neural network weights and activations, researchers can use the "analyze" module and share code under that name.  Additionally, Yerbamaté is designed to be framework-agnostic, meaning it can work out of the box with any machine learning framework or library.  Moreover, Yerbamaté offers compatibility with Python and Python can be used for running experiments. 
+
+\subsubsection{Yerbamaté Command Line}
+The Yerbamaté command line provides useful utility functions and support for modular projects, which can facilitate the development of machine learning models.
+Here is a list of the key Yerbamaté command line options:
+
+\begin{itemize}
+\item \textbf{mate init module\_name}: Initializes a new empty modular project skeleton with the given module name. 
+
+\item \textbf{mate install url -y\textbar n\textbar o pm}: Installs a module from a git repository. Supports multiple formats for the repository URL. The flags -y, -n, and -o specify whether to skip confirmation, skip installing python dependencies, and overwrite existing code modules, respectively. The pm argument specifies the package manager to use.
+\item \textbf{mate list}: Lists all available modules in the project. 
+\item \textbf{mate exports}: Generates dependencies for reproduciblity and sharing.
+\item \textbf{mate test exp\_module exp}: Runs the experiment specified by exp in the module exp\_module. Equivalent to python -m root\_module.exp\_module.exp test.
+\item \textbf{mate train exp\_module exp}: Runs the experiment specified by exp in the module exp\_module. Equivalent to python -m root\_module.exp\_module.exp train.
+\end{itemize}
+
+
+
+Yerbamaté's install command is a crucial component of the tool, allowing for effortless installation of modularized projects that adhere to the principles of separation of concerns. With just one command, you can install a model along with its Python dependencies, making it easier to share and export modules. Additionally, Yerbamaté also supports the installation of coupled modules as whole modules. For example, you can install the source code of over 100 torch image models \footnote{\url{https://github.com/rwightman/pytorch-image-models/tree/main/timm/}} and over 30 implementation PyTorch vision in transformers \footnote{\url{https://github.com/lucidrains/vit-pytorch/tree/main/vit\_pytorch/}} directly into your project. However, the limitation of installing non-Yerbamaté projects is that Yerbamaté cannot install Python dependencies out of the box and this modules can only be installed as a whole, and sub-modules, such as models, are not installable as a standalone module since they are not independent.
+
+
+
+
+
+\subsubsection{Yerbamaté Environment API}
+
+The Yerbamaté Environment API is a tool designed to manage environment variables within a experiment. It prioritizes the use of an env.json file for storing environment variables, but if it is not found, it falls back to the operating system's environment variables. The API offers a convenient way to set, retrieve, and manage these variables in a centralized and organized manner. This can be particularly useful in storing and accessing environment-specific information, such as API keys, database URLs, and other sensitive data, thus ensuring that the application operates optimally regardless of the environment in which it is executed. The Yerbamaté Environment API can be easily accessed within experiments, providing a seamless and efficient method for managing environment variables within a project. 
+
+
+
+
+
+\subsection{Experiment Configuration}
+
+In the field of artificial intelligence and machine learning, defining hyperparameters and experiments plays a crucial role in the development and optimization of models \cite{wu2019hyperparameter}. The choice of format for defining experiments and hyperparameters can greatly impact the efficiency and flexibility of the experimentation process. After evaluating various formats such as JSON and TOML, it has been determined that Python is the most suitable format for defining experiments in AI and ML. Python provides a high level of expressiveness and versatility, allowing for easy modifications and adaptations of the experiment definition. In addition, Python offers a straightforward syntax for defining hyperparameters and allows for the integration of existing code and libraries. This greatly reduces the overhead associated with switching between different languages or systems, leading to a more streamlined and efficient experimentation process. Furthermore, the ability to use Python's powerful libraries and modules enhances the experimentation process by providing access to a vast range of tools and resources. This further enables the exploration of a wider range of hyperparameters and models, leading to a more comprehensive understanding of the problem at hand.
+
+\subsubsection{No-Loop Python Experiment Configuration Convention}
+
+The experiment configuration in this study adopts a restricted version of the Python language that only disallows the use of loops as a convention. The experiment configuration design choice is intended to maintain a hyperparameter-focused experiment format while promoting separation of concerns. The resulting approach provides several benefits, including increased flexibility and customization, as the configuration format can be adapted to various AI tasks, custom use cases, frameworks, and libraries. Additionally, by incorporating well-documented Python code, the readability of the configuration file is improved, making it more accessible to researchers and practitioners alike. Furthermore, this format is executable directly with Python, which makes it Turing complete. This property is particularly useful because it means that the format can include arbitrary computation and is capable of expressing any algorithm, enhancing its flexibility and power.
+
+
+
+\subsection{Seperation of Concerns for AI}
+
+In the field of software engineering, including artificial intelligence and machine learning, decoupling concerns, also known as separation of concerns, is a crucial design principle that helps to improve the maintainability, scalability, and reusability of code (\cite{mo2016decoupling,qian2006decoupling, pressman2010software}. The goal of decoupling concerns is to break down complex systems into smaller, modular components that can be independently developed, tested, and maintained (\cite{pressman2010software, mo2016decoupling, qian2006decoupling}). For example, in a typical deep learning experiment, the trainer component is responsible for training the model. The trainer component can be designed to receive either a string representing the dataset name or the actual dataset objects. The latter approach provides greater flexibility and customization, as the trainer component can operate on any dataset objects, regardless of the underlying dataset.
+
+
+Another example of separation of concerns in AI is the data loading, training and augmentation process. In this context, hardcoding the dataset and augmentation within the training code leads to limitations in terms of flexibility and experimentation. A more effective approach is to pass the data objects directly to the trainer, rather than relying on a string representation of the dataset name. This approach offers greater flexibility in the data loading process, enabling more customization and control, as well as ease of experimentation with different datasets.
+
+The separation of concerns also applies to the design of the model components. For example, a deep learning model can be implemented as a monolithic block of code or as a series of modular components, such as the encoder, decoder, and attention mechanism. The latter approach allows for greater flexibility and customization of the model, as each component can be modified or replaced without affecting the other components. Decoupling concerns is a crucial design principle in the field of artificial intelligence and machine learning. 
+
+
+\subsubsection{Example Custom Data Preprocessing}
+The modular structure of the Yerbamaté toolkit, coupled with its compatibility with pure Python, allows for the integration of custom data preprocessing pipelines with ease. By utilizing the Yerbamaté environment API, developers and researchers can readily access the data paths and results path for the destination of their processed data. For instance, the following project structure can utilize the command \texttt{python -m deepnet.data.my\_data.preprocessing} to execute a custom preprocessing pipeline. The flexibility offered by the python modularity enables users to efficiently tailor their preprocessing procedures to the specific requirements of their research or application, and the Yerbamaté toolkit can be used to share these pipelines effortlessly.
+
+\dirtree{%
+.1 deepnet.
+.2 data.
+.3 \texttt{\_\_init\_\_.py}.
+.3 my\_data.
+.4 \texttt{\_\_init\_\_.py}.
+.4 preprocessing.
+.5 \texttt{\_\_init\_\_.py}.
+.5 preprocess.py.
+.4 data\_loader.
+.2 models.
+.2 trainers.
+.2 experiments.
+}
+
+\section{Social Impact}
+Machine learning models and artificial intelligence systems have the potential to impact society, both positively and negatively significantly (\cite{mittelstadt2019principles, jobin2019global,arrieta2020explainable, floridi2018ai4people}). Consequently, AI's ethical and societal implications have been the subject of much discussion and research in recent years (\cite{floridi2018ai4people, goodman2017european, floridi2019establishing, mittelstadt2016ethics}).
+Open science can significantly impact society by promoting collaboration, transparency, and accessibility in research, enabling broader participation in the scientific process and sharing of knowledge and tools, thus accelerating safer progress and (\cite{kocak2022transparency, wachter2017transparent, coro2020open, braun2018open, paton2019open, goodman2017european}). In artificial intelligence, open science can help democratize access to machine learning and facilitate the development of ethical and accountable AI systems (\cite{goodman2017european, batarseh2020data}). By promoting the principles of open science, researchers and practitioners can work together to build more robust, trustworthy, and fair AI solutions (\cite{accountabilityInAi, kocak2022transparency,wachter2017transparent, coro2020open, braun2018open, hicks2021open, goodman2017european}.
+The development of open source, open science, accessible and user-friendly tools for training machine learning models has the potential to democratize access to artificial intelligence and facilitate more involvement in research and innovation. The Yerbamaté toolkit contributes in this regard, providing a simple and effective means for researchers and practitioners to share, develop and evaluate machine learning models. Moreover, it makes training AI accessible to a broader audience as anyone can run an experiment on accessible science tools such as Colab\footnote{\url{https://colab.research.google.com/github/oalee/yerbamate/blob/main/deep_learning.ipynb}} and reproduce a scientific experiment and conduct their own experiments.
+The wide accessibility of AI through Yerbamaté and other similar open science tools have the potential to accelerate research in various fields (\cite{olson2018system, wolf2020designing,morris2020ai,ong2021guide, li2018can}) including healthcare (\cite{haristiani2020combining}), law (\cite{ashley2017legal}), and education (\cite{goel2020ai}). For example, machine learning models can improve patient outcomes (\cite{hamet2017medicine}), detect fraud in financial transactions (\cite{bao2022fraudartificial}, and enhance personalized learning in education (\cite{haristiani2020combining, goel2020ai}). At the same time, it is essential to ensure that the development and application of AI adhere to ethical principles, including inclusion, transparency, accountability, and fairness (\cite{ accountabilityInAi,  jobin2019global, floridi2018ai4people, wachter2017transparent, arrieta2020explainable, mittelstadt2019principles, goodman2017european, mittelstadt2016ethics, floridi2019establishing, o2017weapons}).
+
+
+\section{Conclusion}
+In conclusion, the development of the Yerbamaté framework could offer a significant contribution to the field of artificial intelligence by promoting open science and accessible AI. By providing a modular framework that encourages best software engineering practices, Yerbamaté simplifies the development and maintenance of machine learning models, enhancing collaboration and knowledge sharing among researchers and practitioners with varying technical expertise. The framework's ease of use and flexibility enables wider accessibility to artificial intelligence, making it possible for individuals and organizations to develop and train machine learning models with greater ease and efficiency. Overall, the adoption of modular design principles and open science tools has the potential to revolutionize the development and implementation of trustworthy and transparent AI, facilitating innovation and progress in various fields. Nevertheless, the widespread adoption of the Yerbamaté toolkit and other similar tools may pose challenges, including a potential learning curve, implementation overhead, and a need for further refinement and evaluation. One area for future work could be the creation of naming conventions for modules and functions, which could further enhance the modularity and readability of the code. Additionally, comprehensive evaluation and testing of the framework could help to identify any potential issues or areas for improvement, ensuring the continued effectiveness and usefulness of the Yerbamaté toolkit.
+ 
+\clearpage
+\newpage
+
+
+\printbibliography
+
+
+\input{appendix}
+\end{document}
