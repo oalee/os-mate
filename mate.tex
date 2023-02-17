@@ -254,7 +254,7 @@ The crisis of reproducibility in AI refers to the difficulty in reproducing the 
 
 \subsection{Open Science}
 
-Open science is a research methodology that prioritizes transparency, collaboration, and reproducibility (\cite{nielsen2011reinventing}). The promotion of open science in the field of AI has garnered considerable attention in recent years (\cite{accountabilityInAi, gundersen2018reproducible, leakage-recrisis, scully-debt-ml, stodden-towardreprodicibleresearch, coro2020open, braun2018open, hicks2021open, burgelman2019open}). In the field of AI, open science practices can help to address concerns about biased or unreliable data, as well as provide a way for researchers to collaborate and build reproducible research and enhance accountability in AI (\cite{accountabilityInAi, stodden-towardreprodicibleresearch}).  Open science encourages researchers to share their knowledge, data, code, and detailed documentation of their methods (\cite{hutson2018artificial,accountabilityInAi}). 
+Open science is a research methodology that prioritizes transparency, collaboration, and reproducibility (\cite{nielsen2011reinventing}). The promotion of open science in the field of AI has garnered considerable attention in recent years (\cite{accountabilityInAi,gundersen2018reproducible,leakage-recrisis,scully-debt-ml,stodden-towardreprodicibleresearch,coro2020open,braun2018open,hicks2021open,burgelman2019open}). In the field of AI, open science practices can help to address concerns about biased or unreliable data, as well as provide a way for researchers to collaborate and build reproducible research and enhance accountability in AI (\cite{accountabilityInAi,stodden-towardreprodicibleresearch}).  Open science encourages researchers to share their knowledge, data, code, and detailed documentation of their methods (\cite{hutson2018artificial,accountabilityInAi}). 
 Researchers can also use open-source frameworks and standard evaluation metrics (\cite{gundersen2018reproducible}) to facilitate reproducibility. Furthermore, the scientific community can encourage reproducibility by valuing it in the peer-review process (\cite{scully-debt-ml}), and by giving credit to researchers who share their data and code (\cite{scully-debt-ml,credit-datasharing,stodden-towardreprodicibleresearch}).
 
 
@@ -301,6 +301,23 @@ However, choosing the right framework can be challenging as each framework has i
 One approach to addressing this challenge is the development of unified deep learning frameworks such as Ivy (\cite{ivy}). Ivy supports multiple frameworks, enabling researchers to utilize the strengths of each framework without sacrificing compatibility and ease of use (\cite{ivy}). However, using such a unified framework also introduces overhead in learning, and computation, as well as limitations in terms of customizability. For instance, users are required to utilize Ivy tensors instead of PyTorch or Keras tensors, limiting access to low-level functionality (\cite{IvyDocs, ivy}).
 
 
+\section{Research Questions}
+
+The objective of this internship at the start was to address the following research questions.
+
+\subsection{Can a standard format be designed for data loaders and preprocessing pipelines?}
+{
+The development of a universal standard format for data loaders and preprocessing pipelines in deep learning is challenging due to the framework-specific nature of the task. Preprocessing pipeline design is highly dependent on the specific problem and its data, making it difficult to create a general solution. However, Separation of concerns (SoC) and modularity principles can enhance code reusability by creating the data loading as an independent python module, and separating preprocessing pipeline from data loading. This project focused on making data loading and code components, such as data loaders and the preprocessing pipelines, sharable within a python machine learning framework.
+}
+
+\subsection{Can this be put in a high-quality, easily accessible database for local access?} {
+The creation of a high-quality, easily accessible database storing preprocessed datasets and related components, such as data loaders and preprocessing pipelines, is complex and involves challenges in terms of data processing, storage, and retrieval, which were beyond the scope of the project. Limitations such as credibility, scalability, compatibility with different deep learning frameworks, privacy, and storage pose additional challenges. This project focused on designing a standard for sharing code-related components, instead of making data available, for feasibility of the task.
+}
+
+\subsection{Can the database be made easily expandable?} {
+Expanding the database of deep learning code components, such as data loaders, relies on adopting software engineering principles of separation of concerns (SoC) and modularity. Adhering to these principles makes code components shareable across projects within the same framework, which can get added to a database and scale in time.
+}
+
 \section{Methodology}
 
 The widespread adoption of the Python programming language in AI programming has been noted in recent studies (\cite{mihajlovic2020use,raschka2020machine}). As such, this project focuses on the examination of software engineering practices in the context of Python and its machine learning frameworks. Many interdisciplinary researchers may lack the software engineering expertise necessary to manage their code bases to ensure correctness, understandability, extendability, and reusability (\cite{amershi2019software,scully-debt-ml,leakage-recrisis,accountabilityInAi}). To address these challenges, we investigated the application of software engineering principles of separation of concerns (SoC) and modular design in Python to AI projects. The goal of this study was to improve the reproducibility and reusability of python AI components through the adoption of best software engineering practices.
@@ -321,23 +338,6 @@ This approach facilitates the creation of a modular design, where the code is or
 A limitation of this approach is that it requires manual translation of AI components, such as data loaders and models, into different frameworks when necessary. While this approach may require additional effort, it allows for greater flexibility and customizability in implementing deep learning models. Additionally, it promotes a deeper understanding of the underlying software engineering principles and their application in the field of AI.
 
 
-
-\section{Research Questions}
-
-The objective of this internship at the start was to address the following research questions.
-
-\subsection{Can a standard format be designed for data loaders and preprocessing pipelines?}
-{
-The development of a universal standard format for data loaders and preprocessing pipelines in deep learning is challenging due to the framework-specific nature of the task. Preprocessing pipeline design is highly dependent on the specific problem and its data, making it difficult to create a general solution. However, Separation of concerns (SoC) and modularity principles can enhance code reusability by creating the data loading as an independent python module, and separating preprocessing pipeline from data loading. This project focused on making data loading and code components, such as data loaders and the preprocessing pipelines, sharable within a python machine learning framework.
-}
-
-\subsection{Can this be put in a high-quality, easily accessible database for local access?} {
-The creation of a high-quality, easily accessible database storing preprocessed datasets and related components, such as data loaders and preprocessing pipelines, is complex and involves challenges in terms of data processing, storage, and retrieval, which were beyond the scope of the project. Limitations such as credibility, scalability, compatibility with different deep learning frameworks, privacy, and storage pose additional challenges. This project focused on designing a standard for sharing code-related components, instead of making data available, for feasibility of the task.
-}
-
-\subsection{Can the database be made easily expandable?} {
-Expanding the database of deep learning code components, such as data loaders, relies on adopting software engineering principles of separation of concerns (SoC) and modularity. Adhering to these principles makes code components shareable across projects within the same framework, which can get added to a database and scale in time.
-}
 
 \section{Results}
 
