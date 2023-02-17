@@ -1,19 +1,26 @@
 
 
+
 \section{Methodology}
+This study aimed to develop a software engineering convention and a framework for AI and ML projects that prioritizes open science and improves developer experience. The methodology involved a comprehensive review of the literature on software engineering practices, modularity, separation of concerns, and open science in AI and ML, which was used to inform the development of the convention. The convention was designed to be simple, effective, and widely applicable to a range of AI and ML projects.
 
-The methodology of this study involved the development of a software engineering convention for AI projects that emphasizes modularity and separation of concerns. The convention was designed to be simple and effective, and involved the separation of code into independent modules whenever possible. 
-% For AI and ML projects, this involved the creation of three independent modules for models, trainers, and data, along with one non-independent module for experimentation. The models module contains code for defining and constructing machine learning models. The trainers module contains code for training models and optimizing their parameters. The data module contains code for loading and preprocessing data. The experimentation module contains code for running experiments and evaluating the performance of the trained models.
+To evaluate the convention, it was tested with a variety of open-source AI and ML projects across different frameworks, including Jax, Flax, Pytorch, Lightning, Tensorflow, Keras, Darts, and Huggingface. The convention was also tested in various use cases, including particle swarm optimization and weight analysis, where only the "experiment" and "model" modules were required. In some cases, only the "experiment" module was necessary.
 
-\subsection{Python Independent Module Convention}
-One of the key aspects of the convention is the use of Python independent modules. These modules only depend on Python dependencies (such as NumPy, PyTorch, TensorFlow, or Hugging Face), and the code inside the module uses relative imports. This design enables the reuse of code and its components under different parent modules.
-
+A case study was conducted to evaluate the convention's effectiveness in practice. An existing AI research on transfer learning using the official Big Transfer (BiT) implementation (\cite{transferlearning}) was refactored to conform to the convention. The resulting code was evaluated for adherence to the convention and overall quality, with findings presented in Appendix A.
 
 
-\subsection{No-Loop Python Experiment Configuration Convention}
 
-The experiment configuration in this study adopts a restricted version of the Python language that only disallows the use of loops as a convention. The experiment configuration design choice is intended to maintain a hyperparameter-focused experiment format while promoting separation of concerns. The resulting approach provides several benefits, including increased flexibility and customization, as the configuration format can be adapted to various AI tasks, custom use cases, frameworks, and libraries. Additionally, by incorporating well-documented Python code, the readability of the configuration file is improved, making it more accessible to researchers and practitioners alike. Furthermore, this format is executable directly with Python, which makes it Turing complete. This property is particularly useful because it means that the format can include arbitrary computation and is capable of expressing any algorithm, enhancing its flexibility and power.
 
+
+% This study was conducted to develop a software engineering convention for AI and ML projects that promotes open science practices. The development of the convention involved a review of existing literature on software engineering best practices and the identification of key principles that could be applied to AI and ML projects.
+
+% The convention was designed to be simple, effective, and widely applicable to a range of AI and ML projects. The convention prioritized modularity, separation of concerns, and consistent naming conventions to promote the maintainability and reusability of code. The convention also included four distinct modules, namely "models", "data", "trainers", and "experiments". The "models" and "data" modules were designed to be independent and modular, while the "trainers" module was dependent on both "models" and "data". The "experiments" module was designed to combine the other modules and facilitate experimentation with different combinations of models, data, and trainers.
+
+% To evaluate the effectiveness of the convention, it was tested with various AI and ML frameworks including Jax, Flax, PyTorch, TensorFlow, Keras, DARTS, and Hugging Face. The convention was also evaluated by looking at various open-source AI and ML projects and comparing their structure and organization to the proposed convention.
+
+% \section{Methodology}
+
+% This study was conducted to develop a software engineering convention for AI and ML projects that promotes open science practices. The development of the convention involved a review of existing literature on software engineering best practices and the identification of key principles that could be applied to AI and ML projects.
 
 
 % \section{Methodology}

@@ -1,7 +1,30 @@
 
 \section{Results}
 
-\subsection{Deep Learning Project Structure}
+
+\subsection{Python Modularity Convention}
+The convention is designed to be simple, effective, and widely applicable solution for organizing AI and ML projects. It prioritizes modularity, separation of concerns, and consistent naming conventions to promote the maintainability and reusability of code. In line with this, the convention places a high priority on creating independent modules, which are standalone, reusable components that can be used across different project.
+
+\subsection{Python Independent Module Convention}
+Python independent modules only depend on Python dependencies (such as NumPy, PyTorch, TensorFlow, or Hugging Face), and the code inside the module uses relative imports. This design allows the reuse of code and its components under different projects. 
+
+
+
+\subsection{No-Loop Python Experiment Configuration Convention}
+
+This convention adopts an experiment configuration of the Python language that only disallows the use of loops as a convention. The experiment configuration design choice is intended to maintain a hyperparameter-focused experiment format while promoting separation of concerns. The resulting approach provides several benefits, including increased flexibility and customization, as the configuration format can be adapted to various AI tasks, custom use cases, frameworks, and libraries. 
+
+
+
+\subsection{AI/ML Project Convention}
+The convention for structuring AI/ML projects involves four distinct modules: "models," "experiments," "trainers," and "data." This modular approach leads to the creation of three standalone modules for models, trainers, and data, each with the ability to operate independently. The fourth module, experiments, serves to harmonize the three modules and provide a unified and comprehensive experiment. The modular structure of independence enables the sharing of models, trainers, and data loaders across various projects and experiments, promoting the reusability of code.
+
+% The convention also included four distinct modules, namely "models", "data", "trainers", and "experiments". The "models" and "data" modules were designed to be independent and modular, while the "trainers" module was dependent on both "models" and "data". The "experiments" module was designed to combine the other modules and facilitate experimentation with different combinations of models, data, and trainers.
+
+
+
+
+\subsubsection{Deep Learning Project Structure Example}
 
 The implementation of software engineering principles of as separation of concerns (SoC) and modularity in deep learning projects results in a well-structured illustrated below. 
 \dirtree{%
@@ -18,10 +41,10 @@ The implementation of software engineering principles of as separation of concer
 \vspace{0.7em}
 
 
-The modular architecture of a deep learning project, characterized by the structured folder system, separates the key components into four distinct modules: models, experiments, trainers, and data. This enhances code legibility and comprehensibility, enabling other researchers to quickly access the desired code components. This approach leads to the formation of three standalone modules for models, trainers, and data, each possessing the ability to operate independently. Meanwhile, the fourth module, experiments, functions to harmonize the three modules and provide a unified and comprehensive experiment. The modular structure of independence further enables the sharing of models, trainers, and data loaders across various projects and experiments, thereby enhancing the code's reusability and scalability. 
+% The modular architecture of a deep learning project, characterized by the structured folder system, separates the key components into four distinct modules: models, experiments, trainers, and data. This enhances code legibility and comprehensibility, enabling other researchers to quickly access the desired code components. This approach leads to the formation of three standalone modules for models, trainers, and data, each possessing the ability to operate independently. Meanwhile, the fourth module, experiments, functions to harmonize the three modules and provide a unified and comprehensive experiment. The modular structure of independence further enables the sharing of models, trainers, and data loaders across various projects and experiments, thereby enhancing the code's reusability and scalability. 
 
-\subsection{Case Study}
- To demonstrate the effectiveness of the convention, we present a case study of a deep learning project built using Yerbamate, and compare it to an existing project that did not adhere to the convention. Our results presented at Appendix \ref{transfer-study} illustrates that the project built with Yerbamate had better code quality, was more modular, and was easier to maintain and reproduce.
+% \subsection{Case Study}
+%  To demonstrate the effectiveness of the convention, we present a case study of a deep learning project built using Yerbamate, and compare it to an existing project that did not adhere to the convention. Our results presented at Appendix \ref{transfer-study} illustrates that the project built with Yerbamate had better code quality, was more modular, and was easier to maintain and reproduce.
  
 \subsection{Example Project Structure}
 
