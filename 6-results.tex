@@ -3,7 +3,7 @@
 
 
 \subsection{Python Modularity Convention}
-The convention is designed to be simple, effective, and widely applicable solution for organizing AI projects. It prioritizes modularity, separation of concerns, and consistent naming conventions to promote the maintainability and reusability of code. In line with this, the convention places a high priority on creating independent modules, which are standalone, reusable components that can be used across different project.
+The convention is designed to be simple, effective, and widely applicable solution for organizing python projects. It prioritizes modularity, separation of concerns, and consistent naming conventions to promote the maintainability and reusability of code. In line with this, the convention places a high priority on creating independent modules, which are standalone, reusable components that can be used across different project.
 
 \subsection{Python Independent Module Convention}
 Python independent modules only depend on Python dependencies (such as NumPy, PyTorch, TensorFlow, or Hugging Face), and the code inside the module uses relative imports. This design allows the reuse of code and its components under different projects. 
@@ -17,7 +17,7 @@ This convention adopts an experiment configuration of the Python language that o
 
 
 \subsection{AI Project Convention}
-The convention for structuring AI/ML projects involves four distinct modules: "models," "experiments," "trainers," and "data." This modular approach leads to the creation of three standalone modules for models, trainers, and data, each with the ability to operate independently. The fourth module, experiments, serves to harmonize the three modules and provide a unified and comprehensive experiment. The modular structure of independence enables the sharing of models, trainers, and data loaders across various projects and experiments, promoting the reusability of code.
+The convention for structuring AI/ML projects involves four distinct modules: "models", "experiments", "trainers", and "data". This modular approach leads to the creation of three standalone modules for models, trainers, and data, each with the ability to operate independently. The fourth module, experiments, serves to harmonize the three modules and provide a unified and comprehensive experiment. The modular structure of independence enables the sharing of models, trainers, and data loaders across various projects and experiments, promoting the reusability of code.
 
 
 
@@ -40,7 +40,7 @@ The convention for structuring AI/ML projects involves four distinct modules: "m
 }
 \end{minipage}
 }
-\caption{The modular architecture of the convention is characterized by the structured folder system, separating the key components into four distinct modules: models, experiments, trainers, and data. This enhances code legibility and comprehensibility, enabling other researchers to quickly access the desired code components.}
+\caption{The modular architecture of the convention for AI is characterized by the structured folder system, separating the key components into four distinct modules: models, experiments, trainers, and data. This enhances code legibility and comprehensibility, enabling other researchers to quickly access the desired code components.}
 \end{figure}
 
 
@@ -123,8 +123,8 @@ The convention for structuring AI/ML projects involves four distinct modules: "m
 % For a comprehensive understanding of the Yerbamaté, see the documentation\footnote{\url{https://oalee.github.io/yerbamate/}}.
 
 
-Yerbamate is an open-source open-science Python framework designed to streamline and simplify the development and management of AI projects using modular design principles and open source. The framework encourages quality coding, collaboration, and sharing of models, trainers, data loaders, and knowledge, while also promoting reproducibility, customization, and flexibility. Yerbamate is designed as a command-line interface (CLI) toolkit that works around the software engineering convention of modularity and independence. The CLI can be used to create and inject dependencies, providing greater reproducibility and sharing capabilities. 
-The framework also offers an Environment API, which, along with the CLI, is presented in the appendix and subject to updates. Users can refer to the documentation for the most up-to-date material. Any module in a project adhering to the Yerbamate convention is automatically sharable out of the box, leveraging the power of open source to enhance open science and collaboration in the AI community.
+Yerbamate is an open-source open-science Python framework designed to streamline and simplify the development and management of AI projects using power of modular design principles and open source. The framework encourages quality coding, collaboration, and sharing of models, trainers, data loaders, and knowledge, while also promoting reproducibility, customization, and flexibility. Yerbamate is designed as a command-line interface (CLI) toolkit that works when the software engineering convention of modularity and independence are adhered. The CLI can be used to create and inject dependencies, providing greater reproducibility and sharing capabilities. 
+The framework also offers an Environment API, which, along with the CLI, is presented in the Appendix and subject to updates. Users can refer to the documentation for the most up-to-date material. Any module in a project adhering to the Yerbamate convention is automatically sharable out of the box, leveraging the power of open source to enhance open science and collaboration in the AI community.
 
 \subsubsection{Flexibility and Customization}
 
