@@ -2,11 +2,13 @@
 
 
 \section{Methodology}
-This study aimed to develop a software engineering convention and a framework for AI and ML projects that prioritizes open science and improves developer experience. The methodology involved a comprehensive review of the literature on software engineering practices, modularity, separation of concerns, and open science in AI and ML, which was used to inform the development of the convention. The convention was designed to be simple, effective, and widely applicable to a range of AI and ML projects.
 
-To evaluate the convention, it was tested with a variety of open-source AI and ML projects across different frameworks, including Jax, Flax, Pytorch, Lightning, Tensorflow, Keras, Darts, and Huggingface. The convention was also tested in various use cases, including particle swarm optimization and weight analysis, where only the "experiment" and "model" modules were required. In some cases, only the "experiment" module was necessary.
+The widespread adoption of the Python programming language in AI programming has been noted in recent studies (\cite{mihajlovic2020use,raschka2020machine}). As such, this study focused on the examination of python projects and aimed to develop a software engineering convention and a framework for AI projects that prioritizes open science and improves developer experience. The methodology involved a comprehensive review of the literature on software engineering practices, modularity, separation of concerns, and open science in AI. The convention was designed to be simple, effective, and widely applicable to a range of AI and ML projects.
 
-A case study was conducted to evaluate the convention's effectiveness in practice. An existing AI research on transfer learning using the official Big Transfer (BiT) implementation (\cite{transferlearning}) was refactored to conform to the convention. The resulting code was evaluated for adherence to the convention and overall quality, with findings presented in Appendix A.
+To evaluate the convention, it was tested with a variety of open-source AI projects across different frameworks, including Jax, Flax, Pytorch, Lightning, Tensorflow, Keras, Darts, and Huggingface. The convention was also tested in various use cases, including particle swarm optimization, computer vision experiment with ransac, and weight analysis. 
+% In some cases, only the "experiment" module was necessary.
+
+A case study was conducted to evaluate the convention's effectiveness in practice. The official implementation of Big Transfer (BiT)  (\cite{transferlearning}) was refactored to conform to the convention. The resulting code was evaluated for adherence to the convention and overall quality, with findings presented in Appendix A.
 
 
 

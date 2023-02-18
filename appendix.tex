@@ -151,6 +151,25 @@ if env.restart:
 
 In this section, we showcase the application of modularity and separation of concerns on the official implementation of "Big Transfer (BiT): General Visual Representation Learning"\cite{transferlearning}. The source code from the official repository \footnote{\url{https://github.com/google-research/big_transfer}} has been refactored \footnote{\url{https://github.com/oalee/big_transfer}} into a modular, decoupled structure.  The original folder structure of the repository is as follows:
 
+
+% \begin{figure}
+% \centering
+% \framebox[\0.4\textwidth]{%
+% \begin{minipage}{0.4\textwidth}
+%   \dirtree{%
+%   .1 \textbf{NDLTD}.
+%   .2 \textbf{OCLC}.
+%   .3 \vdots.
+%   .3 x.xml.
+%   .3
+%   \vdots.
+%   }
+% \end{minipage}
+% }
+% \caption{Framing a dirtree-generated figure}
+% \end{figure}
+
+
 \dirtree{%
 .1 /.
 .2 \texttt{bit\_common.py}.
@@ -297,3 +316,54 @@ if env.test:
 
 
 The new structure in the refactored repository is designed to address the limitations of the original implementation. By separating concerns and adopting modularization, the refactored repository provides a more flexible and scalable solution for training models. The different components in the new structure, such as the trainer, model, and data loading modules, are designed to be independent and reusable, making it easier to manage and maintain the codebase. Moreover, the experimentation module provides a unified interface for combining and executing the various components, making it easier to experiment with different configurations and hyperparameters. Overall, the new structure in the refactored repository represents a significant improvement over the original implementation, offering a better and more organized approach to training machine learning models.
+
+
+
+
+\section{Example Custom Data Preprocessing}
+The modular structure of the Yerbamaté toolkit, coupled with its compatibility with pure Python, allows for the integration of custom data preprocessing pipelines with ease. By utilizing the Yerbamaté environment API, developers and researchers can readily access the data paths and results path for the destination of their processed data. For instance, the following project structure can utilize the command \texttt{python -m deepnet.data.my\_data.preprocessing} to execute a custom preprocessing pipeline. The flexibility offered by the python modularity enables users to efficiently tailor their preprocessing procedures to the specific requirements of their research or application, and the Yerbamaté toolkit can be used to share these pipelines effortlessly.
+
+\dirtree{%
+.1 deepnet.
+.2 data.
+.3 \texttt{\_\_init\_\_.py}.
+.3 my\_data.
+.4 \texttt{\_\_init\_\_.py}.
+.4 preprocessing.
+.5 \texttt{\_\_init\_\_.py}.
+.5 preprocess.py.
+.4 data\_loader.
+.2 models.
+.2 trainers.
+.2 experiments.
+}
+
+
+
+\section{Yerbamaté Command Line}
+The Yerbamaté command line provides useful utility functions and support for modular projects, which can facilitate the development of machine learning models.
+Here is a list of the key Yerbamaté command line options:
+
+\begin{itemize}
+\item \textbf{mate init module\_name}: Initializes a new empty modular project skeleton with the given module name. 
+
+\item \textbf{mate install url -y\textbar n\textbar o pm}: Installs a module from a git repository. Supports multiple formats for the repository URL. The flags -y, -n, and -o specify whether to skip confirmation, skip installing python dependencies, and overwrite existing code modules, respectively. The pm argument specifies the package manager to use.
+\item \textbf{mate list}: Lists all available modules in the project. 
+\item \textbf{mate exports}: Generates dependencies for reproduciblity and sharing.
+\item \textbf{mate test exp\_module exp}: Runs the experiment specified by exp in the module exp\_module. Equivalent to python -m root\_module.exp\_module.exp test.
+\item \textbf{mate train exp\_module exp}: Runs the experiment specified by exp in the module exp\_module. Equivalent to python -m root\_module.exp\_module.exp train.
+\end{itemize}
+
+
+
+Yerbamaté's install command is a crucial component of the tool, allowing for effortless installation of modularized projects that adhere to the principles of separation of concerns. With just one command, you can install a model along with its Python dependencies, making it easier to share and export modules. Additionally, Yerbamaté also supports the installation of coupled modules as whole modules. For example, you can install the source code of over 100 torch image models \footnote{\url{https://github.com/rwightman/pytorch-image-models/tree/main/timm/}} and over 30 implementation PyTorch vision in transformers \footnote{\url{https://github.com/lucidrains/vit-pytorch/tree/main/vit\_pytorch/}} directly into your project. However, the limitation of installing non-Yerbamaté projects is that Yerbamaté cannot install Python dependencies out of the box and this modules can only be installed as a whole, and sub-modules, such as models, are not installable as a standalone module since they are not independent.
+
+
+
+
+
+\section{Yerbamaté Environment API}
+
+The Yerbamaté Environment API is a tool designed to manage environment variables within a experiment. It prioritizes the use of an env.json file for storing environment variables, but if it is not found, it falls back to the operating system's environment variables. The API offers a convenient way to set, retrieve, and manage these variables in a centralized and organized manner. This can be particularly useful in storing and accessing environment-specific information, such as API keys, database URLs, and other sensitive data, thus ensuring that the application operates optimally regardless of the environment in which it is executed. The Yerbamaté Environment API can be easily accessed within experiments, providing a seamless and efficient method for managing environment variables within a project. 
+
+
