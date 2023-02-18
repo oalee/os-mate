@@ -1,23 +1,29 @@
 
 \section{Results}
 
-
 \subsection{Python Modularity Convention}
-The convention is designed to be simple, effective, and widely applicable solution for organizing python projects. It prioritizes modularity, separation of concerns, and consistent naming conventions to promote the maintainability and reusability of code. In line with this, the convention places a high priority on creating independent modules, which are standalone, reusable components that can be used across different project.
+The convention prioritizes modularity, separation of concerns, and consistent naming conventions to promote maintainability and reusability of code. It places a high priority on creating independent modules that are standalone and reusable components, which can be used across different projects. 
 
-\subsection{Python Independent Module Convention}
+
+\subsection{Independent Python Module Convention}
 Python independent modules only depend on Python dependencies (such as NumPy, PyTorch, TensorFlow, or Hugging Face), and the code inside the module uses relative imports. This design allows the reuse of code and its components under different projects. 
 
 
+\subsection{No-Loop Python Experiment Convention}
 
-\subsection{No-Loop Python Experiment Configuration Convention}
+This convention uses a Python experiment configuration that disallows the use of loops, promoting a hyperparameter-focused approach while maintaining separation of concerns. It offers flexibility and customization, allowing the configuration format to be adapted to various AI tasks, custom use cases, frameworks, and libraries.
 
-This convention adopts an experiment configuration with the Python language that only disallows the use of loops. The experiment configuration design choice is intended to maintain a hyperparameter-focused experiment format while promoting separation of concerns. The resulting approach provides several benefits, including increased flexibility and customization, as the configuration format can be adapted to various AI tasks, custom use cases, frameworks, and libraries. 
+
+% \subsection{No-Loop Python Experiment Configuration Convention}
+
+% This convention adopts an experiment configuration with the Python language that only disallows the use of loops. The experiment configuration design choice is intended to maintain a hyperparameter-focused experiment format while promoting separation of concerns. The resulting approach provides several benefits, including increased flexibility and customization, as the configuration format can be adapted to various AI tasks, custom use cases, frameworks, and libraries. 
 
 
 
 \subsection{AI Project Convention}
-The convention for structuring AI/ML projects involves four distinct modules: "models", "experiments", "trainers", and "data". This modular approach leads to the creation of three standalone modules for models, trainers, and data, each with the ability to operate independently. The fourth module, experiments, serves to harmonize the three modules and provide a unified and comprehensive experiment. The modular structure of independence enables the sharing of models, trainers, and data loaders across various projects and experiments, promoting the reusability of code.
+The convention for structuring AI/ML projects involves four modules: "models", "experiments", "trainers", and "data". The modular approach creates standalone modules for models, trainers, and data, each with the ability to operate independently. The experiments module harmonizes the three modules and provides a unified experiment. This modular structure enables the sharing of independent models, trainers, and data modules across various projects, promoting code reusability.
+
+% The convention for structuring AI/ML projects involves four distinct modules: "models", "experiments", "trainers", and "data". This modular approach leads to the creation of three standalone modules for models, trainers, and data, each with the ability to operate independently. The fourth module, experiments, serves to harmonize the three modules and provide a unified and comprehensive experiment. The modular structure of independence enables the sharing of independent models, trainers, and data loaders across various projects and experiments, promoting the reusability of code.
 
 
 
