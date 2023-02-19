@@ -4,17 +4,19 @@
 \section{Methodology}
 
 % The widespread adoption of the Python programming language in AI programming has been noted in recent studies (\cite{mihajlovic2020use,raschka2020machine}). As such, this study focused on the examination of python projects and 
-This study aims to address the absence of software engineering conventions in AI projects by developing a framework that prioritizes open science and improves the developer experience. The methodology involved analyzing open source deep learning projects and reviewing literature on software engineering practices, modularity, separation of concerns, and open science in AI. The resulting convention is simple, effective, and applicable to a wide range of AI projects.
+This study aims to address the absence of software engineering knowledge in AI projects by developing a framework that prioritizes open science and improves the developer experience. 
+% The methodology involved analyzing open source deep learning projects and reviewing literature on software engineering practices, modularity, separation of concerns, and open science in AI. The resulting convention is simple, effective, and applicable to a wide range of AI projects.
 
-To evaluate the convention, it was tested with a variety of open-source AI projects across different frameworks and libraries, including Jax, Flax, Pytorch, Lightning, Tensorflow, Keras, Darts, and Huggingface. The convention was also tested in various use cases, particle swarm optimization, computer vision experiment with ransac, and weight analysis. 
+
+The framework has been designed with the aims of promoting modularity, separation of concerns, consistent naming conventions to improve the maintainability and reusability of code in mind. The methodology for developing this framework involved analyzing existing open-source deep learning projects, reviewing the literature on software engineering practices, and studying modularity, separation of concerns, and open science in AI. The resulting framework prioritizes the creation of independent modules that are standalone and reusable components, which can be used across different projects.
+% The convention is designed to prioritize modularity, separation of concerns, with consistent naming conventions to promote maintainability and reusability of code. It places a high priority on creating independent modules that are standalone and reusable components, which can be used across different projects. 
+
+
+
+To evaluate the framework, it was tested with a variety of open-source AI projects across different frameworks and libraries, including Jax, Flax, Pytorch, Lightning, Tensorflow, Keras, Darts, and Huggingface. The framework was also tested in various use cases, particle swarm optimization, computer vision experiment with ransac, and weight analysis. 
 % In some cases, only the "experiment" module was necessary.
 
 A case study was conducted to evaluate the convention's effectiveness in practice. The official implementation of Big Transfer (BiT)  (\cite{transferlearning}) was refactored to conform to the convention. The resulting code was evaluated for adherence to the convention and overall quality, with findings presented in Appendix A.
-
-
-
-
-
 % This study was conducted to develop a software engineering convention for AI and ML projects that promotes open science practices. The development of the convention involved a review of existing literature on software engineering best practices and the identification of key principles that could be applied to AI and ML projects.
 
 % The convention was designed to be simple, effective, and widely applicable to a range of AI and ML projects. The convention prioritized modularity, separation of concerns, and consistent naming conventions to promote the maintainability and reusability of code. The convention also included four distinct modules, namely "models", "data", "trainers", and "experiments". The "models" and "data" modules were designed to be independent and modular, while the "trainers" module was dependent on both "models" and "data". The "experiments" module was designed to combine the other modules and facilitate experimentation with different combinations of models, data, and trainers.
