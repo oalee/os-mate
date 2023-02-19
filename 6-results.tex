@@ -17,7 +17,7 @@
 % This Structure emphasizes the importance of creating independent modules that can be used across different projects, promoting code reuse and making research more efficient. By following this Structure, researchers can make their work more accessible, reproducible, and transparent, thereby promoting open science in the field of AI.
 
 
-The framework involves organizing the project directory in a hierarchical tree structure, with an arbitrary name given to the root project directory. The project is then broken down into separate concern modules, such as models, experiments, trainers, data, analyzers, and simulators, each with its own subdirectory. If the project does not use a framework, it can directly use this level of tree to define an independent module. Independent modules can be defined in various heights.
+The framework involves organizing the project directory in a hierarchical tree structure, with an arbitrary name given to the root project directory by user. The project is then broken down into separate concern modules, such as models, experiments, trainers, data, analyzers, and simulators, each with its own subdirectory. If the project does not use a framework, it can directly use this level of tree to define an independent module. Independent modules can be defined in various heights.
 
 Within each module, a framework can be specified, such as "jax", "torch", or "keras", followed by the name of the specific model, experiment, or trainer being used. Independent submodules can be created for individual components such as data loaders, data augmentations, or loss functions. 
 % These can be organized in the following manner: \texttt{"data/torch/imagenet"} or \texttt{"data/torch/augmentations"} or\texttt{"optimizers/jax/gpt2"} or \texttt{"models/torch/big\_transfer"}.
@@ -35,15 +35,16 @@ Within each module, a framework can be specified, such as "jax", "torch", or "ke
 .4 augmentations.
 .2 models.
 .3 jax.
+.4 transformer.
 .4 gpt2.
 .3 torch.
 .4 \texttt{big\_transfer}.
-.4 vgg16.
+.4 transformer.
 .2 experiments.
 .3 torch.
-.4 resnet.
-.5 resnet18.py.
-.5 resnet50.py.
+.4 bit.
+.5 \texttt{bit\_cifar.py}.
+.5 \texttt{bit\_aug.py}.
 .2 trainers.
 .3 jax.
 .4 gpt2.
@@ -54,7 +55,7 @@ Within each module, a framework can be specified, such as "jax", "torch", or "ke
 .3 \texttt{confusion\_matrix}.
 }
 \end{minipage}
-}\caption{An example of a directory tree structure for a Python modular project. When adhering to the principles of independency, the submodules such as ResNet and GPT2 can be easily shared and reused across different projects.
+}\caption{An example of a directory tree structure for a Python modular project. When adhering to the principles of independency, the submodules such as Transformer and GPT2 can be easily shared and reused across different projects.
 }
 \end{figure}
 
