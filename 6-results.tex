@@ -66,7 +66,7 @@ This framework places a high priority on creating independent modules that are s
 
 \subsection{No-Loop Python Experiment Definition}
 
-This framework uses a Python experiment configuration definition that disallows the use of loops, promoting a hyperparameter-focused approach while maintaining separation of concerns. It offers flexibility and customization, allowing the configuration format to be adapted to various AI tasks, custom use cases, frameworks, and libraries.
+This framework uses a Python experiment configuration definition that disallows the use of loops as per convention, promoting a hyperparameter-focused approach while maintaining separation of concerns. This format offers flexibility and customization, allowing the configuration format to be adapted to various AI tasks, custom use cases, frameworks, and libraries.
 
 
 % \subsection{No-Loop Python Experiment Configuration Structure}
@@ -190,7 +190,9 @@ The framework also offers an Environment API, which, along with the CLI, is pres
 
 \subsubsection{Flexibility and Customization}
 
-One of the key challenges in the development of the Yerbamaté framework was ensuring flexibility and customization to meet the varying needs of researchers and practitioners in the field of AI. To address this challenge, Yerbamaté provides increased flexibility by not imposing any restrictions on additional module names, enabling researchers to utilize their preferred module names for custom tasks. For example, researchers can use module names such as "simulations" and "analyzers" for their specific use cases, enabling greater customization and adaptability of the framework.
+One of the key challenges in the development of the Yerbamaté framework was ensuring flexibility and customization to meet the varying needs of researchers and practitioners in the field of AI. To address this challenge, Yerbamaté provides increased flexibility by not imposing any restrictions on additional module names, enabling researchers to utilize their preferred module names for custom tasks. 
+% For example, researchers can use module names such as "simulations" and "analyzers" for their specific use cases, enabling greater customization and adaptability of the framework. 
+Additionally, the Yerbamaté framework is designed to be compatible with pure Python, providing greater flexibility as Python can directly be used to execute experiments and Python files.
 
 % Additionally, the Yerbamaté framework is designed to be compatible with pure Python, providing greater flexibility as Python can directly be used to execute experiments and Python files. The Structure can be used without the toolkit, allowing for even greater customization and flexibility. This flexibility and customization offered by Yerbamaté can facilitate the implementation of diverse AI applications, supporting the development of a more accessible and collaborative AI research environment.
 
