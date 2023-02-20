@@ -17,7 +17,7 @@
 % This Structure emphasizes the importance of creating independent modules that can be used across different projects, promoting code reuse and making research more efficient. By following this Structure, researchers can make their work more accessible, reproducible, and transparent, thereby promoting open science in the field of AI.
 
 
- The modular structure of the framework involves organizing the project directory in a hierarchical tree structure, with an arbitrary name given to the root project directory by the user. The project is then broken down into distinct concerns such as models, data, trainers, experiments, analyzers, simulators, each with its own subdirectory. Within each concern, modules can be defined with their own subdirectories, such as models, trainers, data loaders, data augmentations, or loss functions.
+ The modular structure of the framework involves organizing the project directory in a hierarchical tree structure, with an arbitrary name given to the root project directory by the user. The project is then broken down into distinct concerns such as models, data, trainers, experiments, analyzers, simulators, each with its own subdirectory. Within each concern, modules can be defined with their own subdirectories, such as models, trainers, data loaders, data augmentations, or loss functions. Independent modules can be defined in various heights in the tree.
 
 The framework prioritizes the organization of the project into independent modules when applicable, however there are situations where a combination of independent modules may be necessary for a particular concern. An example of this is the experiment concern, which imports and combines models, data, and trainers to define and create a specific experiment. In such cases, the module is not independent and is designed to combine the previously defined independent modules. In the case of non-independent modules, Yerbamate creates a dependency list of independent modules that can be used to install the code and Python dependencies. This ensures that the necessary modules are installed and that the code can be reused. 
 
@@ -62,15 +62,23 @@ When implementing a project using multiple frameworks, it can become challenging
 .4 \textt{bit}.
 .2 ....
 }
+% For modular Python projects, organizing files into a hierarchical directory tree structure is a best practice.
 \end{minipage}}
 \caption{
-The use of a directory tree structure is a common practice when developing modular Python projects. By adhering to principle of independency, the submodules, such as Transformer and GPT2 can be easily shared and reused across different projects. Yerbamaté simplifies this process by providing a toolkit that allows for the injection of dependencies and the installation of modules from open-source projects.
+This figure illustrates an example of a deep learning modular project. The organization of files into separated concerns in the tree is a common best practice for developing modular Python projects. By adhering to principle of independency, the submodules, such as Transformer and GPT2 can be easily shared and reused across different projects. Yerbamaté simplifies this process by providing a toolkit that allows for the injection of dependencies and the installation of modules from open-source projects.
 }
 \end{figure}
 
+
 \subsection{Independent Python Modules}
-Python independent modules only depend on Python dependencies (such as NumPy, PyTorch, TensorFlow, or Hugging Face), and the code inside the module uses relative imports to import within the module. 
-This framework places a high priority on creating independent modules that are standalone and reusable components, which can be used across different projects. 
+
+Python independent modules are stand-alone modules that only depend on Python dependencies, such as NumPy, PyTorch, TensorFlow, or Hugging Face. The code inside the module uses relative imports to import within the module, making it an independent module that can be reused once the necessary Python dependencies are installed. This approach enhances modularity, reusability, and shareability while promoting good software engineering practices.
+
+% Separation of concerns and organizing files into a modular hierarchical tree structure are among best software engineering practices for developing Python projects. 
+% \subsection{Independent Python Modules}
+% Python independent modules only depend on Python dependencies (such as NumPy, PyTorch, TensorFlow, or Hugging Face), and the code inside the module uses relative imports to import within the module, hence making it an in dependent module that can be re-used when python dependencies are installed.
+% All independent python modules c
+% This framework places a high priority on creating independent modules that are standalone and reusable components, which can be used across different projects. 
 % This design allows the reuse of code and its components under different projects. This framework priotizes independency of modules over seperated concerns.
 
 
