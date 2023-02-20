@@ -4,8 +4,14 @@
 \section{Methodology}
 
 % The widespread adoption of the Python programming language in AI programming has been noted in recent studies (\cite{mihajlovic2020use,raschka2020machine}). As such, this study focused on the examination of python projects and 
+
+In 2022, the development of an AI experimentation framework\footnote{\url{https://github.com/ilex-paraguariensis/yerbamate}} began as a means of experimentation with PyTorch Lightning and GANs for a research project at Maastricht University. The framework was further developed as an open source project, and later improved during a research internship at UVA. As part of this development, I contributed in the design and by implemented a flexible JSON configuration format capable of defining an experiment with Jax, PyTorch and Keras\footnote{\url{https://github.com/ilex-paraguariensis/bombilla}}. However, it was later found to be ineffective and inflexible, prompting a need for a more generalized and flexible approach. The framework was subsequently forked to Yerbamate\footnote{\url{https://github.com/oalee/yerbamate}}, to address flexibility issues and create an open science-focused general framework.
+
 This study aims to address the absence of software engineering knowledge in AI projects by developing a framework that prioritizes open science and improves the developer experience. 
 % The methodology involved analyzing open source deep learning projects and reviewing literature on software engineering practices, modularity, separation of concerns, and open science in AI. The resulting convention is simple, effective, and applicable to a wide range of AI projects.
+
+
+% The Yerbamate framework was initially developed in 2022 as part of a research project at Maastricht University, focusing on experimentation with PyTorch Lightning and GANs. Its development was continued during deep learning assignments at the same university. Subsequently, an internship at UVA was undertaken to further improve the framework. Originally limited to PyTorch Lightning and utilizing JSON for experiment specification, it was later generalized to support Keras and JAX, still using JSON as the experimentation format. However, the use of JSON was found to be inflexible. As a result, the Yerbamate framework was forked from its predecessor to create a more flexible and adaptable open science framework.
 
 
 The framework has been designed with the aims of promoting modularity, separation of concerns, consistent naming conventions to improve the maintainability and reusability of code in mind. The methodology for developing this framework involved analyzing existing open-source AI projects, reviewing the literature on software engineering practices, and studying modularity, separation of concerns, and open science in AI. The resulting framework prioritizes the creation of independent modules that are standalone and reusable components, which can be used across different projects.
