@@ -17,9 +17,19 @@
 % This Structure emphasizes the importance of creating independent modules that can be used across different projects, promoting code reuse and making research more efficient. By following this Structure, researchers can make their work more accessible, reproducible, and transparent, thereby promoting open science in the field of AI.
 
 
-The framework involves organizing the project directory in a hierarchical tree structure, with an arbitrary name given to the root project directory by user. The project is then broken down into separate concern modules, such as models, experiments, trainers, data, analyzers, and simulators, each with its own subdirectory. If the project does not use a framework, it can directly use this level of tree to define an independent module. Independent modules can be defined in various heights.
+ The modular structure of the framework involves organizing the project directory in a hierarchical tree structure, with an arbitrary name given to the root project directory by the user. The project is then broken down into distinct concerns such as models, data, trainers, experiments, analyzers, simulators, each with its own subdirectory. Within each concern, modules can be defined with their own subdirectories, such as models, trainers, data loaders, data augmentations, or loss functions.
 
-Within each module, a framework can be specified, such as "jax", "torch", or "keras", followed by the name of the specific model, experiment, or trainer being used. Independent submodules can be created for individual components such as data loaders, data augmentations, or loss functions. 
+The framework prioritizes the organization of the project into independent modules when applicable, however there are situations where a combination of independent modules may be necessary for a particular concern. An example of this is the experiment concern, which imports and combines models, data, and trainers to define and create a specific experiment. In such cases, the module is not independent and is designed to combine the previously defined independent modules. In the case of non-independent modules, Yerbamate creates a dependency list of independent modules that can be used to install the code and Python dependencies. This ensures that the necessary modules are installed and that the code can be reused. 
+
+When implementing a project using multiple frameworks, it can become challenging to specify the exact framework used for each module. To address this issue, Yerbamaté provides a naming convention that specifies the framework used before the name of the module. For instance, the subdirectory for a Jax-based model named \texttt{"my\_model"} would be \texttt{"models/jax/my\_model"}, while the subdirectory for a PyTorch-based model with the same name would be \texttt{"models/torch/my\_model"}. This naming convention makes it easy to identify which framework was used for a specific module and ensures consistency throughout the project.
+
+% While the prioritization of independency is encouraged, sometimes it may not be desired, and a combination of independent modules may be necessary for a particular concern. An example of this is the experiment concern, which imports and combines models, data, and trainers to create a specific experiment. In such cases, the module is not independent and is designed to combine the previously defined independent modules.
+
+
+
+% The framework involves organizing the project directory in a hierarchical tree structure, with an arbitrary name given to the root project directory by user. The project is then broken down into separate concern modules, such as models, experiments, trainers, data, analyzers, and simulators, each with its own subdirectory. If the project does not use a framework, it can directly use this level of tree to define an independent module. Independent modules can be defined in various heights.
+
+% Within each module, a framework can be specified, such as "jax", "torch", or "keras", followed by the name of the specific model, experiment, or trainer being used. Independent submodules can be created for individual components such as data loaders, data augmentations, or loss functions. 
 % These can be organized in the following manner: \texttt{"data/torch/imagenet"} or \texttt{"data/torch/augmentations"} or\texttt{"optimizers/jax/gpt2"} or \texttt{"models/torch/big\_transfer"}.
 
 
@@ -52,13 +62,14 @@ Within each module, a framework can be specified, such as "jax", "torch", or "ke
 .4 \textt{bit}.
 .2 ....
 }
-\end{minipage}
-}\caption{An example of a directory tree structure for a Python modular project. When adhering to the principles of independency, the submodules such as Transformer and GPT2 can be easily shared and reused across different projects.
+\end{minipage}}
+\caption{
+The use of a directory tree structure is a common practice when developing modular Python projects. By adhering to principle of independency, the submodules, such as Transformer and GPT2 can be easily shared and reused across different projects. Yerbamaté simplifies this process by providing a toolkit that allows for the injection of dependencies and the installation of modules from open-source projects.
 }
 \end{figure}
 
 \subsection{Independent Python Modules}
-Python independent modules only depend on Python dependencies (such as NumPy, PyTorch, TensorFlow, or Hugging Face), and the code inside the module uses relative imports. 
+Python independent modules only depend on Python dependencies (such as NumPy, PyTorch, TensorFlow, or Hugging Face), and the code inside the module uses relative imports to import within the module. 
 This framework places a high priority on creating independent modules that are standalone and reusable components, which can be used across different projects. 
 % This design allows the reuse of code and its components under different projects. This framework priotizes independency of modules over seperated concerns.
 
@@ -74,9 +85,14 @@ This framework uses a Python experiment configuration definition that disallows 
 
 
 
+% Yerbamate follows a directory tree structure that is organized into distinct modules, namely "models", "experiments", "trainers", and "data", which have been identified as major concerns in AI projects across a variety of tasks. This naming convention is designed to enhance the understandability and readability of the project structure. 
 
-\subsection{AI Project Structure}
-The structure for AI projects involves four modules: "models", "experiments", "trainers", and "data". The modular approach creates arbitrary standalone modules for models, trainers, and data, each with the ability to operate independently. The experiments module harmonizes the three modules and provides a unified experiment. 
+\subsection{Modular Project Structure for AI}
+
+The structure for AI projects follows a modular pattern that is organized into distinct modules, namely "models", "experiments", "trainers", and "data", which have been identified as major concerns in AI projects across a variety of tasks. This modular approach creates standalone and independent modules for models, trainers, and data, which can operate independently to enhance modularity and reusability. The "experiments" module harmonizes the three independent modules and provides a unified experiment. This naming convention is used to enhance the understandability of the project and facilitate the adoption of software engineering best practices, such as modularity and separation of concerns.
+
+% \subsection{AI Project Structure}
+% The structure for AI projects often involves four modules: "models", "experiments", "trainers", and "data". The modular approach creates arbitrary standalone modules for models, trainers, and data, each with the ability to operate independently. The experiments module harmonizes the three modules and provides a unified experiment. 
 % This modular structure enables the sharing of independent models, trainers, and data modules across various projects, promoting code reusability.
 
 % The Structure for structuring AI/ML projects involves four distinct modules: "models", "experiments", "trainers", and "data". This modular approach leads to the creation of three standalone modules for models, trainers, and data, each with the ability to operate independently. The fourth module, experiments, serves to harmonize the three modules and provide a unified and comprehensive experiment. The modular structure of independence enables the sharing of independent models, trainers, and data loaders across various projects and experiments, promoting the reusability of code.
@@ -186,13 +202,13 @@ The structure for AI projects involves four modules: "models", "experiments", "t
 
 Yerbamate is an open-source open-science Python framework designed to streamline and simplify the development and management of AI projects using power of modular design principles and open source. The framework encourages quality coding, collaboration, and sharing of models, trainers, data loaders, and knowledge, while also promoting reproducibility, customization, and flexibility. 
 Yerbamate is designed as a command-line interface (CLI) toolkit that works when the software engineering Structure of modularity and independence are adhered. The CLI can be used to create and inject dependencies, providing greater reproducibility and sharing capabilities. 
-The framework also offers an Environment API, which, along with the CLI, is presented in the Appendix and subject to updates. Users can refer to the documentation for the most up-to-date material. Any module in a project adhering to the Yerbamate Structure is automatically sharable out of the box, leveraging the power of open source to enhance open science and collaboration in the AI community.
+The framework also offers an Environment API, which, along with the CLI, is presented in the Appendix and subject to updates. Users can refer to the documentation for the most up-to-date material. Any module in a project adhering to the modular structure is automatically sharable out of the box, leveraging the power of open source to enhance open science and collaboration in the AI community.
 
 \subsubsection{Flexibility and Customization}
 
 One of the key challenges in the development of the Yerbamaté framework was ensuring flexibility and customization to meet the varying needs of researchers and practitioners in the field of AI. To address this challenge, Yerbamaté provides increased flexibility by not imposing any restrictions on additional module names, enabling researchers to utilize their preferred module names for custom tasks. 
 % For example, researchers can use module names such as "simulations" and "analyzers" for their specific use cases, enabling greater customization and adaptability of the framework. 
-Additionally, the Yerbamaté framework is designed to be compatible with pure Python, providing greater flexibility as Python can directly be used to execute experiments and Python files.
+Additionally, the framework is designed to be compatible with Python, providing greater flexibility as Python can directly be used to execute experiments and Python files.
 
 % Additionally, the Yerbamaté framework is designed to be compatible with pure Python, providing greater flexibility as Python can directly be used to execute experiments and Python files. The Structure can be used without the toolkit, allowing for even greater customization and flexibility. This flexibility and customization offered by Yerbamaté can facilitate the implementation of diverse AI applications, supporting the development of a more accessible and collaborative AI research environment.
 
