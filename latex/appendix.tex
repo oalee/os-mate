@@ -95,14 +95,14 @@ Custom data preprocessing modular structure example
 The following example illustrates the experiment definition of a Lightweight Generative Adversarial Networks (\cite{lgan,goodfellow2020generative}) implemented with Pytorch Lightning. The use of Python enables the customization of model hyperparameters, loggers, model savers, learning rate schedulers, and optimization algorithms through argument specqification in functions or classes. The source code for the complete project is accessible on Github\footnote{\url{https://github.com/oalee/lightweight-gan}} and all its modules can be installed and the experiment can be trained using Yerbamaté command line on Colab or local machines. The experiment integrates and imports independent trainers, models, and data modules, and defines the experiment's hyperparameters.
 
 \begin{minted} 
-% [
-% frame=lines,
-% framesep=2mm,
-% baselinestretch=1.2,
-% % bgcolor=LightGray,
-% fontsize=\footnotesize,
-% linenos
-% ]
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+% bgcolor=LightGray,
+fontsize=\footnotesize,
+linenos
+]
 {python}
 from ...data.cars import CarsLightningDataModule, AugWrapper
 from ...trainers.lgan import LightningGanModule
@@ -253,6 +253,7 @@ In this examination, we delve into the components of the official Big Transfer r
 
 
 The following code illustrates the execution of the training procedure in the original repository. The training process is initiated by the \texttt{main} function located at the end of the \texttt{train.py} file. 
+
 \begin{minted}{python}
 if __name__ == "__main__":
   parser = bit_common.argparser(models.KNOWN_MODELS.keys())
