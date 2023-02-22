@@ -6,9 +6,9 @@ This repository contains the LaTeX files for the scientific paper describing the
 
 ## Table of Contents
 
-- [Contribution](Contribution)
-- [Code of Conduct](Code-of-Conduct)
-- [Contact Us](contact-us)
+- [Contribution](#contribution)
+- [Code of Conduct](#code-of-conduct)
+- [Contact Us](#contact-us)
 
 ## Contribution
 
