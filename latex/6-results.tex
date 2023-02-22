@@ -19,7 +19,8 @@
 
  The modular structure of the framework involves organizing the project directory in a hierarchical tree structure, with an arbitrary name given to the root project directory by the user. The project is then broken down into distinct concerns such as models, data, trainers, experiments, analyzers, simulators, each with its own subdirectory. Within each concern, modules can be defined with their own subdirectories, such as models, trainers, data loaders, data augmentations, or loss functions. Independent modules can be defined in various heights in the tree.
 
-The framework prioritizes the organization of the project into independent modules when applicable, however there are situations where a combination of independent modules may be necessary for a particular concern. An example of this is the experiment concern, which imports and combines models, data, and trainers to define and create a specific experiment. In such cases, the module is not independent and is designed to combine the previously defined independent modules. In the case of non-independent modules. 
+The framework prioritizes the organization of the project into independent modules when applicable, however there are situations where a combination of independent modules may be necessary for a particular concern. An example of this is the experiment concern, which imports and combines models, data, and trainers to define and create a specific experiment. In such cases, the module is not independent and is designed to combine the previously defined independent modules. 
+% In the case of non-independent modules. 
 % Yerbamate creates a dependency list of independent modules that can be used to install the code and Python dependencies. This ensures that the necessary modules are installed and that the code can be reused. 
 
 When implementing a project using multiple frameworks, it can become challenging to specify the exact framework used for each module. To address this issue, Yerbamaté provides a naming convention that specifies the framework used before the name of the module. For instance, the subdirectory for a Jax-based model named \texttt{"my\_model"} would be \texttt{"models/jax/my\_model"}, while the subdirectory for a PyTorch-based model with the same name would be \texttt{"models/torch/my\_model"}. This naming convention makes it easy to identify which framework was used for a specific module and ensures consistency throughout the project.
@@ -32,6 +33,7 @@ When implementing a project using multiple frameworks, it can become challenging
 
 % Within each module, a framework can be specified, such as "jax", "torch", or "keras", followed by the name of the specific model, experiment, or trainer being used. Independent submodules can be created for individual components such as data loaders, data augmentations, or loss functions. 
 % These can be organized in the following manner: \texttt{"data/torch/imagenet"} or \texttt{"data/torch/augmentations"} or\texttt{"optimizers/jax/gpt2"} or \texttt{"models/torch/big\_transfer"}.
+
 
 
 \begin{figure}
@@ -211,13 +213,40 @@ The structure for AI projects follows a modular pattern that is organized into d
 
 Yerbamate is an open-source open-science Python framework designed to streamline and simplify the development and management of AI projects using power of modular design principles and open source. The framework encourages quality coding, collaboration, and sharing of models, trainers, data loaders, and knowledge, while also promoting reproducibility, customization, and flexibility. 
 Yerbamate is designed as a command-line interface (CLI) toolkit that works when the software engineering Structure of modularity and independence are adhered. The CLI can be used to create and inject dependencies, providing greater reproducibility and sharing capabilities. 
-The framework also offers an Environment API, which, along with the CLI, is presented in the Appendix and subject to updates. Users can refer to the documentation for the most up-to-date material. Any module in a project adhering to the modular structure is automatically sharable out of the box, leveraging the power of open source to enhance open science and collaboration in the AI community.
+% The framework also offers an Environment API, which, along with the CLI, is presented in the Appendix and subject to updates.
+Users can refer to the documentation\footnote{\url{https://oalee.github.io/yerbamate/}} for the most up-to-date material. Any module in a project adhering to the modular structure is automatically sharable out of the box, leveraging the power of open source to enhance open science and collaboration in the AI community.
 
 \subsubsection{Flexibility and Customization}
 
 One of the key challenges in the development of the Yerbamaté framework was ensuring flexibility and customization to meet the varying needs of researchers and practitioners in the field of AI. To address this challenge, Yerbamaté provides increased flexibility by not imposing any restrictions on additional module names, enabling researchers to utilize their preferred module names for custom tasks. 
 % For example, researchers can use module names such as "simulations" and "analyzers" for their specific use cases, enabling greater customization and adaptability of the framework. 
 Additionally, the framework is designed to be compatible with Python, providing greater flexibility as Python can directly be used to execute experiments and Python files.
+
+
+\subsubsection{Yerbamaté Command Line}
+The Yerbamaté command line provides useful utility functions and support for modular projects, which can facilitate the development of machine learning models.
+Here is a list of the key Yerbamaté command line options:
+
+\begin{itemize}
+\item \textbf{mate init module\_name}: Initializes a new empty modular project skeleton with the given module name. 
+
+\item \textbf{mate install url -y\textbar n\textbar o pm}: Installs a module from a git repository. Supports multiple formats for the repository URL. The flags -y, -n, and -o specify whether to skip confirmation, skip installing python dependencies, and overwrite existing code modules, respectively. The pm argument specifies the package manager to use.
+\item \textbf{mate list}: Lists all available modules in the project. 
+\item \textbf{mate exports}: Generates dependencies for reproduciblity and sharing.
+\item \textbf{mate test exp\_module exp}: Runs the experiment specified by exp in the module exp\_module. Equivalent to \texttt{python -m root\_module.exp\_module.exp test}
+\item \textbf{mate train exp\_module exp}: Runs the experiment specified by exp in the module exp\_module. Equivalent to \texttt{python -m root\_module.exp\_module.exp train}
+\end{itemize}
+
+
+\subsubsection{Yerbamaté install}
+Yerbamaté's install command is a crucial component of the tool, allowing for effortless installation of modularized projects that adhere to the principles of separation of concerns. With just one command, you can install a model along with its Python dependencies, making it easier to share and export modules. Additionally, Yerbamaté also supports the installation of coupled modules as whole modules. For example, you can install the source code of over 100 torch image models \footnote{\url{https://github.com/rwightman/pytorch-image-models/tree/main/timm/}} and over 30 implementation PyTorch vision in transformers \footnote{\url{https://github.com/lucidrains/vit-pytorch/tree/main/vit\_pytorch/}} directly into your project. However, the limitation of installing non-Yerbamaté projects is that Yerbamaté cannot install Python dependencies out of the box and this modules can only be installed as a whole, and sub-modules, such as models, are not installable as a standalone module since they are not independent.
+
+\subsection{Yerbamaté Environment API}
+
+The Yerbamaté Environment API is a tool designed to manage environment variables within a experiment. It prioritizes the use of an \texttt{env.json} file for storing environment variables, but if it is not found, it falls back to the operating system's environment variables. The API offers a convenient way to set, retrieve, and manage these variables in a centralized and organized manner. This can be particularly useful in storing and accessing environment-specific information, such as local results and data paths, API keys, database URLs, and other sensitive data, thus ensuring that the application operates optimally regardless of the environment in which it is executed. The Yerbamaté Environment API can be easily accessed within experiments, providing a seamless and efficient method for managing environment variables within a project. 
+
+
+
 
 % Additionally, the Yerbamaté framework is designed to be compatible with pure Python, providing greater flexibility as Python can directly be used to execute experiments and Python files. The Structure can be used without the toolkit, allowing for even greater customization and flexibility. This flexibility and customization offered by Yerbamaté can facilitate the implementation of diverse AI applications, supporting the development of a more accessible and collaborative AI research environment.
 
