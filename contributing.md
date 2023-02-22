@@ -20,12 +20,12 @@ We are committed to maintaining a welcoming and inclusive environment for everyo
 
 ## Becoming a Co-Author 
 
-We appreciate contributions of all sizes and types, and significant contributions may be eligible for co-authorship on the scientific paper. If you are interested in becoming a co-author, please reach out to us directly via email to discuss.
+We appreciate contributions of all sizes and types, and significant contributers and maintainers are co-authors of the Yerbamaté paper.
 
 
 ## Pull Requests
 
-When submitting pull requests, please ensure that your changes align with the overall scope and purpose of the scientific paper. Here are some guidelines to follow:
+When submitting pull requests, please ensure that your changes align with the overall scope and purpose of the Yerbamaté paper. Here are some guidelines to follow:
 1. Fork the repository and create a new branch for your changes* 
 2. Commit your changes with clear and descriptive commit messages
 <!-- 3. Ensure that your code follows the conventions and style of the existing codebase -->
