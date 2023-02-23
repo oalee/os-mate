@@ -35,12 +35,12 @@
 \end{itemize}
 
 
-\section{Examples}
+\subsection{Examples}
 
-\subsection{Example Custom Data Preprocessing}
+\subsubsection{Example Custom Data Preprocessing}
 The modular structure of the Yerbamaté toolkit, coupled with its compatibility with pure Python, allows for the integration of custom data preprocessing pipelines with ease. By utilizing the Yerbamaté environment API, developers and researchers can readily access the data paths and results path for the destination of their processed data. For instance, the following project structure can utilize the command \texttt{python -m deepnet.data.my\_data.preprocessing} to execute a custom preprocessing pipeline. The flexibility offered by the python modularity enables users to efficiently tailor their preprocessing procedures to the specific requirements of their research or application, and the Yerbamaté toolkit can be used to share these pipelines effortlessly.
 
-
+% \captionsetup[figure]{position=bottom,justification=centering,width=.4\textwidth,labelfont=bf,font=small}
 
 \begin{figure}[h!]
 \centering
@@ -69,7 +69,7 @@ Custom data preprocessing modular structure example
 \end{figure}
 
 
-\subsection{Example GAN Experiment}
+\subsubsection{Example GAN Experiment}
 
 The following example illustrates the experiment definition of a Lightweight Generative Adversarial Networks (\cite{lgan,goodfellow2020generative}) implemented with Pytorch Lightning. The use of Python enables the customization of model hyperparameters, loggers, model savers, learning rate schedulers, and optimization algorithms through argument specqification in functions or classes. The source code for the complete project is accessible on Github\footnote{\url{https://github.com/oalee/lightweight-gan}} and all its modules can be installed and the experiment can be trained using Yerbamaté command line on Colab or local machines. The experiment integrates and imports independent trainers, models, and data modules, and defines the experiment's hyperparameters.
 
@@ -81,7 +81,6 @@ The following example illustrates the experiment definition of a Lightweight Gen
 % fontsize=\footnotesize,
 % linenos
 % ]
-
 
 
 \begin{minted}{python}
