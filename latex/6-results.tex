@@ -81,7 +81,7 @@ Yerbamaté addresses the issue of specifying the exact framework used for each m
 % For modular Python projects, organizing files into a hierarchical directory tree structure is a best practice.
 \end{minipage}}
 \caption{
-This figure illustrates a directory tree example of a deep learning modular project. The organization of files into separated concerns in the tree is a common best practice for developing modular Python projects. By adhering to principle of independency, the submodules, such as Transformer and GPT2 can be easily shared and reused across different projects. Yerbamaté simplifies this process by providing a toolkit that can be used to install reusable modules from open source projects. 
+This figure illustrates a directory tree example of a deep learning modular project. The organization of files into separated concerns in the tree is a common best practice for developing modular Python projects. By adhering to principle of independency, the submodules, such as Transformer and GPT2 can be easily shared and reused across different projects. 
 }
 \end{figure}
 
@@ -283,12 +283,20 @@ Yerbamaté CLI provides utility functions and supports modular projects, facilit
 \end{itemize}
 
 
+% \subsubsection{Yerbamaté install}
+
 \subsubsection{Yerbamaté install}
-Yerbamaté's install command is a crucial component of the tool, allowing for effortless installation of modularized projects that adhere to the principles of separation of concerns. With just one command, you can install a model along with its Python dependencies, making it easier to share and export modules. Additionally, Yerbamaté also supports the installation of coupled modules as whole modules. For example, you can install the source code of over 100 torch image models \footnote{\url{https://github.com/rwightman/pytorch-image-models/tree/main/timm/}} and over 30 implementation PyTorch vision in transformers \footnote{\url{https://github.com/lucidrains/vit-pytorch/tree/main/vit\_pytorch/}} directly into your project. However, the limitation of installing non-Yerbamaté projects is that Yerbamaté cannot install Python dependencies out of the box and this modules can only be installed as a whole, and sub-modules, such as models, are not installable as a standalone module when they are not independent and reusable modules. 
+Yerbamaté's install command enables easy installation of modularized projects adhering to separation of concerns principles, including both models and their associated Python dependencies, with a single command. In addition, Yerbamaté allows for the installation of non-Yerbamaté projects as concrete modules, which can be installed alongside SoC modules at the first level of the tree structure. However, note that Yerbamaté cannot install Python dependencies automatically in the absence of a "requirements.txt" file in the root directory of the module. For example, one could install the source code of over 100 Torch image models\footnote{\url{https://github.com/rwightman/pytorch-image-models/tree/main/timm/}} and over 30 PyTorch vision implementations in transformers\footnote{\url{https://github.com/lucidrains/vit-pytorch/tree/main/vit_pytorch/}} directly into your project and then manually install the dependencies with pip.
+
+% \subsubsection{Yerbamaté install}
+% Yerbamaté's install command makes it easy to install modularized projects that follow separation of concerns principles, including models and their Python dependencies, with a single command. Additionally, non-Yerbamaté projects can be installed as concrete modules alongside SoC modules at the first level of the tree structure. However, Yerbamaté cannot install the Python dependencies in absenste of \texttt{requirments.txt} file in root directy of the module. For example, you can install the source code of over 100 torch image models \footnote{\url{https://github.com/rwightman/pytorch-image-models/tree/main/timm/}} and over 30 implementation PyTorch vision in transformers \footnote{\url{https://github.com/lucidrains/vit-pytorch/tree/main/vit\_pytorch/}} directly into your project, then install the dependencies with pip manually.
 
 \subsubsection{Yerbamaté Environment API}
 
-The Yerbamaté Environment API is a tool designed to manage environment variables within a experiment. It prioritizes the use of an \texttt{env.json} file for storing environment variables, but if it is not found, it falls back to the operating system's environment variables. The API offers a convenient way to set, retrieve, and manage these variables in a centralized and organized manner. This can be particularly useful in storing and accessing environment-specific information, such as local results and data paths, API keys, database URLs, and other sensitive data, thus ensuring that the application operates optimally regardless of the environment in which it is executed. The Yerbamaté Environment API can be easily accessed within experiments, providing a seamless and efficient method for managing environment variables within a project. 
+The Yerbamaté Environment API is a tool designed to manage environment variables within a experiment. It prioritizes the use of an \texttt{env.json} file for storing environment variables, but if it is not found, it falls back to the operating system's environment variables. The API offers a convenient way to set, retrieve, and manage these variables in a centralized and organized manner. This can be particularly useful in storing and accessing environment-specific information, such as local results and data paths, API keys, database URLs, and other sensitive data.
+% thus ensuring that the application operates optimally regardless of the environment in which it is executed.
+
+% The Yerbamaté Environment API can be easily accessed within experiments, providing a seamless and efficient method for managing environment variables within a project. 
 
 
 
