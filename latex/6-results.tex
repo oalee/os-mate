@@ -1,12 +1,18 @@
 \section{Results}
-This section outlines the results of the study, which provide software engineering principles for modular Python projects. The principles include modularity, independent modules, and an experiment definition format. 
-The study also presents the Yerbamaté open science framework, which functions as a productivity tool for modular Python projects that facilitates sharing modules between practitioners.
+
+This section presents the results of the study, which provide software engineering principles for modular Python projects. The principles include modular project structuring, independent and interchangeable modules, and an experiment definition format. The Yerbamaté open science framework is introduced as a productivity tool for modular Python projects, promoting sharing and enabling out-of-the-box use of modules.
+% This section outlines the results of the study, which provide software engineering principles for modular Python projects. The principles include modularity, independent modules, and an experiment definition format. 
+% The study also presents the Yerbamaté open science framework, which functions as a productivity tool for modular Python projects that facilitates sharing modules between practitioners.
 % The study also presents a framework that serves as a productivity tool for modular Python projects.
 % This section presents the results of the study, which include guidelines for developing modular open science Python projects, as well as an open source open science Python framework, Yerbamate, that applies these principles. These guidelines, including a modular project structure and software engineering practices, are not specific to the Yerbamate toolkit and can be applied to a variety of projects without the toolkit.
 
-\subsection{Independent Python Modules}
+\subsection{Independent/Reusable Python Modules}
 
-Python independent modules are stand-alone modules that only depend on Python dependencies, such as NumPy, PyTorch, TensorFlow, or Hugging Face. The code inside the module uses relative imports to import within the module, making it an independent module that can be reused once the necessary Python dependencies are installed. This approach enhances modularity, reusability, and shareability while promoting good software engineering practices.
+Independent/Reusable Python modules are self-contained modules that only depend on Python dependencies, such as NumPy, PyTorch, TensorFlow, or Hugging Face. The code inside the module uses relative imports to import within the module, making it independent and reusable once the necessary Python dependencies are installed locally. This approach enhances modularity, reusability, and shareability while promoting good software engineering practices.
+
+% \subsection{Independent Python Modules}
+
+% Python independent modules are stand-alone modules that only depend on Python dependencies, such as NumPy, PyTorch, TensorFlow, or Hugging Face. The code inside the module uses relative imports to import within the module, making it an independent module that can be reused once the necessary Python dependencies are installed. This approach enhances modularity, reusability, and shareability while promoting good software engineering practices.
 
 
 \subsection{Separated Concern Python Modular Project Structure}
@@ -78,6 +84,10 @@ This figure illustrates a directory tree example of a deep learning modular proj
 
 
 
+\subsection{No-Loop Python Experiment Definition}
+
+This section presents a convention and guideline used in the Yerbamate framework for defining Python experiments that prohibits the use of loops. This approach aims to promote a hyperparameter-focused configuration and maintain separation of concerns, resulting in a more flexible and customizable format that can be adapted to various AI tasks, frameworks, and libraries. In practice, the configuration file should primarily consist of hyperparameters, object creations, and executions, while higher complexities such as training procedure should generally be avoided.
+
 % Separation of concerns and organizing files into a modular hierarchical tree structure are among best software engineering practices for developing Python projects. 
 % \subsection{Independent Python Modules}
 % Python independent modules only depend on Python dependencies (such as NumPy, PyTorch, TensorFlow, or Hugging Face), and the code inside the module uses relative imports to import within the module, hence making it an in dependent module that can be re-used when python dependencies are installed.
@@ -99,10 +109,10 @@ This figure illustrates a directory tree example of a deep learning modular proj
 
 % The no-loop Python experiment/execution definition used in the Yerbamate framework is a general guideline that can be applied to various experimentation or executing tasks and not limited to AI. It prohibits the use of loops in the experiment configuration, instead prioritizing hyperparameter definition and separation of concerns. This approach allows for greater flexibility and customization, making the configuration format adaptable to a wide range of use cases, libraries, and frameworks beyond the Yerbamate toolkit.
 % \subsection{No-Loop Python Experiment Definition}
-\subsection{No-Loop Python Experiment Definition}
+% \subsection{No-Loop Python Experiment Definition}
 
-This section presents a convention used in the Yerbamate framework for defining Python experiments that does not allow the use of loops. 
-This approach is designed to promotes a hyperparameter-focused configuration and maintaining separation of concerns, resulting in a more flexible and customizable format that can be adapted to various AI tasks, frameworks, and libraries. In practice, the configuration file should primarily consist of hyperparameters, object creations, and executions, while higher complexities should generally be avoided.
+% This section presents a convention used in the Yerbamate framework for defining Python experiments that does not allow the use of loops. 
+% This approach is designed to promotes a hyperparameter-focused configuration and maintaining separation of concerns, resulting in a more flexible and customizable format that can be adapted to various AI tasks, frameworks, and libraries. In practice, the configuration file should primarily consist of hyperparameters, object creations, and executions, while higher complexities should generally be avoided.
 % The Yerbamate framework follows a convention for defining Python experiments that disallows the use of loops, resulting in a more focused and streamlined approach that promotes hyperparameter configuration while maintaining separation of concerns. This convention ensures flexibility and customizability, allowing the configuration format to be adapted to different AI tasks, frameworks, and libraries. The configuration file should primarily consist of hyperparameters, object creations, and executions, while higher complexities are generally avoided.
 % The Yerbamate framework uses a Python experiment configuration definition that prohibits the use of loops. 
 % This section outlines a guideline used in the Yerbamate framework for defining Python experiments that disallows the use of loops. This approach promotes a hyperparameter-focused configuration and maintains separation of concerns, resulting in a more flexible and customizable format that can be adapted to various AI tasks, frameworks, and libraries. In practice, the configuration file should primarily consist of hyperparameters, object creations, and executions, and higher complexities such as training procedure should generally be avoided. 
@@ -262,7 +272,7 @@ Yerbamaté CLI provides utility functions and supports modular projects, facilit
 \begin{itemize}
 \item \textbf{mate init module\_name}: Initializes a new empty modular project skeleton with the given module name. 
 
-\item \textbf{mate install url -y\textbar n\textbar o pm}: Installs a module from a git repository. Supports multiple formats for the repository URL. The flags -y, -n, and -o specify whether to skip confirmation, skip installing python dependencies, and overwrite existing code modules, respectively. The pm argument specifies the package manager to use.
+\item \textbf{mate install url -y\textbar n\textbar o pm}: Installs a module from a git repository. Supports multiple formats for the repository URL. The flags -y, -n, and -o specify whether to skip confirmation, skip installing python dependencies, and overwrite existing code modules, respectively. The pm argument specifies the Python package manager to use.
 \item \textbf{mate list}: Lists all available modules in the project. 
 \item \textbf{mate exports}: Generates dependencies for reproduciblity and sharing.
 \item \textbf{mate test exp\_module exp}: Runs the experiment specified by exp in the module exp\_module. Equivalent to \texttt{python -m root\_module.exp\_module.exp test}
@@ -271,7 +281,7 @@ Yerbamaté CLI provides utility functions and supports modular projects, facilit
 
 
 \subsubsection{Yerbamaté install}
-Yerbamaté's install command is a crucial component of the tool, allowing for effortless installation of modularized projects that adhere to the principles of separation of concerns. With just one command, you can install a model along with its Python dependencies, making it easier to share and export modules. Additionally, Yerbamaté also supports the installation of coupled modules as whole modules. For example, you can install the source code of over 100 torch image models \footnote{\url{https://github.com/rwightman/pytorch-image-models/tree/main/timm/}} and over 30 implementation PyTorch vision in transformers \footnote{\url{https://github.com/lucidrains/vit-pytorch/tree/main/vit\_pytorch/}} directly into your project. However, the limitation of installing non-Yerbamaté projects is that Yerbamaté cannot install Python dependencies out of the box and this modules can only be installed as a whole, and sub-modules, such as models, are not installable as a standalone module since they are not independent.
+Yerbamaté's install command is a crucial component of the tool, allowing for effortless installation of modularized projects that adhere to the principles of separation of concerns. With just one command, you can install a model along with its Python dependencies, making it easier to share and export modules. Additionally, Yerbamaté also supports the installation of coupled modules as whole modules. For example, you can install the source code of over 100 torch image models \footnote{\url{https://github.com/rwightman/pytorch-image-models/tree/main/timm/}} and over 30 implementation PyTorch vision in transformers \footnote{\url{https://github.com/lucidrains/vit-pytorch/tree/main/vit\_pytorch/}} directly into your project. However, the limitation of installing non-Yerbamaté projects is that Yerbamaté cannot install Python dependencies out of the box and this modules can only be installed as a whole, and sub-modules, such as models, are not installable as a standalone module when they are not independent and reusable modules.
 
 \subsubsection{Yerbamaté Environment API}
 
