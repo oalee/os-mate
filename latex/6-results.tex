@@ -79,7 +79,7 @@ When implementing a project using multiple frameworks, it can become challenging
 % For modular Python projects, organizing files into a hierarchical directory tree structure is a best practice.
 \end{minipage}}
 \caption{
-This figure illustrates a directory tree example of a deep learning modular project. The organization of files into separated concerns in the tree is a common best practice for developing modular Python projects. By adhering to principle of independency, the submodules, such as Transformer and GPT2 can be easily shared and reused across different projects. Yerbamaté simplifies this process by providing a toolkit that allows for the injection of dependencies and the installation of modules from open-source projects.
+This figure illustrates a directory tree example of a deep learning modular project. The organization of files into separated concerns in the tree is a common best practice for developing modular Python projects. By adhering to principle of independency, the submodules, such as Transformer and GPT2 can be easily shared and reused across different projects. Yerbamaté simplifies this process by providing a toolkit that can be used to install reusable modules from open source projects. 
 }
 \end{figure}
 
@@ -87,7 +87,7 @@ This figure illustrates a directory tree example of a deep learning modular proj
 
 \subsection{No-Loop Python Experiment Definition}
 
-This section presents a convention and guideline used in the Yerbamate framework for defining Python experiments that prohibits the use of loops. This approach aims to promote a hyperparameter-focused configuration and maintain separation of concerns, resulting in a more flexible and customizable format that can be adapted to various AI tasks, frameworks, and libraries. In practice, the configuration file should primarily consist of hyperparameters, object creations, and executions, while higher complexities such as training procedure should generally be avoided.
+This section presents a convention and guideline used in the Yerbamate framework for defining Python experiments that prohibits the use of loops. This approach aims to promote a hyperparameter-focused configuration and maintain separation of concerns, resulting in a more flexible and customizable format that can be adapted to various AI tasks, frameworks, and libraries. In practice, the configuration file should primarily consist of hyperparameters, object creations, and executions, while higher complexities such as training loops should generally be avoided.
 
 % Separation of concerns and organizing files into a modular hierarchical tree structure are among best software engineering practices for developing Python projects. 
 % \subsection{Independent Python Modules}
