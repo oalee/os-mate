@@ -31,10 +31,12 @@ Independent/Reusable Python modules are self-contained modules that only depend 
  The modular structure of the framework and software engineering best practice of SoC involves organizing the project directory in a hierarchical tree structure, with an arbitrary name given to the root project directory by the user. The project is then broken down into distinct concerns such as models, data, trainers, experiments, analyzers, simulators, each with its own subdirectory. Within each concern, arbitrary modules can be defined, including models, trainers, data loaders, data augmentations, and loss functions. Independent modules can be defined in various heights in the tree.
 
 The framework prioritizes the organization of the project into independent modules when applicable, however there are situations where a combination of independent modules may be necessary for a particular concern. An example of this is the experiment concern, which imports and combines models, data, and trainers to define and create a specific experiment. In such cases, the module is not independent and is designed to combine the previously defined independent modules. 
-In the case of non-independent modules. 
-Yerbamate creates a dependency list of independent modules that can be used to install the code and Python dependencies. This ensures that the necessary modules are installed and that the code can be reused. 
+% In the case of non-independent modules. 
+% Yerbamate creates a dependency list of independent modules that can be used to install the code and Python dependencies. This ensures that the necessary modules are installed and that the code can be reused. 
 
-When implementing a project using multiple frameworks, it can become challenging to specify the exact framework used for each module. To address this issue, Yerbamaté provides a naming convention that specifies the framework used before the name of the module. For instance, the subdirectory for a Jax-based model named \texttt{"my\_model"} would be \texttt{"models/jax/my\_model"}, while the subdirectory for a PyTorch-based model with the same name would be \texttt{"models/torch/my\_model"}. This naming convention makes it easy to identify which framework was used for a specific module and ensures consistency throughout the project.
+Yerbamaté addresses the issue of specifying the exact framework used for each module in a project that involves multiple frameworks by providing a naming convention that specifies the framework used before the name of the module. This naming convention helps maintain consistency and make it easy to identify which framework was used for a specific module. For instance, the subdirectory for a Jax-based model named "my\_model" would be "models/jax/my\_model", while the subdirectory for a PyTorch-based model with the same name would be "models/torch/my\_model".
+
+% When implementing a project using multiple frameworks, it can become challenging to specify the exact framework used for each module. To address this issue, Yerbamaté provides a naming convention that specifies the framework used before the name of the module. For instance, the subdirectory for a Jax-based model named \texttt{"my\_model"} would be \texttt{"models/jax/my\_model"}, while the subdirectory for a PyTorch-based model with the same name would be \texttt{"models/torch/my\_model"}. This naming convention makes it easy to identify which framework was used for a specific module and ensures consistency throughout the project.
 
 % While the prioritization of independency is encouraged, sometimes it may not be desired, and a combination of independent modules may be necessary for a particular concern. An example of this is the experiment concern, which imports and combines models, data, and trainers to create a specific experiment. In such cases, the module is not independent and is designed to combine the previously defined independent modules.
 
@@ -271,18 +273,18 @@ Additionally, the framework is designed to be compatible with Python, providing 
 Yerbamaté CLI provides utility functions and supports modular projects, facilitating machine learning model development. Key CLI options include:
 
 \begin{itemize}
-\item \textbf{mate init module\_name}: Initializes a new empty modular project skeleton with the given module name. 
+\item \texttt{mate init module\_name}: Initializes a new empty modular project skeleton with the given module name. 
 
-\item \textbf{mate install url -y\textbar n\textbar o pm}: Installs a module from a git repository. Supports multiple formats for the repository URL. The flags -y, -n, and -o specify whether to skip confirmation, skip installing python dependencies, and overwrite existing code modules, respectively. The pm argument specifies the Python package manager to use.
-\item \textbf{mate list}: Lists all available modules in the project. 
-\item \textbf{mate exports}: Generates dependencies for reproduciblity and sharing.
-\item \textbf{mate test exp\_module exp}: Runs the experiment specified by exp in the module exp\_module. Equivalent to \texttt{python -m root\_module.exp\_module.exp test}
-\item \textbf{mate train exp\_module exp}: Runs the experiment specified by exp in the module exp\_module. Equivalent to \texttt{python -m root\_module.exp\_module.exp train}
+\item \texttt{mate install url -y\textbar n\textbar o pm}: Installs a module from a git repository. Supports multiple formats for the repository URL. The flags -y, -n, and -o specify whether to skip confirmation, skip installing python dependencies, and overwrite existing code modules, respectively. The pm argument specifies the Python package manager to use.
+\item \texttt{mate list}: Lists all available modules in the project. 
+\item \texttt{mate exports}: Generates dependencies for reproduciblity and sharing.
+\item \texttt{mate test exp\_module exp}: Runs the experiment specified by exp in the module exp\_module. Equivalent to \texttt{python -m root\_module.exp\_module.exp test}
+\item \texttt{mate train exp\_module exp}: Runs the experiment specified by exp in the module exp\_module. Equivalent to \texttt{python -m root\_module.exp\_module.exp train}
 \end{itemize}
 
 
 \subsubsection{Yerbamaté install}
-Yerbamaté's install command is a crucial component of the tool, allowing for effortless installation of modularized projects that adhere to the principles of separation of concerns. With just one command, you can install a model along with its Python dependencies, making it easier to share and export modules. Additionally, Yerbamaté also supports the installation of coupled modules as whole modules. For example, you can install the source code of over 100 torch image models \footnote{\url{https://github.com/rwightman/pytorch-image-models/tree/main/timm/}} and over 30 implementation PyTorch vision in transformers \footnote{\url{https://github.com/lucidrains/vit-pytorch/tree/main/vit\_pytorch/}} directly into your project. However, the limitation of installing non-Yerbamaté projects is that Yerbamaté cannot install Python dependencies out of the box and this modules can only be installed as a whole, and sub-modules, such as models, are not installable as a standalone module when they are not independent and reusable modules.
+Yerbamaté's install command is a crucial component of the tool, allowing for effortless installation of modularized projects that adhere to the principles of separation of concerns. With just one command, you can install a model along with its Python dependencies, making it easier to share and export modules. Additionally, Yerbamaté also supports the installation of coupled modules as whole modules. For example, you can install the source code of over 100 torch image models \footnote{\url{https://github.com/rwightman/pytorch-image-models/tree/main/timm/}} and over 30 implementation PyTorch vision in transformers \footnote{\url{https://github.com/lucidrains/vit-pytorch/tree/main/vit\_pytorch/}} directly into your project. However, the limitation of installing non-Yerbamaté projects is that Yerbamaté cannot install Python dependencies out of the box and this modules can only be installed as a whole, and sub-modules, such as models, are not installable as a standalone module when they are not independent and reusable modules. 
 
 \subsubsection{Yerbamaté Environment API}
 
