@@ -21,22 +21,13 @@ Data is a crucial factor in the success of deep learning models (\cite{lecun2015
  This is highlighted in the seminal publication "Towards Accountability for Machine Learning Datasets: Practices from Software Engineering and Infrastructure," which emphasizes the importance of incorporating open science principles into the development life cycle of AI datasets and the documentation process for researcher collaboration (\cite{accountabilityInAi}).
 
 
-
-% Additionally, bugs in the data-related code or leakage between the test and train sets can also invalidate the results of a study (\cite{leakage-recrisis}).
-
-
-
-
-% \subsection{Open Science}
-
 \subsection{The Significance of Open Science for AI}
 
  
 Open science represents a crucial component in the pursuit of responsible and trustworthy AI (\cite{floridi2019establishing,coro2020open,braun2018open,hicks2021open}). By prioritizing transparency and reproducibility, researchers in the field can advance its development in a safer and trustworthy manner (\cite{coro2020open,floridi2018ai4people,kocak2022transparency,stodden-towardreprodicibleresearch}).
 Open science practices serve to mitigate the risks associated with closed-source AI and big data bias, which have raised significant concerns among stakeholders (\cite{batarseh2020data, o2017weapons}). Adoption of open science and open source AI can increase the fairness and impartiality of AI models (\cite{stodden-towardreprodicibleresearch,accountabilityInAi,gundersen2018reproducible}) and enhance the credibility and trustworthiness of their outputs among stakeholders and decision-makers (\cite{goodman2017european,hsiao2018vtaiwan,praprotnikevaluation}). % 
-% Beyond that, close-sourced AI and bias in big data can have detrimental effects and increases inequality, and threaten democracy (\cite{o2017weapons}).  
+
 \subsection{Software Engineering}
-% Software engineering is the process of designing, developing, and maintaining software systems efficiently and reliably (\cite{pressman2010software}).
 Software engineering is a well-established discipline that encompasses the process of designing, developing, testing, and maintaining software systems with a focus on quality, reliability, and efficiency \cite{pressman2010software}. While the specific activities and methodologies involved in software engineering can vary depending on the type of software, the principles of good software engineering practices are generally applicable across all types of software (\cite{pressman2010software}), including those in the field of artificial intelligence (\cite{se4dl,wan2019does,martinez2022softwareAI,davis2011understandingmodularity}). The software engineering practices employed in the development of AI systems include, but are not limited to, testing, debugging, documentation, version control, and code review. Additionally, given the complex and evolving nature of AI systems, specific attention must be given to software requirements and their evolution over time (\cite{heyn2021requirement,belani2019requirements}). However, unlike traditional software engineering, the requirements of AI systems may not always be well-defined, and software engineering practices may need to be adapted to the rapidly changing needs of these systems (\cite{heyn2021requirement,belani2019requirements}). 
 
 
@@ -54,31 +45,12 @@ A python module contains definitions, functions, classes, and variables (\cite{r
 
 \subsection{Developer Experience}
 The concept of developer experience (DX) is a multidimensional construct that refers to developers' perceptions of various aspects of the development process, including the usability and effectiveness of the tools, frameworks, and platforms used (\cite{fagerholm2012developer}). DX is a critical factor in software development as it has the potential to impact productivity, motivation, and satisfaction (\cite{fagerholm2012developer}).
-%  The development of AI systems is a complex and challenging task that involves a range of tasks, including data preprocessing, model selection and training, and performance evaluation (\cite{lecun2015deep}). Given the complexity of the development process, researchers and practitioners in the field of AI require tools and frameworks that are user-friendly, customizable, and provide a seamless development experience (\cite{wolf2020designing,li2018can,olson2018system}.
+
 
 
 \subsection{Decoupling Concerns in Writing AI Code}
 
-% In the field of software engineering, including artificial intelligence and machine learning, decoupling concerns, also known as separation of concerns, is a crucial design principle that helps to improve the maintainability, scalability, and reusability of code (\cite{mo2016decoupling,qian2006decoupling, pressman2010software}. The goal of decoupling concerns is to break down complex systems into smaller, modular components that can be independently developed, tested, and maintained (\cite{pressman2010software, mo2016decoupling, qian2006decoupling}). 
 
 Decoupling concerns, also known as SoC, is a crucial design principle in the field of artificial intelligence and machine learning (\cite{mo2016decoupling,qian2006decoupling, pressman2010software}. For instance, in a typical deep learning experiment, the trainer component is responsible for training the model. The trainer component can be designed to receive either a string representing the dataset/model names or the actual dataset/model objects, with the latter approach providing greater flexibility and customization. Another example of separation of concerns in AI is the data loading and augmentation process, which can be hardcoded into the data loading module or passed as an object to a function. Similarly, a deep learning model can be implemented as a monolithic block of code or as a series of modular components, such as the encoder, decoder, and attention mechanism. The latter approach allows for greater flexibility and customization of the model, as each component can be modified or replaced without affecting the other components.
 
 
-
-
-
-% \subsection{Deep Learning Frameworks in Python}
-
-% The utilization of deep learning models in Python has seen the rise of several prominent frameworks, including Jax, Keras/TensorFlow, PyTorch, PyTorch Lightning, and Jax/Flax (\cite{mihajlovic2020use,raschka2020machine, nguyen2019machine, shatnawi2018comparative}). These frameworks provide a comprehensive set of tools and functionalities for the implementation and training of deep learning models (\cite{elshawi2021dlbench}). 
-% However, choosing the right framework can be challenging as each framework has its own advantages and limitations (\cite{nguyen2019machine, elshawi2021dlbench,shatnawi2018comparative}).
-
-% One approach to addressing this challenge is the development of unified deep learning frameworks such as Ivy (\cite{ivy}). Ivy supports multiple frameworks, enabling researchers to utilize the strengths of each framework without sacrificing compatibility and ease of use (\cite{ivy}). However, using such a unified framework also introduces overhead in learning, and computation, as well as limitations in terms of customizability. For instance, users are required to utilize Ivy tensors instead of PyTorch or Keras tensors, limiting access to low-level functionality (\cite{IvyDocs, ivy}).
-
-
-
-
-% \subsubsection{Experiment Configuration}
-
-% In the field of artificial intelligence and machine learning, defining hyperparameters and experiments plays a crucial role in the development and optimization of models \cite{wu2019hyperparameter}. The choice of format for defining experiments and hyperparameters can greatly impact the efficiency and flexibility of the experimentation process. After evaluating various formats such as JSON and TOML, it was decided that Python is the most suitable format for defining experiments in AI and ML python projects. Python provides a high level of expressiveness and versatility, allowing for easy modifications and adaptations of the experiment definition. In addition, Python offers a straightforward syntax for defining hyperparameters and allows for the integration of existing code and libraries. This greatly reduces the overhead associated with switching between different languages or systems, leading to a more streamlined and efficient experimentation process. Furthermore, the ability to use Python's powerful libraries and modules enhances the experimentation process by providing access to a vast range of tools and resources. This further enables the exploration of a wider range of hyperparameters and models, leading to a more comprehensive understanding of the problem at hand.
-
-% Additionally, by incorporating well-documented Python code, the readability of the configuration file is improved, making it more accessible to researchers and practitioners alike. Furthermore, this format is executable directly with Python, which makes it Turing complete. This property is particularly useful because it means that the format can include arbitrary computation and is capable of expressing any algorithm, enhancing its flexibility and power.
