@@ -1,51 +1,24 @@
 \section{Results}
 
 This section presents the results of the study, which provide software engineering principles for shareable modular Python projects and an open science Framework, Yerbamaté. The principles include modular project structuring, independent and interchangeable modules, and an experiment definition format.  Furthermore, the Yerbamaté CLI is introduced as a productivity tool for modular Python projects, promoting sharing and reuse of Python modules.
-% This section presents the results of the study, which provide software engineering principles for modular Python projects. The principles include modular project structuring, independent and interchangeable modules, and an experiment definition format. The Yerbamaté open science framework is introduced as a productivity tool for modular Python projects, promoting sharing and enabling out-of-the-box use of modules.
-% This section outlines the results of the study, which provide software engineering principles for modular Python projects. The principles include modularity, independent modules, and an experiment definition format. 
-% The study also presents the Yerbamaté open science framework, which functions as a productivity tool for modular Python projects that facilitates sharing modules between practitioners.
-% The study also presents a framework that serves as a productivity tool for modular Python projects.
-% This section presents the results of the study, which include guidelines for developing modular open science Python projects, as well as an open source open science Python framework, Yerbamate, that applies these principles. These guidelines, including a modular project structure and software engineering practices, are not specific to the Yerbamate toolkit and can be applied to a variety of projects without the toolkit.
+
 
 \subsection{Independent/Reusable Python Modules}
 
 Independent/Reusable Python modules are self-contained modules that only depend on Python dependencies, such as NumPy, PyTorch, TensorFlow, or Hugging Face. The code inside the module uses relative imports to import within the module, making it independent and reusable once the necessary Python dependencies are installed locally. This approach enhances modularity, reusability, and shareability while promoting good software engineering practices.
 
-% \subsection{Independent Python Modules}
-
-% Python independent modules are stand-alone modules that only depend on Python dependencies, such as NumPy, PyTorch, TensorFlow, or Hugging Face. The code inside the module uses relative imports to import within the module, making it an independent module that can be reused once the necessary Python dependencies are installed. This approach enhances modularity, reusability, and shareability while promoting good software engineering practices.
 
 
 \subsection{Separated Concern Python Modular Project Structure}
-% The Structure involves organizing the project directory in a hierarchical tree structure, with an arbitrary name given to the root project directory. The project is then broken down into separate concern modules, such as models, experiments, trainers, data, analyzers, and simulators, each with its own subdirectory. If the project does not use a framework, it can directly use this level of tree to define an independent module. Independent modules can be defined in various heights.
 
-% Within each module, a framework can be specified, such as "jax", "torch", or "keras", followed by the name of the specific model, experiment, or trainer being used. 
-% Independent submodules can be created for individual components such as data loaders, data augmentations, or loss functions. These can be organized in the following manner: \texttt{"data/torch/imagenet"} or \texttt{"data/torch/augmentations/random\_crop"} or\texttt{"models/jax/gpt2"} or \texttt{"models/torch/big\_transfer"}.
-% This Structure emphasizes the importance of creating independent modules that can be used across different projects, promoting code reuse and making research more efficient. By following this Structure, researchers can make their work more accessible, reproducible, and transparent, thereby promoting open science in the field of AI.
-
-% The modular structure guideline for open science Python projects involves organizing the project directory into a hierarchical tree structure, where the root project directory is given an arbitrary name by the user. This directory is then broken down into distinct concerns such as models, data, trainers, experiments, analyzers, simulators, each with its own subdirectory.
-% Within each concern, modules can be defined with their own subdirectories, such as models, trainers, data loaders, data augmentations, or loss functions. This hierarchical structure allows for the organization of modules in a logical and consistent manner, promoting code reuse and ease of maintenance.
-
-% The guideline emphasizes the use of independent modules where applicable, as this allows for flexibility and modularity. However, there may be situations where a combination of independent modules is necessary for a particular concern. An example of this is the experiment concern, which imports and combines models, data, and trainers to define and create a specific experiment. In such cases, the module is not independent and is designed to combine the previously defined independent modules.
 
  The modular structure of the framework and software engineering best practice of SoC involves organizing the project directory in a hierarchical tree structure, with an arbitrary name given to the root project directory by the user. The project is then broken down into distinct concerns such as models, data, trainers, experiments, analyzers, simulators, each with its own subdirectory. Within each concern, arbitrary modules can be defined, including models, trainers, data loaders, data augmentations, and loss functions. Independent modules can be defined in various heights in the tree.
 
 The framework prioritizes the organization of the project into independent modules when applicable, however there are situations where a combination of independent modules may be necessary for a particular concern. An example of this is the experiment concern, which imports and combines models, data, and trainers to define and create a specific experiment. In such cases, the module is not independent and is designed to combine the previously defined independent modules. 
-% In the case of non-independent modules. 
-% Yerbamate creates a dependency list of independent modules that can be used to install the code and Python dependencies. This ensures that the necessary modules are installed and that the code can be reused. 
+
 
 Yerbamaté addresses the issue of specifying the exact framework used for each module in a project that involves multiple frameworks by providing a naming convention that specifies the framework used before the name of the module. This naming convention helps maintain consistency and make it easy to identify which framework was used for a specific module. For instance, the subdirectory for a Jax-based model named "my\_model" would be "models/jax/my\_model", while the subdirectory for a PyTorch-based model with the same name would be "models/torch/my\_model".
 
-% When implementing a project using multiple frameworks, it can become challenging to specify the exact framework used for each module. To address this issue, Yerbamaté provides a naming convention that specifies the framework used before the name of the module. For instance, the subdirectory for a Jax-based model named \texttt{"my\_model"} would be \texttt{"models/jax/my\_model"}, while the subdirectory for a PyTorch-based model with the same name would be \texttt{"models/torch/my\_model"}. This naming convention makes it easy to identify which framework was used for a specific module and ensures consistency throughout the project.
-
-% While the prioritization of independency is encouraged, sometimes it may not be desired, and a combination of independent modules may be necessary for a particular concern. An example of this is the experiment concern, which imports and combines models, data, and trainers to create a specific experiment. In such cases, the module is not independent and is designed to combine the previously defined independent modules.
-
-
-
-% The framework involves organizing the project directory in a hierarchical tree structure, with an arbitrary name given to the root project directory by user. The project is then broken down into separate concern modules, such as models, experiments, trainers, data, analyzers, and simulators, each with its own subdirectory. If the project does not use a framework, it can directly use this level of tree to define an independent module. Independent modules can be defined in various heights.
-
-% Within each module, a framework can be specified, such as "jax", "torch", or "keras", followed by the name of the specific model, experiment, or trainer being used. Independent submodules can be created for individual components such as data loaders, data augmentations, or loss functions. 
-% These can be organized in the following manner: \texttt{"data/torch/imagenet"} or \texttt{"data/torch/augmentations"} or\texttt{"optimizers/jax/gpt2"} or \texttt{"models/torch/big\_transfer"}.
 
 
 
@@ -90,214 +63,65 @@ This figure illustrates a directory tree example of a deep learning modular proj
 
 This section presents a convention and guideline used in the Yerbamate framework for defining Python experiments that prohibits the use of loops. This approach aims to promote a hyperparameter-focused configuration and maintain separation of concerns, resulting in a more flexible and customizable format that can be adapted to various AI tasks, frameworks, and libraries. In practice, the configuration file should primarily consist of hyperparameters, object creations, and executions, while higher complexities such as training loops should generally be avoided.
 
-% Separation of concerns and organizing files into a modular hierarchical tree structure are among best software engineering practices for developing Python projects. 
-% \subsection{Independent Python Modules}
-% Python independent modules only depend on Python dependencies (such as NumPy, PyTorch, TensorFlow, or Hugging Face), and the code inside the module uses relative imports to import within the module, hence making it an in dependent module that can be re-used when python dependencies are installed.
-% All independent python modules c
-% This framework places a high priority on creating independent modules that are standalone and reusable components, which can be used across different projects. 
-% This design allows the reuse of code and its components under different projects. This framework priotizes independency of modules over seperated concerns.
 
-
-
-
-% The No-Loop Python Experiment/Execution Definition is a software engineering guideline that prioritizes the separation of concerns and hyperparameter definition in the configuration format. Loops are disallowed in the configuration file, promoting a more modular design in which higher computation functions are segregated into separate modules such as trainers. By focusing on hyperparameter definition, this approach increases flexibility and customization in the configuration format, allowing it to be adapted to a wide range of use cases.
-% The No-Loop Python Experiment/Execution Definition is a software engineering guideline that prioritizes the separation of concerns and hyperparameter definition in the configuration format. The disallowance of loops in this configuration promotes a more modular design, where higher computation functions are referred to in separate modules such as trainers, and the configuration file remains focused on defining the hyperparameters. This approach enhances the flexibility and customization of the configuration format, making it adaptable to a wide range of use cases, beyond AI experimentation, libraries, and frameworks, and is designed to improve the developer experience.
-
-% The No-Loop Python Experiment/Execution Definition is a guideline for software engineering that aims to prioritize hyperparameter definition, separation of concerns and prohibit the use of loops in the configuration format. This approach promotes a more modular design for experimentation and execution tasks and enables greater flexibility and customization of the configuration format to various use cases, libraries and frameworks. 
-
-% The No-Loop Python Experiment/Execution Definition is a software engineering guideline that prioritizes hyperparameter definition, separation of concerns and prohibits the use of loops in the configuration format. This is applicable not just to AI but to any execution and hyperparameter format. An example is a configuration file that defines hyperparameters, creates objects like models, data loaders, and augmentations, and calls trainers, while avoiding the use of loops.
-
-% The no-loop Python experiment definition, as implemented in the Yerbamate framework, is a general guideline that can be utilized for a variety of experimentation or execution tasks, not limited to AI. It emphasizes the importance of hyperparameter definition and separation of concerns, and prohibits the use of loops in the experiment configuration. This method promotes flexibility and adaptability, allowing the configuration format to be customized for a wide range of use cases, frameworks, and libraries beyond the Yerbamate toolkit.
-
-% The no-loop Python experiment/execution definition used in the Yerbamate framework is a general guideline that can be applied to various experimentation or executing tasks and not limited to AI. It prohibits the use of loops in the experiment configuration, instead prioritizing hyperparameter definition and separation of concerns. This approach allows for greater flexibility and customization, making the configuration format adaptable to a wide range of use cases, libraries, and frameworks beyond the Yerbamate toolkit.
-% \subsection{No-Loop Python Experiment Definition}
-% \subsection{No-Loop Python Experiment Definition}
-
-% This section presents a convention used in the Yerbamate framework for defining Python experiments that does not allow the use of loops. 
-% This approach is designed to promotes a hyperparameter-focused configuration and maintaining separation of concerns, resulting in a more flexible and customizable format that can be adapted to various AI tasks, frameworks, and libraries. In practice, the configuration file should primarily consist of hyperparameters, object creations, and executions, while higher complexities should generally be avoided.
-% The Yerbamate framework follows a convention for defining Python experiments that disallows the use of loops, resulting in a more focused and streamlined approach that promotes hyperparameter configuration while maintaining separation of concerns. This convention ensures flexibility and customizability, allowing the configuration format to be adapted to different AI tasks, frameworks, and libraries. The configuration file should primarily consist of hyperparameters, object creations, and executions, while higher complexities are generally avoided.
-% The Yerbamate framework uses a Python experiment configuration definition that prohibits the use of loops. 
-% This section outlines a guideline used in the Yerbamate framework for defining Python experiments that disallows the use of loops. This approach promotes a hyperparameter-focused configuration and maintains separation of concerns, resulting in a more flexible and customizable format that can be adapted to various AI tasks, frameworks, and libraries. In practice, the configuration file should primarily consist of hyperparameters, object creations, and executions, and higher complexities such as training procedure should generally be avoided. 
-
-% The Yerbamate framework uses a Python experiment configuration definition that prohibits the use of loops. This is intended to promote a hyperparameter-focused approach and maintain separation of concerns. 
-% The configuration should focus on hyperparameters, object creations, and executions. More complex logic, such as loops, should generally be avoided to maintain simplicity and ease of use. This approach enables flexibility and customization, allowing the configuration format to be adapted to various AI tasks, custom use cases, frameworks, and libraries.
-% Loops are not allowed as they are generally used for controlling flow of execution, whereas the configuration file is intended to define hyperparameters for experiments. 
-
-% Yerbamaté framework uses a Python experiment configuration definition that disallows the use of loops as per convention, promoting a hyperparameter-focused approach while maintaining separation of concerns. This format offers flexibility and customization, allowing the configuration format to be adapted to various AI tasks, custom use cases, frameworks, and libraries.
-
-
-% \subsection{No-Loop Python Experiment Configuration Structure}
-
-% This Structure adopts an experiment configuration with the Python language that only disallows the use of loops. The experiment configuration design choice is intended to maintain a hyperparameter-focused experiment format while promoting separation of concerns. The resulting approach provides several benefits, including increased flexibility and customization, as the configuration format can be adapted to various AI tasks, custom use cases, frameworks, and libraries. 
-
-
-
-% Yerbamate follows a directory tree structure that is organized into distinct modules, namely "models", "experiments", "trainers", and "data", which have been identified as major concerns in AI projects across a variety of tasks. This naming convention is designed to enhance the understandability and readability of the project structure. 
-
-\subsection{Modular Project Structure for AI}
-
-% The guideline for modular project structure in AI involves organizing projects into independent modules for models, trainers, and data, as these are major concerns across various AI tasks. These modules are designed to be standalone and operate independently, enhancing modularity and reusability. The experiments module harmonizes the independent modules to provide a unified experiment. This structure enhances understandability and facilitates the adoption of software engineering best practices, such as modularity and separation of concerns.
-
-% \subsection{Modular Project Structure for AI}
-
-The structure for AI projects results in a modular pattern that is organized into distinct  modules, namely "models", "experiments", "trainers", and "data", which have been identified as major concerns in AI projects across a variety of tasks. This modular approach creates standalone and independent modules for models, trainers, and data, which can operate independently to enhance modularity and reusability. The "experiments" module harmonizes the three independent modules and provides a unified experiment. This naming convention is used to enhance the understandability of the project and facilitate the adoption of software engineering best practices, such as modularity and separation of concerns.
-
-% \subsection{AI Project Structure}
-% The structure for AI projects often involves four modules: "models", "experiments", "trainers", and "data". The modular approach creates arbitrary standalone modules for models, trainers, and data, each with the ability to operate independently. The experiments module harmonizes the three modules and provides a unified experiment. 
-% This modular structure enables the sharing of independent models, trainers, and data modules across various projects, promoting code reusability.
-
-% The Structure for structuring AI/ML projects involves four distinct modules: "models", "experiments", "trainers", and "data". This modular approach leads to the creation of three standalone modules for models, trainers, and data, each with the ability to operate independently. The fourth module, experiments, serves to harmonize the three modules and provide a unified and comprehensive experiment. The modular structure of independence enables the sharing of independent models, trainers, and data loaders across various projects and experiments, promoting the reusability of code.
-
-
-
-% \begin{figure}
-% \centering
-% \framebox[\0.45\textwidth]{%
-% \begin{minipage}{0.45\textwidth}
-% \dirtree{%
-% .1 /.
-% .2 models.
-% .3 \texttt{\_\_init\_\_.py}.
-% .2 experiments.
-% .3 \texttt{\_\_init\_\_.py}.
-% .2 trainers.
-% .3 \texttt{\_\_init\_\_.py}.
-% .2 data.
-% .3 \texttt{\_\_init\_\_.py}.
-% .2 \texttt{\_\_init\_\_.py}.
-% }
-% \end{minipage}
-% }
-% \caption{The modular architecture of the Structure for AI is characterized by the structured folder system, separating the key components into four distinct modules: models, experiments, trainers, and data. This enhances code legibility and comprehensibility, enabling other researchers to quickly access the desired code components.}
-% \end{figure}
 
 
 
 
-% \subsubsection{}
+% \subsection{Modular Project Structure for AI}
 
-% The implementation of software engineering principles of as separation of concerns (SoC) and modularity in deep learning projects results in a well-structured illustrated below. 
-
-% \vspace{0.7em}
+% The structure for AI projects results in a modular pattern that is organized into distinct  modules, namely "models", "experiments", "trainers", and "data", which have been identified as major concerns in AI projects across a variety of tasks. This modular approach creates standalone and independent modules for models, trainers, and data, which can operate independently to enhance modularity and reusability. The "experiments" module harmonizes the three independent modules and provides a unified experiment. This naming convention is used to enhance the understandability of the project and facilitate the adoption of software engineering best practices, such as modularity and separation of concerns.
 
 
-% The modular architecture of a deep learning project, characterized by the structured folder system, separates the key components into four distinct modules: models, experiments, trainers, and data. This enhances code legibility and comprehensibility, enabling other researchers to quickly access the desired code components. This approach leads to the formation of three standalone modules for models, trainers, and data, each possessing the ability to operate independently. Meanwhile, the fourth module, experiments, functions to harmonize the three modules and provide a unified and comprehensive experiment. The modular structure of independence further enables the sharing of models, trainers, and data loaders across various projects and experiments, thereby enhancing the code's reusability and scalability. 
+\subsection{Yerbamaté: A Python Framework for Open Science}
+
+Yerbamaté is an open science framework that prioritizes modularity, independent modules, and a separated concern project structure for Python projects. These principles enable Yerbamaté to provide a command line interface (CLI) for easy sharing and installation of code modules, dependency management, and execution of experiments. The framework also supports machine learning model development, with key features such as:
+
+\subsubsection{Easy Installation with Yerbamaté Install}
+
+Yerbamaté's install command enables the installation of modularized projects adhering to separation of concerns principles, along with their associated Python dependencies, with a single command. Additionally, Yerbamaté allows the installation of non-Yerbamaté projects as concrete modules, which can be installed alongside the root module of the project. While Yerbamaté cannot automatically install Python dependencies without a "requirements.txt" file in the root directory of the module, it can for example be used to install source code of over 100 Torch image models or 30 PyTorch vision in transformers directly into a project. See Appendix \ref{CLIApp}.
+
+% \subsubsection{Metadata and Reproducibility}
+% Yerbamate can be used to create and inject python version dependencies for reproduciblity by creating a requirements.txt file. Moreover metadata can be generated to create list of reusable modules that are in the project. THese metadata compily with FAIR pricniples
+
+\subsubsection{Metadata and Reproducibility}
+
+Yerbamaté enhances reproducibility by creating dependencies of a python module with a requirements.txt file that lists the python version dependencies. The framework can also be used to generate metadata for exported and reusable modules that comply with the FAIR principles. By adhering to these principles and guidelines, Yerbamaté promotes transparency, reproducibility, and open science practices in the research community.
+
+\subsubsection{Environment API}
+
+The Yerbamaté Environment API is a tool designed to manage environment variables within an experiment. It prioritizes the use of an \texttt{env.json} file for storing environment variables, falling back to the operating system's environment variables if the file is not found. The API offers a convenient way to set, retrieve, and manage these variables in a centralized and organized manner, which can be useful in storing and accessing environment-specific information, such as local results and data paths, API keys, database URLs, and other sensitive data.
 
 
-% \begin{figure}
-% \centering
-% \framebox[\0.45\textwidth]{%
-% \begin{minipage}{0.45\textwidth}
+% \subsection{Yerbamaté: A Python Framework for Open Science}
 
+% Yerbamaté is an open science framework that prioritizes modularity, independent modules, and a separated concern project structure for Python projects. These principles enable Yerbamaté to provide a command line interface (CLI) for easy sharing and installation of code modules, dependency management, and execution of experiments. The framework also supports machine learning model development, with key features such as:
 
-% \dirtree{%
-% .1 /.
-% .2 data.
-% .3 cifar10.
-% .4 \texttt{data\_loader.py}.
-% .4 \texttt{\_\_init\_\_.py}.
-% .3 cifar100.
-% .4 \texttt{data\_loader.py}.
-% .4 \texttt{\_\_init\_\_.py}.
-% .3 \texttt{\_\_init\_\_.py}.
-% .2 models.
-% .3 resnet.
-% .4 \texttt{fine\_tune.py}.
-% .4 \texttt{resnet.py}.
-% .4 \texttt{\_\_init\_\_.py}.
-% .3 efficientnet.
-% .4 \texttt{efficientnet.py}.
-% .4 \texttt{\_\_init\_\_.py}.
-% .3 \texttt{\_\_init\_\_.py}.
-% .2 trainers.
-% .3 classification.
-% .4 \texttt{pl\_classification\_module.py}.
-% .4 \texttt{\_\_init\_\_.py}.
-% .3 \texttt{\_\_init\_\_.py}.
-% .2 experiments.
-% .3 torch.
-% .4 \texttt{resnet\_cifar10.py}.
-% .4 \texttt{resnet\_cifar100.py}.
-% .4 \texttt{fine\_tune\_resnet\_cifar.py}.
-% .4 \texttt{\_\_init\_\_.py}.
-% .3 keras.
-% .4 \texttt{keras\_efficient\_net\_cifar.py}.
-% .4 \texttt{\_\_init\_\_.py}.
-% .3 \texttt{\_\_init\_\_.py}.
-% .2 \texttt{\_\_init\_\_.py}.
-% }
-% \end{minipage}
-% }
-% \caption{This figure illustration a sample folder structure for a deep learning vision project\footnote{ \url{https://github.com/oalee/deep-vision}}. Each folder represents a modular code component with a specific concern, which is demonstrated by the presence of \texttt{\_\_init\_\_.py} within the folder.}
-% \end{figure}
+% \subsubsection{Easy Installation with Yerbamaté Install}
+
+% Yerbamaté's install command enables the installation of modularized projects adhering to separation of concerns principles, along with their associated Python dependencies, with a single command. Additionally, Yerbamaté allows the installation of non-Yerbamaté projects as concrete modules, which can be installed alongside the root module of the project. While Yerbamaté cannot automatically install Python dependencies without a "requirements.txt" file in the root directory of the module, it allows the manual installation of over 100 Torch image models and 30 PyTorch vision implementations in transformers, for example.
+
+% \subsubsection{Metadata and Reproducibility}
+
+% \subsection{Yerbamaté: An Open Science Python Framework}
 
 
 
 
-% \subsection{Example Project Structure}
+% Yerbamaté is an open science framework built around the aforementioned principles of modularity, independent modules, and a separated concern project structure for Python projects. When these principles and guidelines are adhered to, the resulting framework provides a command line interface (CLI) for sharing and installing code modules, dependency management, and execution of experiments. 
 
 
-% \vspace{2em}
-% Each top-level module can be divided into multiple sub-modules, allowing for the separation of individual components within each module. For instance, the models module can comprise sub-modules such as ResNet (\cite{resnet}), ViT (\cite{dosovitskiy2020vit}), CvT (\cite{wu2021cvt}), and others, implemented as independent components. Likewise, the data module can encompass sub-modules such as data loaders, preprocessing pipelines, and post-processing routines. This modular design promotes increased organization and manageability of the codebase, contributing to the efficiency and effectiveness of the deep learning project.
 
-
-\subsection{Yerbamaté: An Open Science Python Framework}
-% Yerbamaté\footnote{\url{https://github.com/oalee/yerbamate}} is an open-source, open-science Python framework that aims to streamline and simplify the development and management of AI projects. It promotes modular design principles and encourages quality coding, collaboration, sharing of models, trainers, data loaders, and knowledge, while also prioritizing reproducibility, customization, and flexibility. The framework provides a command-line interface (CLI) toolkit that conforms to the software engineering Structure of modularity and independence, allowing the creation and injection of dependencies for greater reproducibility and sharing capabilities. Moreover, Yerbamate is compatible with Linux systems and Jupyter notebooks, providing researchers with the ability to run experiments on Colab. By adhering to the Yerbamate Structure, any module in a project is automatically sharable.
-% is a result of the study on reproducibility and the importance of modularity in AI and machine learning projects. Yerbamaté is an open source open science framework designed to streamline and simplify the development and management of artificial intelligence and machine learning projects. Built around the principles of modularity and separation of concerns, Yerbamaté provides a convenient and efficient means of adding source code and dependencies to projects.
-
-% Modularity allows for a clean and organized codebase, making it easier to maintain, scale, and reuse the code in the future. In addition, Yerbamaté provides an easy-to-use interface for sharing the source code of models, trainers, data loaders, and experiments between modular projects, enabling greater flexibility and collaboration. Furthermore, adopting the Yerbamaté framework ensures that all projects adhering to its principles are readily compatible with Colab\footnote{\url{https://colab.research.google.com/github/oalee/yerbamate/blob/main/deep_learning.ipynb}}, a cloud-based platform widely used for machine learning experimentation and development.
-
-% Yerbamaté also provides support for full customizability and reproducibility of results through the inclusion of dependencies in your project. The tool supports pip and conda for dependency management, making it easy to manage and install the necessary dependencies for your project.
-% Additionally, Yerbamaté is fully compatible with python, and can be used with popular libraries such as PyTorch/Lightning, TensorFlow/Keras, JAX/Flax, Huggingface/transformers. Another feature of Yerbamaté is its convenient environment management through the Yerbamaté Environment API. This API allows for the creation and management of virtual environments, ensuring that each experiment is run in an isolated environment with the necessary dependencies. 
-% For a comprehensive understanding of the Yerbamaté, see the documentation\footnote{\url{https://oalee.github.io/yerbamate/}}.
-
-
-% Yerbamate is an open-source open-science Python framework designed to streamline and simplify the development and management of AI projects using power of modular design principles and open source. The framework encourages quality coding, collaboration, and sharing of models, trainers, data loaders, and knowledge, while also promoting reproducibility, customization, and flexibility. 
-% Yerbamate is designed as a command-line interface (CLI) toolkit that works when the software engineering Structure of modularity and independence are adhered. The CLI can be used to create and inject dependencies, providing greater reproducibility and sharing capabilities. 
-% % The framework also offers an Environment API, which, along with the CLI, is presented in the Appendix and subject to updates.
-% Users can refer to the documentation\footnote{\url{https://oalee.github.io/yerbamate/}} for the most up-to-date material. Any module in a project adhering to the modular structure is automatically sharable out of the box, leveraging the power of open source to enhance open science and collaboration in the AI community.
-
-Yerbamaté is an open science framework built around the aforementioned principles of modularity, independent modules, and a separated concern project structure for Python projects. When these principles and guidelines are adhered to, the resulting framework provides a command line interface (CLI) for sharing and installing code modules, dependency management, and execution of experiments. 
-
-% The Yerbamaté framework is built around the aforementioned guidelines for open science modular project project. When these principles and guidelines are adhered, the resulting framework provides a command line interface (CLI) for easy installation of code modules, dependency management and execution of commands.. The CLI provides a simple and consistent interface for executing tasks such as data preparation, model training, and inference. Furthermore, the framework is highly flexible and can be adapted to a wide range of use cases, making it a powerful tool for researchers and practitioners in various fields.
-
-
-% For example, researchers can use module names such as "simulations" and "analyzers" for their specific use cases, enabling greater customization and adaptability of the framework. 
-Additionally, the framework is designed to be compatible with Python, providing greater flexibility as Python can directly be used to execute experiments and Python files.
-
-
-% \subsubsection{Yerbamaté CLI}
-Yerbamaté provides utility functions and supports modular projects, facilitating machine learning model development. Key Yerbamate features include:
-
-% \begin{itemize}
-% \item \texttt{mate init module\_name}: Initializes a new empty modular project skeleton with the given module name. 
-
-% \item \texttt{mate install url -y\textbar n\textbar o pm}: Installs a module from a git repository. Supports multiple formats for the repository URL. The flags -y, -n, and -o specify whether to skip confirmation, skip installing python dependencies, and overwrite existing code modules, respectively. The pm argument specifies the Python package manager to use.
-% \item \texttt{mate list}: Lists all available modules in the project. 
-% \item \texttt{mate exports}: Generates dependencies for reproduciblity and sharing.
-% \item \texttt{mate test exp\_module exp}: Runs the experiment specified by exp in the module exp\_module. Equivalent to \texttt{python -m root\_module.exp\_module.exp test}
-% \item \texttt{mate train exp\_module exp}: Runs the experiment specified by exp in the module exp\_module. Equivalent to \texttt{python -m root\_module.exp\_module.exp train}
-% \end{itemize}
+% Yerbamaté provides utility functions and supports modular projects, facilitating machine learning model development. Key Yerbamate features include:
 
 
 % \subsubsection{Yerbamaté install}
+% Yerbamaté's install command enables easy installation of modularized projects adhering to separation of concerns principles, including both source code and their associated Python dependencies, with a single command. In addition, Yerbamaté allows for the installation of non-Yerbamaté projects as concrete modules, which can be installed alongside the root module of the project. However, note that Yerbamaté cannot install Python dependencies automatically in the absence of a "requirements.txt" file in the root directory of the module.
 
-\subsubsection{Yerbamaté install}
-Yerbamaté's install command enables easy installation of modularized projects adhering to separation of concerns principles, including both source code and their associated Python dependencies, with a single command. In addition, Yerbamaté allows for the installation of non-Yerbamaté projects as concrete modules, which can be installed alongside the root module of the project. However, note that Yerbamaté cannot install Python dependencies automatically in the absence of a "requirements.txt" file in the root directory of the module.
-% \footnote{The current limitation is anticipated to be mitigated in forthcoming versions through the implementation of an engineering solution that utilizes a repository of GitHub projects and their respective dependencies.} 
-For example, one could install the source code of over 100 Torch image models\footnote{\url{https://github.com/rwightman/pytorch-image-models/tree/main/timm/}} and over 30 PyTorch vision implementations in transformers\footnote{\url{https://github.com/lucidrains/vit-pytorch/tree/main/vit_pytorch/}} directly into your project and then manually install the dependencies with pip.
-
-% \subsubsection{Yerbamaté install}
-% Yerbamaté's install command makes it easy to install modularized projects that follow separation of concerns principles, including models and their Python dependencies, with a single command. Additionally, non-Yerbamaté projects can be installed as concrete modules alongside SoC modules at the first level of the tree structure. However, Yerbamaté cannot install the Python dependencies in absenste of \texttt{requirments.txt} file in root directy of the module. For example, you can install the source code of over 100 torch image models \footnote{\url{https://github.com/rwightman/pytorch-image-models/tree/main/timm/}} and over 30 implementation PyTorch vision in transformers \footnote{\url{https://github.com/lucidrains/vit-pytorch/tree/main/vit\_pytorch/}} directly into your project, then install the dependencies with pip manually.
-
-\subsubsection{Yerbamaté Environment API}
-
-The Yerbamaté Environment API is a tool designed to manage environment variables within a experiment. It prioritizes the use of an \texttt{env.json} file for storing environment variables, but if it is not found, it falls back to the operating system's environment variables. The API offers a convenient way to set, retrieve, and manage these variables in a centralized and organized manner. This can be particularly useful in storing and accessing environment-specific information, such as local results and data paths, API keys, database URLs, and other sensitive data.
+% For example, one could install the source code of over 100 Torch image models\footnote{\url{https://github.com/rwightman/pytorch-image-models/tree/main/timm/}} and over 30 PyTorch vision implementations in transformers\footnote{\url{https://github.com/lucidrains/vit-pytorch/tree/main/vit_pytorch/}} directly into your project and then manually install the dependencies with pip.
 
 
+% \subsubsection{Yerbamaté Environment API}
 
-
-% \subsection{Export of Metadata}
-
-% Yerbamate also exports metadata about the exported modules, such as links to the code as a table. This metadata provides greater visibility into the data processing pipeline, making it easier to track the processing of data throughout the project. By providing access to this metadata, the Yerbamate framework enables users to understand how their data is being processed, making it easier to reproduce results and improve the transparency of their work.
+% The Yerbamaté Environment API is a tool designed to manage environment variables within a experiment. It prioritizes the use of an \texttt{env.json} file for storing environment variables, but if it is not found, it falls back to the operating system's environment variables. The API offers a convenient way to set, retrieve, and manage these variables in a centralized and organized manner. This can be particularly useful in storing and accessing environment-specific information, such as local results and data paths, API keys, database URLs, and other sensitive data.
 
