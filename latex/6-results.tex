@@ -78,7 +78,6 @@ Yerbamaté addresses the issue of specifying the exact framework used for each m
 .4 \textt{bit}.
 .2 ....
 }
-% For modular Python projects, organizing files into a hierarchical directory tree structure is a best practice.
 \end{minipage}}
 \caption{
 This figure illustrates a directory tree example of a deep learning modular project. The organization of files into separated concerns in the tree is a common best practice for developing modular Python projects. By adhering to principle of independency, the submodules, such as Transformer and GPT2 can be easily shared and reused across different projects. 
@@ -262,25 +261,23 @@ Yerbamaté is an open science framework built around the aforementioned principl
 
 % The Yerbamaté framework is built around the aforementioned guidelines for open science modular project project. When these principles and guidelines are adhered, the resulting framework provides a command line interface (CLI) for easy installation of code modules, dependency management and execution of commands.. The CLI provides a simple and consistent interface for executing tasks such as data preparation, model training, and inference. Furthermore, the framework is highly flexible and can be adapted to a wide range of use cases, making it a powerful tool for researchers and practitioners in various fields.
 
-\subsubsection{Flexibility and Customization}
 
-One of the key challenges in the development of the Yerbamaté framework was ensuring flexibility and customization to meet the varying needs of researchers and practitioners in the field of AI. To address this challenge, Yerbamaté provides increased flexibility by not imposing any restrictions on additional module names, enabling researchers to utilize their preferred module names for custom tasks. 
 % For example, researchers can use module names such as "simulations" and "analyzers" for their specific use cases, enabling greater customization and adaptability of the framework. 
 Additionally, the framework is designed to be compatible with Python, providing greater flexibility as Python can directly be used to execute experiments and Python files.
 
 
-\subsubsection{Yerbamaté CLI}
-Yerbamaté CLI provides utility functions and supports modular projects, facilitating machine learning model development. Key CLI options include:
+% \subsubsection{Yerbamaté CLI}
+Yerbamaté provides utility functions and supports modular projects, facilitating machine learning model development. Key Yerbamate features include:
 
-\begin{itemize}
-\item \texttt{mate init module\_name}: Initializes a new empty modular project skeleton with the given module name. 
+% \begin{itemize}
+% \item \texttt{mate init module\_name}: Initializes a new empty modular project skeleton with the given module name. 
 
-\item \texttt{mate install url -y\textbar n\textbar o pm}: Installs a module from a git repository. Supports multiple formats for the repository URL. The flags -y, -n, and -o specify whether to skip confirmation, skip installing python dependencies, and overwrite existing code modules, respectively. The pm argument specifies the Python package manager to use.
-\item \texttt{mate list}: Lists all available modules in the project. 
-\item \texttt{mate exports}: Generates dependencies for reproduciblity and sharing.
-\item \texttt{mate test exp\_module exp}: Runs the experiment specified by exp in the module exp\_module. Equivalent to \texttt{python -m root\_module.exp\_module.exp test}
-\item \texttt{mate train exp\_module exp}: Runs the experiment specified by exp in the module exp\_module. Equivalent to \texttt{python -m root\_module.exp\_module.exp train}
-\end{itemize}
+% \item \texttt{mate install url -y\textbar n\textbar o pm}: Installs a module from a git repository. Supports multiple formats for the repository URL. The flags -y, -n, and -o specify whether to skip confirmation, skip installing python dependencies, and overwrite existing code modules, respectively. The pm argument specifies the Python package manager to use.
+% \item \texttt{mate list}: Lists all available modules in the project. 
+% \item \texttt{mate exports}: Generates dependencies for reproduciblity and sharing.
+% \item \texttt{mate test exp\_module exp}: Runs the experiment specified by exp in the module exp\_module. Equivalent to \texttt{python -m root\_module.exp\_module.exp test}
+% \item \texttt{mate train exp\_module exp}: Runs the experiment specified by exp in the module exp\_module. Equivalent to \texttt{python -m root\_module.exp\_module.exp train}
+% \end{itemize}
 
 
 % \subsubsection{Yerbamaté install}

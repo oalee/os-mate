@@ -6,7 +6,21 @@
 
 
 
-\subsection{Yerbamaté CLI Examples}
+\subsection{Yerbamaté CLI}
+
+Yerbamaté CLI provides utility functions and supports modular projects, facilitating machine learning model development. Key CLI options include:
+
+\begin{itemize}
+\item \texttt{mate init module\_name}: Initializes a new empty modular project skeleton with the given module name. 
+
+\item \texttt{mate install url -y\textbar n\textbar o pm}: Installs a module from a git repository. Supports multiple formats for the repository URL. The flags -y, -n, and -o specify whether to skip confirmation, skip installing python dependencies, and overwrite existing code modules, respectively. The pm argument specifies the Python package manager to use.
+\item \texttt{mate list}: Lists all available modules in the project. 
+\item \texttt{mate exports}: Generates dependencies for reproduciblity and sharing.
+\item \texttt{mate test exp\_module exp}: Runs the experiment specified by exp in the module exp\_module. Equivalent to \texttt{python -m root\_module.exp\_module.exp test}
+\item \texttt{mate train exp\_module exp}: Runs the experiment specified by exp in the module exp\_module. Equivalent to \texttt{python -m root\_module.exp\_module.exp train}
+\end{itemize}
+
+\subsubsection{Example Commands}
 
 \begin{itemize}
     \item \textbf{Installing GAN experiment from a modular project}: 
