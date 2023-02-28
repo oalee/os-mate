@@ -98,7 +98,7 @@ Yerbamate's mate export command generates a markdown table of reusable component
 
 
 \subsubsection{Example Custom Data Preprocessing}
-The modular structure of the Yerbamaté toolkit, coupled with its compatibility with pure Python, allows for the integration of custom data preprocessing pipelines with ease. By utilizing the Yerbamaté environment API, developers and researchers can readily access the data paths and results path for the destination of their processed data. For instance, the following project structure can utilize the command \texttt{python -m deepnet.data.my\_data.preprocessing} to execute a custom preprocessing pipeline. The flexibility offered by the python modularity enables users to efficiently tailor their preprocessing procedures to the specific requirements of their research or application, and the Yerbamaté toolkit can be used to share these pipelines effortlessly.
+The modular structure of the Yerbamaté toolkit, coupled with its compatibility with pure Python, allows for the integration of custom data preprocessing pipelines with ease. By utilizing the Yerbamaté environment API, developers and researchers can readily access the data paths and results path for the destination of their processed data. For instance, the following project structure illustrated at Figure \ref{customdata} can utilize the command \texttt{python -m deepnet.data.my\_data.preprocessing} to execute a custom preprocessing pipeline. The flexibility offered by the python modularity enables users to efficiently tailor their preprocessing procedures to the specific requirements of their research or application, and the Yerbamaté toolkit can be used to share these pipelines effortlessly.
 
 % \captionsetup[figure]{position=bottom,justification=centering,width=.4\textwidth,labelfont=bf,font=small}
 
@@ -130,39 +130,43 @@ Custom data preprocessing modular structure example
 
 \subsubsection{Example Keras Fine Tuning}
 
-The following exmaple illustrated an experiment definition with Keras framework.
+The following example showcases the flexibility and compatibility of Yerbamaté with the Keras framework. In this experiment definition, the models and trainers do not need to be explicitly defined, as Keras provides these functionalities out of the box. This highlights the ease of integration and adaptability of Yerbamaté with existing frameworks.
 
 \begin{minted}{python}
-
+import os
 from tensorflow import keras
 from keras.applications.resnet import ResNet50
-import ipdb 
+import yerbamate
 
+env = yerbamate.Environment()
 resnet: keras.Model = ResNet50(
     include_top=False,
     input_tensor=keras.Input(shape=(32, 32, 3)),
     classes=10,
     classifier_activation="softmax",
 )
-
-
-
 resnet.compile(
     optimizer=keras.optimizers.Adam(learning_rate=0.0004, beta_1=0.9, beta_2=0.999),
     loss="binary_crossentropy",
     metrics=["accuracy", "loss"],
 )
-
-
 (x_train, y_train), (x_test, y_test) = keras.datasets.cifar10.load_data()
+model_path = os.path.join(env.results, "model.h5")
 
-resnet.fit(
-    x=x_train,
-    y=y_train,
-    validation_data=(x_test, y_test),
-    batch_size=64,
-    epochs=10,
-)
+
+if env.train:
+    resnet.fit(
+        x=x_train,
+        y=y_train,
+        validation_data=(x_test, y_test),
+        batch_size=64,
+        epochs=10,
+    )
+    resnet.save(model_path)
+
+if env.test:
+    resnet.load_weights(model_path)
+    resnet.evaluate(x_test, y_test)
 
 \end{minted}
 
@@ -293,8 +297,9 @@ if env.restart:
 \section{Transfer Learning Case Study}\label{transfer-study}
 
 
-In this section, we showcase the application of modularity and separation of concerns on the official implementation of "Big Transfer (BiT): General Visual Representation Learning"\cite{transferlearning}. The source code from the official repository \footnote{\url{https://github.com/google-research/big_transfer}} has been refactored \footnote{\url{https://github.com/oalee/big_transfer}} into a modular, decoupled structure.  The original folder structure of the repository is as follows:
+% In this section, we showcase the application of modularity and separation of concerns on the official implementation of "Big Transfer (BiT): General Visual Representation Learning"\cite{transferlearning}. The source code from the official repository \footnote{\url{https://github.com/google-research/big_transfer}} has been refactored \footnote{\url{https://github.com/oalee/big_transfer}} into a modular, decoupled structure.  The original folder structure of the repository is as follows:
 
+This section presents a case study on the application of modularity and separation of concerns to the official implementation of "Big Transfer (BiT): General Visual Representation Learning" \cite{transferlearning}. The source code from the original repository\footnote{\url{https://github.com/google-research/big_transfer}} has been refactored into a modular and decoupled structure in a separate repository\footnote{\url{https://github.com/oalee/big_transfer}}. The refactoring process was applied to the PyTorch implementation of the model, and the resulting code can be easily extended and reused. Furthermore, the repository provides the implementation of the model in three popular frameworks: PyTorch, TensorFlow, and JAX, which enhances the accessibility of the work to a wider audience. However, the lack of modularity and separation of concerns in the original implementation could reduce its accessibility and extensibility. Therefore, in this case study, we showcase the process of refactoring the PyTorch code, noting that similar processes could be applied to the TensorFlow and JAX implementations to achieve the same results. The original folder structure of the repository is as following figure:
 
 \begin{figure}[H]
 \centering
@@ -323,7 +328,7 @@ Official Repository of BiT Project Structure for Pytorch
 
 
 \vspace{0.4em}
-In this examination, we delve into the components of the official Big Transfer repository to better understand the purpose of each one. The components are as follows:
+In this examination, we delve into the modules and Python files of the official Big Transfer repository to better understand the purpose of each one. The components are as follows:
 
 \begin{itemize}
     \item \texttt{bit\_common.py} serves as the central point for defining an argument parser and setting up a logger for experiments. Currently, the project only supports a limited set of hyperparameter selections, which include the initial learning rate, batch size, batch split, and five datasets, namely CIFAR10, CIFAR100, Oxford\_iiit\_pet, Oxford\_flowers102, and ImageNet2012. The name of this file, however, does not accurately reflect its purpose.
@@ -336,6 +341,7 @@ In this examination, we delve into the components of the official Big Transfer r
 
 
 The following code illustrates the execution of the training procedure in the original repository. The training process is initiated by the \texttt{main} function located at the end of the \texttt{train.py} file. 
+\vspace{0.2em}
 
 \begin{minted}{python}
 if __name__ == "__main__":
@@ -347,10 +353,101 @@ if __name__ == "__main__":
   parser.add_argument("--no-save", dest="save", action="store_false")
   main(parser.parse_args())
 \end{minted}
+\vspace{0.2em}
 
-This implementation exhibits limited adaptability as the function is dependent solely on the arguments provided through the command-line interface. The following tree structure and experiment definition showcases modularity and separation of concerns applied on this task .
+
+Furthermore, the \texttt{main} training function exhibits a high level of coupling between its arguments and objects, as evidenced in the following code snippet of the function definition:
+
+\begin{minted}{python}
 
 
+def main(args):
+  logger = bit_common.setup_logger(args)
+
+  # Lets cuDNN benchmark conv implementations and choose the fastest.
+  # Only good if sizes stay the same within the main loop!
+  torch.backends.cudnn.benchmark = True
+
+  device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+  logger.info(f"Going to train on {device}")
+
+  train_set, valid_set, train_loader, valid_loader = mktrainval(args, logger)
+
+  logger.info(f"Loading model from {args.model}.npz")
+  model = models.KNOWN_MODELS[args.model](head_size=len(valid_set.classes), zero_head=True)
+  model.load_from(np.load(f"{args.model}.npz"))
+
+  logger.info("Moving model onto all GPUs")
+  model = torch.nn.DataParallel(model)
+
+  # Optionally resume from a checkpoint.
+  # Load it to CPU first as we'll move the model to GPU later.
+  # This way, we save a little bit of GPU memory when loading.
+  step = 0
+
+  # Note: no weight-decay!
+  optim = torch.optim.SGD(model.parameters(), lr=0.003, momentum=0.9)
+
+  # Resume fine-tuning if we find a saved model.
+  savename = pjoin(args.logdir, args.name, "bit.pth.tar")
+  ....
+\end{minted}
+% \vspace{0.2em}
+
+This implementation exhibits limited adaptability as the function is dependent solely on the arguments provided through the command-line interface. The following tree structure and experiment definition showcases modularity and separation of concerns applied on this task.
+
+
+\begin{figure}[H]
+\centering
+\framebox[\0.4\textwidth]{%
+\begin{minipage}{0.4\textwidth}
+\dirtree{%
+.1 /\texttt{big\_transfer}.
+.2 data.
+.3 bit.
+.4 \texttt{fewshot.py}.
+.4 \texttt{\_\_init\_\_.py}.
+.4 \texttt{minibatch\_fewshot.py}.
+.4 \texttt{requirements.txt}.
+.4 \texttt{transforms.py}.
+.3 \texttt{\_\_init\_\_.py}.
+.2 experiments.
+.3 bit.
+.4 \texttt{dependencies.json}.
+.4 \texttt{few\_shot.py}.
+.4 \texttt{\_\_init\_\_.py}.
+.4 \texttt{learn.py}.
+.4 \texttt{requirements.txt}.
+.3 \texttt{\_\_init\_\_.py}.
+.2 \texttt{\_\_init\_\_.py}.
+.2 models.
+.3 \texttt{bit\_torch}.
+.4 downloader.
+.5 \texttt{downloader.py}.
+.5 \texttt{\_\_init\_\_.py}.
+.5 \texttt{requirements.txt}.
+.5 \texttt{utils.py}.
+.4 \texttt{\_\_init\_\_.py}.
+.4 \texttt{models.py}.
+.4 \texttt{requirements.txt}.
+.3 \texttt{\_\_init\_\_.py}.
+.2 trainers.
+.3 \textt{bit\_torch}.
+.4 \texttt{\_\_init\_\_.py}.
+.4 \texttt{utils.py}.
+.4 \texttt{logger.py}.
+.4 \texttt{lr\_schduler.py}.
+.4 \texttt{requirements.txt}.
+.4 \texttt{trainer.py}.
+.3 \texttt{\_\_init\_\_.py}.
+}
+\end{minipage}
+}\caption{Refactored Repository of BiT Project Structure}
+\label{bitnew}
+\end{figure}
+
+
+\vspace{0.2em}
 
 
 \begin{minted}{python}
@@ -417,54 +514,6 @@ if env.test:
 
 
 
-\begin{figure}[H]
-\centering
-\framebox[\0.4\textwidth]{%
-\begin{minipage}{0.4\textwidth}
-\dirtree{%
-.1 /\texttt{big\_transfer}.
-.2 data.
-.3 bit.
-.4 \texttt{fewshot.py}.
-.4 \texttt{\_\_init\_\_.py}.
-.4 \texttt{minibatch\_fewshot.py}.
-.4 \texttt{requirements.txt}.
-.4 \texttt{transforms.py}.
-.3 \texttt{\_\_init\_\_.py}.
-.2 experiments.
-.3 bit.
-.4 \texttt{dependencies.json}.
-.4 \texttt{few\_shot.py}.
-.4 \texttt{\_\_init\_\_.py}.
-.4 \texttt{learn.py}.
-.4 \texttt{requirements.txt}.
-.3 \texttt{\_\_init\_\_.py}.
-.2 \texttt{\_\_init\_\_.py}.
-.2 models.
-.3 \texttt{bit\_torch}.
-.4 downloader.
-.5 \texttt{downloader.py}.
-.5 \texttt{\_\_init\_\_.py}.
-.5 \texttt{requirements.txt}.
-.5 \texttt{utils.py}.
-.4 \texttt{\_\_init\_\_.py}.
-.4 \texttt{models.py}.
-.4 \texttt{requirements.txt}.
-.3 \texttt{\_\_init\_\_.py}.
-.2 trainers.
-.3 \textt{bit\_torch}.
-.4 \texttt{\_\_init\_\_.py}.
-.4 \texttt{utils.py}.
-.4 \texttt{logger.py}.
-.4 \texttt{lr\_schduler.py}.
-.4 \texttt{requirements.txt}.
-.4 \texttt{trainer.py}.
-.3 \texttt{\_\_init\_\_.py}.
-}
-\end{minipage}
-}\caption{Refactored Repository of BiT Project Structure}
-\end{figure}
 
-
-The new structure in the refactored repository is designed to address the limitations of the original implementation. By separating concerns and adopting modularization, the refactored repository provides a more flexible and scalable solution for training models. The different components in the new structure, such as the trainer, model, and data loading modules, are designed to be independent and reusable, making it easier to manage and maintain the codebase. Moreover, the experimentation module provides a unified interface for combining and executing the various components, making it easier to experiment with different configurations and hyperparameters. Overall, the new structure in the refactored repository represents a significant improvement over the original implementation, offering a better and more organized approach to training machine learning models.
+The new structure in the refactored repository depicted at Figure \ref{bitnew} is designed to address the limitations of the original implementation. By separating concerns and adopting modularization, the refactored repository provides a more flexible and scalable solution for training models. The different components in the new structure, such as the trainer, model, and data loading modules, are designed to be independent and reusable, making it easier to manage and maintain the codebase. Moreover, the experimentation module provides a unified interface for combining and executing the various components, making it easier to experiment with different configurations and hyperparameters. Overall, the new structure in the refactored repository represents a significant improvement over the original implementation, offering a better and more organized approach to training machine learning models.
 
