@@ -2,7 +2,7 @@
 
 \onecolumn
 
-\section{Appendix}
+\section{Appendix}\label{appendix}
 
 
 
@@ -47,12 +47,62 @@ Yerbamaté CLI provides utility functions and supports modular projects, facilit
 
 \subsection{Examples}
 
+
+\subsubsection{Exported Modules}
+
+Yerbamate's mate export command generates a markdown table of reusable components, showcasing metadata such as the module name, type, short URL for installation, exact versions of dependencies for reproducibility, and URLs of code module dependencies. This metadata enhances transparency and reproducibility of research by providing detailed information about each component used in a project. For example, the experiment module may have a dependency on a code module, which is included in the metadata table with its associated information.
+
+% {p{0.35\linewidth} | p{0.6\linewidth}}
+
+\begin{figure}[H]
+    \centering
+
+\begin{tabular}{|l|l|l|p{0.35\linewidth}|}
+\hline
+ name           & type        & short\_url                                          & dependencies                                                                                                                                                                                                                                                                                                                             \\
+\hline
+ cifar10        & data        & oalee/deep-vision/deepnet/data/cifar10             & ['pytorch\_lightning\textasciitilde{}=1.7.5', 'ipdb\textasciitilde{}=0.13.9', 'torch\textasciitilde{}=1.12.1', 'torchvision\textasciitilde{}=0.13.1']                                                                                                                                                                                                                                                         \\ 
+  \hline 
+ 
+ cifar100       & data        & oalee/deep-vision/deepnet/data/cifar100            & ['pytorch\_lightning\textasciitilde{}=1.7.5', 'ipdb\textasciitilde{}=0.13.9', 'torch\textasciitilde{}=1.12.1', 'torchvision\textasciitilde{}=0.13.1']                                                                                                                                                                                                                                                         \\
+  \hline 
+ keras          & data        & oalee/deep-vision/deepnet/data/keras               & ['tensorflow\_gpu\textasciitilde{}=2.10.0']                                                                                                                                                                                                                                                                                                                   \\
+  \hline 
+ timm\_aug       & data        & oalee/deep-vision/deepnet/data/timm\_aug            & ['numpy\textasciitilde{}=1.24.2']                                                                                                                                                                                                                                                                                                                            \\
+  \hline 
+ resnet         & experiments & oalee/deep-vision/deepnet/experiments/resnet       & ['pytorch\_lightning\textasciitilde{}=1.7.5', 'timm\textasciitilde{}=0.6.12', 'torch\textasciitilde{}=1.12.1', 'tensorboard\textasciitilde{}=2.10.0', 'torchvision\textasciitilde{}=0.13.1', 'https://github.com/oalee/deep-vision/tree/main/deepnet/data/cifar10', 'https://github.com/oalee/deep-vision/tree/main/deepnet/trainers/classification', 'https://github.com/oalee/deep-vision/tree/main/deepnet/models/resnet'] \\
+ 
+  \hline 
+ 
+ resnet\_keras   & experiments & oalee/deep-vision/deepnet/experiments/resnet\_keras & ['keras\textasciitilde{}=2.10.0', 'https://github.com/oalee/deep-vision/tree/main/deepnet/models/keras/resnet']                                                                                                                                                                                                                                              \\
+  \hline 
+ kerasnet       & experiments & oalee/deep-vision/deepnet/experiments/kerasnet     & ['ipdb\textasciitilde{}=0.13.9', 'tensorflow\_gpu\textasciitilde{}=2.10.0', 'keras\textasciitilde{}=2.10.0']                                                                                                                                                                                                                                                                                  \\
+  \hline 
+ timm           & experiments & oalee/deep-vision/deepnet/experiments/timm         & ['pytorch\_lightning\textasciitilde{}=1.7.5', 'torch\textasciitilde{}=1.12.1', 'https://github.com/oalee/deep-vision/tree/main/timm/', 'https://github.com/oalee/deep-vision/tree/main/deepnet/data/cifar10', 'https://github.com/oalee/deep-vision/tree/main/deepnet/trainers/classification', 'https://github.com/oalee/deep-vision/tree/main/deepnet/models/resnet']       \\
+ resnet         & models      & oalee/deep-vision/deepnet/models/resnet            & ['torch\textasciitilde{}=1.12.1']                                                                                                                                                                                                                                                                                                                            \\
+  \hline 
+ keras          & models      & oalee/deep-vision/deepnet/models/keras             & ['torch\textasciitilde{}=1.12.1', 'tensorflow\_gpu\textasciitilde{}=2.10.0']                                                                                                                                                                                                                                                                                                  \\
+  \hline 
+ vit\_pytorch    & models      & oalee/deep-vision/deepnet/models/vit\_pytorch       & ['einops\textasciitilde{}=0.4.1', 'torch\textasciitilde{}=1.12.1', 'torchvision\textasciitilde{}=0.13.1']                                                                                                                                                                                                                                                                                    \\
+  \hline 
+ torch\_vit      & models      & oalee/deep-vision/deepnet/models/torch\_vit         & ['einops\textasciitilde{}=0.4.1', 'torch\textasciitilde{}=1.12.1', 'torchvision\textasciitilde{}=0.13.1']                                                                                                                                                                                                                                                                                    \\
+  \hline 
+ classification & trainers    & oalee/deep-vision/deepnet/trainers/classification  & ['pytorch\_lightning\textasciitilde{}=1.7.5', 'torchmetrics\textasciitilde{}=0.9.3', 'torch\textasciitilde{}=1.12.1', 'ipdb\textasciitilde{}=0.13.9']                                                                                                                                                                                                                                                         \\
+\hline
+
+\end{tabular}
+   
+\caption{Exported module metadata generated from a modular project. The following example is generated from this repository: \url{https://github.com/oalee/deep-vision} }
+    \label{fig:my_label}
+\end{figure}
+
+
 \subsubsection{Example Custom Data Preprocessing}
 The modular structure of the Yerbamaté toolkit, coupled with its compatibility with pure Python, allows for the integration of custom data preprocessing pipelines with ease. By utilizing the Yerbamaté environment API, developers and researchers can readily access the data paths and results path for the destination of their processed data. For instance, the following project structure can utilize the command \texttt{python -m deepnet.data.my\_data.preprocessing} to execute a custom preprocessing pipeline. The flexibility offered by the python modularity enables users to efficiently tailor their preprocessing procedures to the specific requirements of their research or application, and the Yerbamaté toolkit can be used to share these pipelines effortlessly.
 
 % \captionsetup[figure]{position=bottom,justification=centering,width=.4\textwidth,labelfont=bf,font=small}
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \framebox[\0.4\textwidth]{%
 \begin{minipage}{0.4\textwidth}
@@ -78,6 +128,47 @@ Custom data preprocessing modular structure example
 \label{customdata}
 \end{figure}
 
+\subsubsection{Example Keras Fine Tuning}
+
+The following exmaple illustrated an experiment definition with Keras framework.
+
+\begin{minted}{python}
+
+from tensorflow import keras
+from keras.applications.resnet import ResNet50
+import ipdb 
+
+resnet: keras.Model = ResNet50(
+    include_top=False,
+    input_tensor=keras.Input(shape=(32, 32, 3)),
+    classes=10,
+    classifier_activation="softmax",
+)
+
+
+
+resnet.compile(
+    optimizer=keras.optimizers.Adam(learning_rate=0.0004, beta_1=0.9, beta_2=0.999),
+    loss="binary_crossentropy",
+    metrics=["accuracy", "loss"],
+)
+
+
+(x_train, y_train), (x_test, y_test) = keras.datasets.cifar10.load_data()
+
+resnet.fit(
+    x=x_train,
+    y=y_train,
+    validation_data=(x_test, y_test),
+    batch_size=64,
+    epochs=10,
+)
+
+\end{minted}
+
+
+% \subsubsection{Example JAX Experiment}
+% The following experiment showcases the use of the experiment format with JAX framework
 
 \subsubsection{Example GAN Experiment}
 
@@ -205,7 +296,7 @@ if env.restart:
 In this section, we showcase the application of modularity and separation of concerns on the official implementation of "Big Transfer (BiT): General Visual Representation Learning"\cite{transferlearning}. The source code from the official repository \footnote{\url{https://github.com/google-research/big_transfer}} has been refactored \footnote{\url{https://github.com/oalee/big_transfer}} into a modular, decoupled structure.  The original folder structure of the repository is as follows:
 
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \framebox[\0.4\textwidth]{%
 \begin{minipage}{0.4\textwidth}
@@ -326,7 +417,7 @@ if env.test:
 
 
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \framebox[\0.4\textwidth]{%
 \begin{minipage}{0.4\textwidth}
@@ -376,7 +467,4 @@ if env.test:
 
 
 The new structure in the refactored repository is designed to address the limitations of the original implementation. By separating concerns and adopting modularization, the refactored repository provides a more flexible and scalable solution for training models. The different components in the new structure, such as the trainer, model, and data loading modules, are designed to be independent and reusable, making it easier to manage and maintain the codebase. Moreover, the experimentation module provides a unified interface for combining and executing the various components, making it easier to experiment with different configurations and hyperparameters. Overall, the new structure in the refactored repository represents a significant improvement over the original implementation, offering a better and more organized approach to training machine learning models.
-
-
-
 
