@@ -2,7 +2,7 @@
 
 Yerbamate is an open science framework designed for Python-based projects, including Artificial Intelligence (AI). It emphasizes modularity and separation of concerns to promote reproducibility, reusability, shareability, maintainability, and code quality.
 
-This repository contains the LaTeX files for the scientific paper describing the Yerbamate framework. The source code for Yerbamate can be found at [Github](github.com/oalee/yerbamate).
+This repository contains the LaTeX files for the scientific paper describing the Yerbamate framework. The source code for Yerbamate can be found at [Github](https://github.com/oalee/yerbamate).
 
 ## Table of Contents
 
