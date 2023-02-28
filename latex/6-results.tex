@@ -79,18 +79,23 @@ Yerbamaté is an open science framework that prioritizes modularity, independent
 
 \subsubsection{Easy Installation with Yerbamaté Install}
 
-Yerbamaté's install command enables the installation of modularized projects adhering to separation of concerns principles, along with their associated Python dependencies, with a single command. Additionally, Yerbamaté allows the installation of non-Yerbamaté projects as concrete modules, which can be installed alongside the root module of the project. While Yerbamaté cannot automatically install Python dependencies without a "requirements.txt" file in the root directory of the module, it can for example be used to install source code of over 100 Torch image models or 30 PyTorch vision in transformers directly into a project. See Appendix \ref{CLIApp}.
+Yerbamaté's install command enables the installation of modularized projects adhering to separation of concerns principles, along with their associated Python dependencies, with a single command. Additionally, Yerbamaté allows the installation of non-Yerbamaté projects as concrete modules, which can be installed alongside the root module of the project. While Yerbamaté cannot automatically install Python dependencies of this non Yerbamaté repositories, it can for example be used to install source code of over 100 Torch image models or 30 PyTorch vision in transformers directly into a project. See Appendix \ref{CLIApp}.
 
 % \subsubsection{Metadata and Reproducibility}
 % Yerbamate can be used to create and inject python version dependencies for reproduciblity by creating a requirements.txt file. Moreover metadata can be generated to create list of reusable modules that are in the project. THese metadata compily with FAIR pricniples
 
 \subsubsection{Metadata and Reproducibility}
 
-Yerbamaté enhances reproducibility by creating dependencies of a python module with a "requirements.txt" file that lists the python version dependencies. The framework can also be used to generate metadata for exported and reusable modules that complies with the FAIR principles. By adhering to these principles and guidelines, Yerbamaté promotes transparency, reproducibility, and open science practices in the research community.
+Yerbamaté enhances reproducibility by creating metadata of both python and code dependencies. This metadata complies with the FAIR principles and can be used for exported and reusable modules. By adhering to these principles and guidelines, Yerbamaté promotes FAIR AI, transparency, reproducibility, and open science practices in the research community.
+% \subsubsection{Metadata and Reproducibility}
+
+% Yerbamaté enhances reproducibility by creating dependencies of a python module with a "requirements.txt" file that lists the python version dependencies. The framework can also be used to generate metadata for exported and reusable modules that complies with the FAIR principles. 
+% By adhering to these principles and guidelines, Yerbamaté promotes transparency, reproducibility, and open science practices in the research community.
 
 \subsubsection{Environment API}
 
-The Yerbamaté Environment API is a tool designed to manage environment variables within an experiment. It prioritizes the use of an \texttt{env.json} file for storing environment variables, falling back to the operating system's environment variables if the file is not found. The API offers a convenient way to set, retrieve, and manage these variables in a centralized and organized manner, which can be useful in storing and accessing environment-specific information, such as local results and data paths, API keys, database URLs, and other sensitive data.
+The Yerbamaté Environment API is a tool provided by the Yerbamate framework to help manage environment variables within an experiment. It is designed to be a central, organized way to set, retrieve, and manage environment-specific information, such as data paths, API keys, database URLs, and other sensitive data. The API prioritizes the use of an \texttt{env.json} file for storing environment variables, but can fall back to using the operating system's environment variables if the file is not found.
+% The Yerbamaté Environment API is a tool designed to manage environment variables within an experiment. It prioritizes the use of an \texttt{env.json} file for storing environment variables, falling back to the operating system's environment variables if the file is not found. The API offers a convenient way to set, retrieve, and manage these variables in a centralized and organized manner, which can be useful in storing and accessing environment-specific information, such as local results and data paths, API keys, database URLs, and other sensitive data.
 
 
 % \subsection{Yerbamaté: A Python Framework for Open Science}
