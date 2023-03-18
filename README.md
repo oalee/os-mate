@@ -10,6 +10,10 @@ This repository contains the LaTeX files for the scientific paper describing the
 - [Code of Conduct](#code-of-conduct)
 - [Contact Us](#contact-us)
 
+## Report
+
+You can download the latest PDF version from [here](https://github.com/oalee/os-yerbamate/blob/main/preprint.pdf)
+
 ## Contribution
 
 We welcome contributions to the scientific paper describing the Yerbamate framework. Contributions may include answering questions, engaging in discussions, and sharing ideas related to the framework. To contribute, please open a new issue or comment on an existing issue.
